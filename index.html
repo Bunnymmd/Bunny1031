@@ -2758,6 +2758,45 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             <div id="wbListContainer"></div>
         </div>
     </div>
+    <div class="modal-overlay" id="wbEditor">
+        <div class="modal-container">
+            <div class="modal-header">编辑世界书</div>
+            <div class="modal-scroll">
+                <input type="hidden" id="wbId">
+                <label class="setting-label">标题</label>
+                <input type="text" class="setting-input" id="wbTitle" placeholder="输入标题...">
+                <label class="setting-label">类型</label>
+                <div class="radio-group">
+                    <div class="radio-card active" onclick="selectRadio('wbType', 'global', this)">全局</div>
+                    <div class="radio-card" onclick="selectRadio('wbType', 'local', this)">局部</div>
+                </div>
+                <input type="hidden" id="wbType" value="global">
+                <label class="setting-label">触发方式</label>
+                <div class="radio-group">
+                    <div class="radio-card active" onclick="toggleKeywordInput('always', this)">始终生效</div>
+                    <div class="radio-card" onclick="toggleKeywordInput('keyword', this)">关键词触发</div>
+                </div>
+                <input type="hidden" id="wbActivate" value="always">
+                <div id="keywordInputGroup" style="display:none;">
+                    <label class="setting-label">关键词 (多个用逗号分隔)</label>
+                    <input type="text" class="setting-input" id="wbKeywords" placeholder="例如: 苹果, 香蕉">
+                </div>
+                <label class="setting-label">优先级</label>
+                <div class="radio-group">
+                    <div class="radio-card active" onclick="selectRadio('wbPriority', 'high', this)">高</div>
+                    <div class="radio-card" onclick="selectRadio('wbPriority', 'medium', this)">中</div>
+                    <div class="radio-card" onclick="selectRadio('wbPriority', 'low', this)">低</div>
+                </div>
+                <input type="hidden" id="wbPriority" value="high">
+                <label class="setting-label">内容</label>
+                <textarea class="setting-textarea" id="wbContent" placeholder="输入世界书设定内容..."></textarea>
+            </div>
+            <div class="btn-row">
+                <button class="btn-secondary" onclick="closeWorldBookEditor()">取消</button>
+                <button class="btn-primary" onclick="saveWorldBook()">保存</button>
+            </div>
+        </div>
+    </div>
     <!-- Add Contact Page -->
     <div class="app-page" id="addContactPage">
         <div class="page-header">

@@ -4117,12 +4117,19 @@ function handleSendClick() {
 }
 function renderChatMessage(msg, contact, index) {
     if (msg.msgType === 'text' && typeof msg.content === 'string') {
-        const voiceMatch = msg.content.match(/^\[语音.*?\]\s*([\s\S]*)/);
-        if (voiceMatch) {
+        if (/[\[【]语音.*?[\]】]/.test(msg.content)) {
             msg.msgType = 'voice';
-            msg.content = voiceMatch[1].trim() || '...';
+            let txt = msg.content.replace(/[\[【]语音.*?[:：]\s*(.*?)[\]】]/g, '$1');
+            txt = txt.replace(/[\[【]语音.*?[\]】]/g, '');
+            msg.content = txt.replace(/^["'“”‘’\s]+|["'“”‘’\s]+$/g, '') || '语音消息';
         }
     }
+
+
+
+
+
+
 
 
     const container = document.getElementById('chatMsgContainer');
@@ -4159,14 +4166,7 @@ function renderChatMessage(msg, contact, index) {
         if (msg.quote.msgType === 'image') qContent = '[图片]';
         else if (msg.quote.msgType === 'voice') qContent = '[语音]';
         
-        // 尝试获取时间：如果当前引用没有时间(比如AI生成的或旧数据)，去历史记录里找原文的时间
-        let qTimeStr = msg.quote.timestamp;
-        if (!qTimeStr && contact && contact.messages) {
-            const origMsg = contact.messages.find(m => m.content === msg.quote.content);
-            if (origMsg) qTimeStr = origMsg.timestamp || contact.time;
-        }
-        
-        let qTime = qTimeStr ? `<div class="quote-time">${qTimeStr}</div>` : '';
+        let qTime = msg.quote.timestamp ? `<div class="quote-time">${msg.quote.timestamp}</div>` : '';
         
         quoteHtml = `
         <div class="quote-in-bubble">
@@ -4177,7 +4177,6 @@ function renderChatMessage(msg, contact, index) {
             <div class="quote-text">${qContent}</div>
         </div>`;
     }
-
 
 
     let bubbleContent = msg.content;
@@ -4450,6 +4449,7 @@ async function getAiReply() {
         }
         let rawReplies = parsed.replies || parsed.messages || [{type: 'text', content: content}];
         let finalReplies = [];
+        let pendingVoice = false;
         
         rawReplies.forEach(rawMsg => {
             let msgType = 'text';
@@ -4458,10 +4458,19 @@ async function getAiReply() {
             
             if (typeof rawMsg === 'object' && rawMsg !== null && rawMsg.type === 'voice') msgType = 'voice';
             
-            const voiceMatch = msgContent.match(/^\[语音.*?\]\s*([\s\S]*)/);
-            if (voiceMatch) {
+            if (/[\[【]语音.*?[\]】]/.test(msgContent)) {
                 msgType = 'voice';
-                msgContent = voiceMatch[1].trim() || '...';
+                let txt = msgContent.replace(/[\[【]语音.*?[:：]\s*(.*?)[\]】]/g, '$1');
+                txt = txt.replace(/[\[【]语音.*?[\]】]/g, '');
+                msgContent = txt.replace(/^["'“”‘’\s]+|["'“”‘’\s]+$/g, '');
+                if (!msgContent) {
+                    pendingVoice = true;
+                    return;
+                }
+            } else if (pendingVoice) {
+                msgType = 'voice';
+                msgContent = msgContent.replace(/^["'“”‘’\s]+|["'“”‘’\s]+$/g, '');
+                pendingVoice = false;
             }
 
             if (msgType === 'text' && msgContent.length > 20) {
@@ -4958,20 +4967,21 @@ function menuQuote(index) {
     const contact = contacts.find(c => c.id == currentChatId);
     const msg = contact.messages[index];
     const name = msg.role === 'user' ? contact.user.name : contact.role.name;
-    
     currentQuoteData = {
         name: name,
         content: msg.content,
         msgType: msg.msgType || 'text',
         timestamp: msg.timestamp || contact.time || ''
     };
-    
     document.getElementById('quoteContent').innerText = msg.msgType === 'image' ? '[图片]' : (msg.msgType === 'voice' ? '[语音]' : msg.content);
     document.getElementById('quotePanel').classList.add('active');
     
     if(activeToolbar) activeToolbar.remove();
     document.getElementById('chatInput').focus();
 }
+
+
+
 function cancelQuote() {
     currentQuoteData = null;
     document.getElementById('quotePanel').classList.remove('active');

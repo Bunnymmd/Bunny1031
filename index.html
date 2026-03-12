@@ -3246,9 +3246,10 @@ ${CORE_PHILOSOPHY}
 [Technical Instruction]
 You must respond with a valid JSON object.
 CRITICAL CHAT HABIT: You are chatting on a mobile instant messaging app. Humans DO NOT send huge blocks of text. You MUST break your response into multiple short, natural messages.
-Format: {"replies": [{"type": "text", "content": "short message 1", "quote": {"name": "TargetName", "content": "quoted text"}}, {"type": "text", "content": "short message 2"}], "innerVoice": {"heartRate": 85, "location": "City...", "thought": "...", "desire": "..."}}
-Constraint: The "replies" array MUST contain 5 to 8 objects if the response is long. Keep each "content" relatively short. Use the "quote" object ONLY if you are directly replying to a specific previous message. "innerVoice" MUST contain "heartRate" (number), "location" (>=10 chars), "thought" (>=20 chars), "desire" (>=20 chars). Keep the tone 100% in character.
+Format: {"replies": [{"type": "text", "content": "short message 1", "quote": {"name": "TargetName", "content": "quoted text"}}, {"type": "voice", "content": "actual spoken words only"}], "innerVoice": {"heartRate": 85, "location": "City...", "thought": "...", "desire": "..."}}
+Constraint: The "replies" array MUST contain 5 to 8 objects if the response is long. Keep each "content" relatively short. Use the "quote" object ONLY if you are directly replying to a specific previous message. For voice messages, MUST set "type" to "voice" and ONLY put the spoken text in "content", NEVER include timestamps like "0:05" or tags like "[语音]". "innerVoice" MUST contain "heartRate" (number), "location" (>=10 chars), "thought" (>=20 chars), "desire" (>=20 chars). Keep the tone 100% in character.
 `;
+
 
 
 function updateClock() {
@@ -4117,18 +4118,12 @@ function handleSendClick() {
 }
 function renderChatMessage(msg, contact, index) {
     if (msg.msgType === 'text' && typeof msg.content === 'string') {
-        if (/[\[【]语音.*?[\]】]/.test(msg.content)) {
+        const voiceMatch = msg.content.match(/([\s\S]*?)\[语音.*?\]([\s\S]*)/);
+        if (voiceMatch) {
             msg.msgType = 'voice';
-            let txt = msg.content.replace(/[\[【]语音.*?[:：]\s*(.*?)[\]】]/g, '$1');
-            txt = txt.replace(/[\[【]语音.*?[\]】]/g, '');
-            msg.content = txt.replace(/^["'“”‘’\s]+|["'“”‘’\s]+$/g, '') || '语音消息';
+            msg.content = (voiceMatch[1] + voiceMatch[2]).trim() || '语音消息';
         }
     }
-
-
-
-
-
 
 
 
@@ -4162,21 +4157,29 @@ function renderChatMessage(msg, contact, index) {
     
     let quoteHtml = '';
     if (msg.quote) {
-        let qContent = msg.quote.content;
+        let qContent = msg.quote.content || '';
         if (msg.quote.msgType === 'image') qContent = '[图片]';
         else if (msg.quote.msgType === 'voice') qContent = '[语音]';
         
-        let qTime = msg.quote.timestamp ? `<div class="quote-time">${msg.quote.timestamp}</div>` : '';
+        let qTimeStr = msg.quote.timestamp;
+        if (!qTimeStr && contact && contact.messages) {
+            const origMsg = contact.messages.find(m => m.content && m.content.includes(msg.quote.content));
+            qTimeStr = origMsg ? (origMsg.timestamp || contact.time) : (msg.timestamp || contact.time);
+        }
+        if (!qTimeStr) qTimeStr = msg.timestamp || '12:00';
+        
+        let qTime = `<div class="quote-time">${qTimeStr}</div>`;
         
         quoteHtml = `
         <div class="quote-in-bubble">
             <div class="quote-header">
-                <div class="quote-name">${msg.quote.name}</div>
+                <div class="quote-name">${msg.quote.name || ''}</div>
                 ${qTime}
             </div>
             <div class="quote-text">${qContent}</div>
         </div>`;
     }
+
 
 
     let bubbleContent = msg.content;
@@ -4388,8 +4391,9 @@ async function getAiReply() {
                 { type: "image_url", image_url: { url: msg.content } }
             ];
         } else if (msg.msgType === 'voice') {
-            contentData = `[语音消息] ${msg.content}`;
+            contentData = `(Voice Message) ${msg.content}`;
         } else if (msg.msgType === 'diary_card') {
+
             try {
                 const dData = JSON.parse(msg.content);
                 contentData = `[系统提示：用户向你分享了一篇私人日记]\n日记标题：${dData.title}\n记录时间：${dData.time}\n日记内容：${dData.content}\n\n[指令：请仔细阅读这篇日记，体会其中的情感，并作出符合你角色设定的评价和回应。]`;
@@ -4449,7 +4453,6 @@ async function getAiReply() {
         }
         let rawReplies = parsed.replies || parsed.messages || [{type: 'text', content: content}];
         let finalReplies = [];
-        let pendingVoice = false;
         
         rawReplies.forEach(rawMsg => {
             let msgType = 'text';
@@ -4458,19 +4461,10 @@ async function getAiReply() {
             
             if (typeof rawMsg === 'object' && rawMsg !== null && rawMsg.type === 'voice') msgType = 'voice';
             
-            if (/[\[【]语音.*?[\]】]/.test(msgContent)) {
+            const voiceMatch = msgContent.match(/([\s\S]*?)\[语音.*?\]([\s\S]*)/);
+            if (voiceMatch) {
                 msgType = 'voice';
-                let txt = msgContent.replace(/[\[【]语音.*?[:：]\s*(.*?)[\]】]/g, '$1');
-                txt = txt.replace(/[\[【]语音.*?[\]】]/g, '');
-                msgContent = txt.replace(/^["'“”‘’\s]+|["'“”‘’\s]+$/g, '');
-                if (!msgContent) {
-                    pendingVoice = true;
-                    return;
-                }
-            } else if (pendingVoice) {
-                msgType = 'voice';
-                msgContent = msgContent.replace(/^["'“”‘’\s]+|["'“”‘’\s]+$/g, '');
-                pendingVoice = false;
+                msgContent = (voiceMatch[1] + voiceMatch[2]).trim() || '语音消息';
             }
 
             if (msgType === 'text' && msgContent.length > 20) {

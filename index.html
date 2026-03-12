@@ -57,13 +57,14 @@ body {
     font-size: 15px;
     font-weight: 600;
     color: var(--text-main);
-    z-index: 1000;
+    z-index: 5000;
     background-color: transparent;
     position: absolute;
     top: 0;
     width: 100%;
     pointer-events: none;
 }
+
 .battery {
     width: 24px;
     height: 12px;
@@ -1582,13 +1583,14 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
 .chat-msg-image {
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 140px;
+    max-height: 140px;
     border-radius: 12px;
     object-fit: cover;
     cursor: pointer;
     display: block;
 }
+
 .chat-msg-bubble.is-image {
     background: transparent !important;
     border: none !important;
@@ -2352,7 +2354,185 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     font-size: 13px;
     margin-top: 40px;
 }
-
+.music-container { height: 100%; display: flex; flex-direction: column; position: relative; background-color: #fcfcf9; }
+.music-tab-content { flex: 1; overflow-y: auto; display: none; padding-bottom: 120px; }
+.music-tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+.music-dock { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); width: 240px; height: 76px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border-radius: 38px; box-shadow: 0 8px 32px rgba(0,0,0,0.08); display: flex; justify-content: space-evenly; align-items: center; z-index: 200; }
+.music-dock-item { display: flex; flex-direction: column; align-items: center; gap: 4px; opacity: 0.4; transition: all 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28); cursor: pointer; width: 60px; }
+.music-dock-item.active { opacity: 1; transform: scale(1.05); }
+.music-dock-icon { width: 26px; height: 26px; background-size: contain; background-repeat: no-repeat; background-position: center; }
+.music-dock-text { font-size: 10px; font-weight: 700; color: var(--text-main); }
+.icon-m-home { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231a1a1a'%3E%3Cpath d='M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z'/%3E%3C/svg%3E"); }
+.icon-m-together { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231a1a1a'%3E%3Cpath d='M15 8c0-1.42-.5-2.73-1.33-3.76.42-.14.86-.24 1.33-.24 2.21 0 4 1.79 4 4s-1.79 4-4 4c-.47 0-.91-.1-1.33-.24C14.5 10.73 15 9.42 15 8zM9 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-4 8c0-2.66 5.33-4 8-4 1.16 0 2.45.2 3.61.56 1.78-1.52 4.41-2.56 7.39-2.56v2c-2.33 0-4.67 1.17-6.04 3H22v2H2v-2h3zm14-8c-1.11 0-2 .89-2 2s.89 2 2 2 2-.89 2-2-.89-2-2-2z'/%3E%3C/svg%3E"); }
+.icon-m-me { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231a1a1a'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/%3E%3C/svg%3E"); }
+.music-hero { background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%); padding: 60px 24px 30px; border-bottom-left-radius: 36px; border-bottom-right-radius: 36px; color: #1a1a1a; position: relative; box-shadow: 0 10px 30px rgba(142, 197, 252, 0.2); }
+.music-title-large { font-size: 32px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 6px; }
+.music-subtitle { font-size: 14px; font-weight: 600; opacity: 0.7; }
+.music-card-scroll { display: flex; gap: 16px; padding: 24px; overflow-x: auto; scroll-snap-type: x mandatory; }
+.music-card { width: 140px; flex-shrink: 0; scroll-snap-align: start; cursor: pointer; }
+.music-card-img { width: 100%; aspect-ratio: 1; border-radius: 24px; background: #eee; box-shadow: 0 10px 20px rgba(0,0,0,0.06); margin-bottom: 12px; background-size: cover; background-position: center; transition: transform 0.2s; }
+.music-card:active .music-card-img { transform: scale(0.95); }
+.music-card-title { font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.music-card-desc { font-size: 11px; color: var(--text-sub); font-weight: 500; }
+.music-section-title { font-size: 18px; font-weight: 800; color: var(--text-main); margin: 10px 24px 16px; }
+.music-list { padding: 0 24px; }
+.music-list-item { display: flex; align-items: center; padding: 12px 16px; background: #ffffff; border-radius: 16px; margin-bottom: 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.02); cursor: pointer; transition: transform 0.1s; }
+.music-list-item:active { transform: scale(0.98); }
+.music-list-cover { width: 44px; height: 44px; border-radius: 12px; background: #ddd; margin-right: 14px; flex-shrink: 0; }
+.music-list-info { flex: 1; overflow: hidden; }
+.music-list-name { font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.music-list-artist { font-size: 12px; color: var(--text-sub); font-weight: 500; }
+.music-list-play { width: 24px; height: 24px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23007aff'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E"); background-size: contain; opacity: 0.8; }
+.music-together-card { background: #ffffff; border-radius: 28px; padding: 40px 24px; margin: 20px 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.04); text-align: center; position: relative; overflow: hidden; }
+.music-radar { width: 140px; height: 140px; border-radius: 50%; border: 2px dashed rgba(0,122,255,0.3); margin: 0 auto 30px; display: flex; align-items: center; justify-content: center; position: relative; }
+.music-radar::after { content: ''; position: absolute; width: 60px; height: 60px; background: rgba(0,122,255,0.15); border-radius: 50%; animation: radarPulse 2s cubic-bezier(0.25, 1, 0.5, 1) infinite; }
+@keyframes radarPulse { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(3.5); opacity: 0; } }
+.toast-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.toast-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+.toast-box {
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 16px 24px;
+    border-radius: 16px;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+}
+.toast-spinner {
+    width: 24px; height: 24px;
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top: 3px solid #fff;
+    border-radius: 50%;
+    animation: simSpin 1s linear infinite;
+}
+#musicAppPage {
+    background: linear-gradient(180deg, #f2f4f7 0%, #ffffff 100%);
+    padding-top: 0;
+}
+.music-header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 48px 24px 10px;
+    position: sticky; top: 0; z-index: 10;
+}
+.music-btn {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,0.6); backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; font-weight: 300; cursor: pointer; color: #1a1a1a;
+}
+.music-title {
+    font-size: 32px; font-weight: 800; color: #1a1a1a;
+    margin: 10px 24px 24px; letter-spacing: 0.5px;
+}
+.music-section { padding: 0 24px 24px; }
+.music-sec-title { font-size: 18px; font-weight: 700; color: #1a1a1a; margin-bottom: 16px; }
+.playlist-scroll {
+    display: flex; gap: 16px; overflow-x: auto; padding-bottom: 10px;
+    scroll-snap-type: x mandatory; scrollbar-width: none;
+}
+.playlist-scroll::-webkit-scrollbar { display: none; }
+.playlist-card { min-width: 150px; scroll-snap-align: start; cursor: pointer; }
+.playlist-cover {
+    width: 150px; height: 150px; border-radius: 20px; background: #ddd;
+    margin-bottom: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    background-size: cover; background-position: center; position: relative; overflow: hidden;
+}
+.playlist-cover::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.3) 100%);
+}
+.playlist-name { font-size: 14px; font-weight: 700; color: #222; margin-bottom: 4px; }
+.playlist-count { font-size: 12px; color: #888; font-weight: 500; }
+.song-list { display: flex; flex-direction: column; gap: 16px; padding-bottom: 120px; }
+.song-item { display: flex; align-items: center; gap: 16px; cursor: pointer; padding: 8px; border-radius: 16px; transition: background 0.2s;}
+.song-item:active { background: rgba(0,0,0,0.03); }
+.song-cover {
+    width: 52px; height: 52px; border-radius: 14px; background: #ccc;
+    flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    background-size: cover; background-position: center;
+}
+.song-info { flex: 1; overflow: hidden; }
+.song-name { font-size: 16px; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.song-artist { font-size: 13px; color: #888; font-weight: 500;}
+.song-more { color: #ccc; font-size: 20px; font-weight: bold; width: 24px; text-align: center;}
+.music-player-bar {
+    position: absolute; bottom: 24px; left: 16px; right: 16px; height: 76px;
+    background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+    border-radius: 38px; box-shadow: 0 12px 40px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.8);
+    display: flex; align-items: center; padding: 0 12px 0 12px; z-index: 200; overflow: hidden;
+}
+.player-cover {
+    width: 52px; height: 52px; border-radius: 50%; background: #222;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2); animation: simSpin 12s linear infinite;
+    animation-play-state: paused; /* 默认暂停旋转 */
+    position: relative; background-size: cover; background-position: center; flex-shrink: 0;
+}
+.player-cover.playing { animation-play-state: running; }
+.player-cover::after {
+    content:''; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    width:14px; height:14px; background:#f2f4f7; border-radius:50%; box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+}
+.player-info { flex: 1; margin-left: 14px; overflow: hidden; }
+.player-name { font-size: 15px; font-weight: 700; color: #1a1a1a; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.player-artist { font-size: 12px; color: #888; font-weight: 500;}
+.player-controls { display: flex; align-items: center; gap: 14px; margin-right: 8px; }
+.player-btn { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #1a1a1a; transition: transform 0.1s; }
+.player-btn:active { transform: scale(0.9); }
+.player-btn.play-pause { width: 44px; height: 44px; background: #1a1a1a; color: #fff; border-radius: 50%; box-shadow: 0 4px 12px rgba(0,0,0,0.15);}
+.player-progress-bg { position: absolute; bottom: 0; left: 38px; right: 38px; height: 8px; background: transparent; cursor: pointer; display: flex; align-items: flex-end; }
+.player-progress-track { width: 100%; height: 3px; background: rgba(0,0,0,0.08); border-radius: 2px; position: relative; pointer-events: none; margin-bottom: 2px;}
+.player-progress-fill { width: 0%; height: 100%; background: #1a1a1a; border-radius: 2px; position: absolute; top:0; left:0; transition: width 0.1s linear;}
+.del-song-btn { color: #ff3b30; font-size: 13px; font-weight: 600; cursor: pointer; padding: 4px 8px; }
+/* --- 新增：全屏播放器与翻转歌词样式 --- */
+.edit-song-btn { color: #007aff; font-size: 13px; font-weight: 600; cursor: pointer; padding: 4px 8px; }
+.full-player-page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, #fdfdfd 0%, #f0f0f5 100%); z-index: 3000; display: flex; flex-direction: column; transform: translateY(100%); transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1); }
+.full-player-page.active { transform: translateY(0); }
+.fp-header { padding: 75px 24px 10px; display: flex; justify-content: space-between; align-items: center; } /* 增加 padding-top 整体下移避开状态栏 */
+.fp-close { font-size: 24px; cursor: pointer; color: #1a1a1a; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-weight: 300;}
+.fp-content { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 30px 30px 40px; }
+.fp-flip-container { width: 100%; aspect-ratio: 1; max-width: 320px; perspective: 1000px; margin-bottom: 40px; cursor: pointer; }
+.fp-flipper { width: 100%; height: 100%; position: relative; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; }
+.fp-flip-container.flipped .fp-flipper { transform: rotateY(180deg); }
+.fp-front, .fp-back { width: 100%; height: 100%; position: absolute; top: 0; left: 0; backface-visibility: hidden; border-radius: 24px; }
+.fp-front { background-size: cover; background-position: center; box-shadow: 0 20px 50px rgba(0,0,0,0.15); overflow: hidden;}
+.fp-back { transform: rotateY(180deg); background: transparent; display: flex; flex-direction: column; padding: 0; box-shadow: none; } /* 去掉黑底和阴影 */
+.fp-lyrics-container { flex: 1; overflow-y: auto; text-align: center; scroll-behavior: smooth; padding: 50% 0; mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent); }
+.fp-lyrics-container::-webkit-scrollbar { display: none; }
+.fp-lyric-line { font-size: 15px; color: rgba(0,0,0,0.3); margin-bottom: 24px; transition: all 0.3s; min-height: 20px; padding: 0 10px; line-height: 1.5; font-weight: 600; } /* 适应浅色背景的深色文字 */
+.fp-lyric-line.active { color: #1a1a1a; font-size: 18px; font-weight: 800; transform: scale(1.1); }
+.fp-info { text-align: center; margin-bottom: 30px; width: 100%; }
+.fp-name { font-size: 24px; font-weight: 800; color: #1a1a1a; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fp-artist { font-size: 15px; color: #888; font-weight: 500; }
+.fp-progress-area { width: 100%; margin-bottom: 30px; }
+.fp-time-row { display: flex; justify-content: space-between; font-size: 12px; color: #888; margin-bottom: 8px; font-family: monospace;}
+.fp-progress-bg { width: 100%; height: 30px; background: transparent; cursor: pointer; position: relative; display: flex; align-items: center; touch-action: none; } /* 增加热区高度，禁止默认滑动 */
+.fp-progress-track { width: 100%; height: 4px; background: rgba(0,0,0,0.08); border-radius: 2px; position: relative; pointer-events: none;}
+.fp-progress-fill { height: 100%; width: 0%; background: #1a1a1a; border-radius: 2px; position: absolute; top:0; left:0; transition: width 0.1s linear; }
+.fp-progress-fill::after { content: ''; position: absolute; right: -8px; top: -6px; width: 16px; height: 16px; background: #fff; border: 4px solid #1a1a1a; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.2); transition: transform 0.1s; }
+.fp-progress-bg:active .fp-progress-fill::after { transform: scale(1.2); }
+.fp-controls { display: flex; align-items: center; justify-content: center; gap: 36px; width: 100%; }
+.fp-btn { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #1a1a1a; transition: transform 0.1s;}
+.fp-btn:active { transform: scale(0.9); }
+.fp-btn.play-pause { width: 68px; height: 68px; background: #1a1a1a; color: #fff; border-radius: 50%; box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
 </style>
 </head>
 <body>
@@ -2381,7 +2561,9 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             <div class="app-item" id="what-trigger"><div class="app-icon white" id="icon-m-2"></div><span class="app-name">What</span></div>
             <div class="app-item"><div class="app-icon gray" id="icon-m-3"></div><span class="app-name">论坛</span></div>
             <div class="app-item"><div class="app-icon gray" id="icon-m-4"></div><span class="app-name">购物</span></div>
-            <div class="app-item"><div class="app-icon white" id="icon-m-5"></div><span class="app-name">音乐</span></div>
+            <div class="app-item" id="music-trigger" onclick="openAppPage('musicAppPage')"><div class="app-icon white" id="icon-m-5"></div><span class="app-name">音乐</span></div>
+
+
             <div class="app-item"><div class="app-icon gray" id="icon-m-6"></div><span class="app-name">陪伴</span></div>
             <div class="app-item" onclick="openCheckPhoneTargetSelect()"><div class="app-icon white" id="icon-m-7"></div><span class="app-name">查手机</span></div>
             <div class="app-item"><div class="app-icon gray" id="icon-m-8"></div><span class="app-name">情侣空间</span></div>
@@ -3094,10 +3276,9 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             <div class="diary-tab-content active" id="diary-tab-me">
                 <div id="diaryListMe"></div>
             </div>
-
-            <!-- Ta Tab -->
             <div class="diary-tab-content" id="diary-tab-ta">
-                <div class="empty-diary">Ta 还没有写下任何日记...</div>
+                <div class="contact-grid" id="diaryRoleGrid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px 12px; padding-top: 10px;">
+                </div>
             </div>
 
             <!-- Diary Dock -->
@@ -3107,7 +3288,22 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             </div>
         </div>
     </div>
-        <!-- Diary Write Page -->
+    <div class="app-page" id="diaryRolePage" style="z-index: 155;">
+        <div class="diary-container">
+            <div class="page-header" style="background: #f7f7f7; border-bottom: 1px solid rgba(0,0,0,0.05);">
+                <div class="header-left">
+                    <div class="back-btn" onclick="closeAppPage('diaryRolePage')">&#10094;</div>
+                    <div class="page-title" id="diaryRolePageTitle">Ta的日记</div>
+                </div>
+                <div class="header-right" id="diaryRoleHeaderActions">
+                    <div class="header-icon-btn icon-pen" id="roleDiaryGenBtn" onclick="generateRoleDiary()"></div>
+                    <div class="header-text-btn" id="diaryRoleManageBtn" onclick="toggleManageRoleDiary()">管理</div>
+                </div>
+            </div>
+            <div class="diary-tab-content active" id="diaryListRole" style="padding-bottom: 40px; padding-top: 16px;">
+            </div>
+        </div>
+    </div>
     <div class="app-page diary-write-page" id="diaryWritePage" style="z-index: 160;">
         <div class="page-header" style="flex-shrink: 0;">
             <div class="header-left">
@@ -3142,7 +3338,137 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
         </div>
     </div>
 </div>
+    <!-- Music App Page -->
+    <div class="app-page" id="musicAppPage">
+        <div class="music-header">
+            <!-- 左上角加号 -->
+            <div class="music-btn" onclick="openAddMusicModal()">+</div>
+            <!-- 右上角关闭按钮 -->
+            <div class="music-btn" onclick="closeAppPage('musicAppPage')">×</div>
+        </div>
+        
+        <div class="page-content" style="padding: 0; overflow-x: hidden;">
+            <div class="music-title">音乐</div>
+            
+            <div class="music-section">
+                <div class="music-sec-title">我的曲库</div>
+                <div class="song-list" id="localSongList">
+                    <!-- 动态生成的音乐列表 -->
+                    <div class="sim-empty-tip" style="margin-top: 20px;">暂无音乐，点击左上角 + 号添加</div>
+                </div>
+            </div>
+        </div>
+        <!-- 底部悬浮播放控制栏 -->
+        <div class="music-player-bar" id="musicPlayerBar" style="display:none;" onclick="openFullPlayer()">
+            <div class="player-cover" id="playerCover" style="background-image: url('')"></div>
+            <div class="player-info">
+                <div class="player-name" id="playerName">未播放</div>
+                <div class="player-artist" id="playerArtist">-</div>
+            </div>
+            <div class="player-controls">
+                <div class="player-btn" onclick="event.stopPropagation(); playPrevSong()">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
+                </div>
+                <div class="player-btn play-pause" id="playPauseBtn" onclick="event.stopPropagation(); togglePlayMusic()">
+                    <svg id="icon-play" viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    <svg id="icon-pause" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                </div>
+                <div class="player-btn" onclick="event.stopPropagation(); playNextSong()">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+                </div>
+            </div>
+            <!-- 播放进度条 -->
+            <div class="player-progress-bg" onclick="event.stopPropagation(); seekMusic(event)">
+                <div class="player-progress-track"><div class="player-progress-fill" id="progressFill"></div></div>
+            </div>
+        </div>
+    </div>
 
+    <!-- 添加/编辑音乐弹窗 -->
+    <div class="modal-overlay" id="addMusicModal">
+        <div class="modal-container" style="max-height: 90vh;">
+            <div class="modal-header" id="musicModalTitle">添加音乐</div>
+            <div class="modal-scroll">
+                <input type="hidden" id="mInpEditIndex" value="-1">
+                <label class="setting-label">歌曲名称 *</label>
+                <input type="text" class="setting-input" id="mInpName" placeholder="例如：七里香">
+                
+                <label class="setting-label">歌手 *</label>
+                <input type="text" class="setting-input" id="mInpArtist" placeholder="例如：周杰伦">
+                
+                <label class="setting-label">音频源 (输入URL 或 选择本地文件) *</label>
+                <input type="text" class="setting-input" id="mInpAudioUrl" placeholder="https://... (mp3/m4a)">
+                <input type="file" id="mInpAudioFile" accept="audio/*" class="setting-input" style="padding: 8px;">
+                <div style="font-size:10px;color:#ff3b30;margin-top:-10px;margin-bottom:12px;">注: 本地音频过大可能导致存储空间爆满，建议使用URL。</div>
+
+                <label class="setting-label">封面图片 (输入URL 或 选择本地文件)</label>
+                <input type="text" class="setting-input" id="mInpCoverUrl" placeholder="https://...">
+                <input type="file" id="mInpCoverFile" accept="image/*" class="setting-input" style="padding: 8px;">
+
+                <label class="setting-label">歌词 (粘贴文本 或 选择.lrc文件)</label>
+                <input type="file" id="mInpLrcFile" accept=".lrc,text/plain" class="setting-input" style="padding: 8px;" onchange="readLrcFile(this)">
+                <textarea class="setting-textarea" id="mInpLyrics" placeholder="[00:00.00] 粘贴歌词..."></textarea>
+            </div>
+            <div class="btn-row">
+                <button class="btn-secondary" onclick="closeAddMusicModal()">取消</button>
+                <button class="btn-primary" onclick="saveNewMusic()">保存</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 全屏播放器页面 -->
+    <div class="full-player-page" id="fullPlayerPage">
+        <div class="fp-header">
+            <div class="fp-close" onclick="closeFullPlayer()">
+                <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <div style="font-size:12px; font-weight:700; color:#888; letter-spacing:2px; text-transform:uppercase;">正在播放</div>
+            <div style="width:32px;"></div>
+        </div>
+        <div class="fp-content">
+            <div class="fp-flip-container" id="fpFlipContainer" onclick="toggleFpFlip()">
+                <div class="fp-flipper">
+                    <div class="fp-front" id="fpCoverImage"></div>
+                    <div class="fp-back">
+                        <div class="fp-lyrics-container" id="fpLyricsContainer">
+                            <div class="fp-lyric-line">暂无歌词</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="fp-info">
+                <div class="fp-name" id="fpName">未播放</div>
+                <div class="fp-artist" id="fpArtist">-</div>
+            </div>
+            <div class="fp-progress-area">
+                <div class="fp-time-row">
+                    <span id="fpTimeCurr">0:00</span>
+                    <span id="fpTimeTotal">0:00</span>
+                </div>
+                <div class="fp-progress-bg" 
+                     onmousedown="startSeekFp(event)" onmousemove="moveSeekFp(event)" onmouseup="endSeekFp(event)" onmouseleave="endSeekFp(event)"
+                     ontouchstart="startSeekFp(event)" ontouchmove="moveSeekFp(event)" ontouchend="endSeekFp(event)">
+                    <div class="fp-progress-track"><div class="fp-progress-fill" id="fpProgressFill"></div></div>
+                </div>
+            </div>
+            <div class="fp-controls">
+
+                <div class="fp-btn" onclick="playPrevSong()">
+                    <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
+                </div>
+                <div class="fp-btn play-pause" onclick="togglePlayMusic()">
+                    <svg id="fp-icon-play-large" viewBox="0 0 24 24" width="32" height="32" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                    <svg id="fp-icon-pause-large" viewBox="0 0 24 24" width="32" height="32" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                </div>
+                <div class="fp-btn" onclick="playNextSong()">
+                    <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 4 15 12 5 20 5 4"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 隐藏的音频播放器 -->
+    <audio id="globalAudioPlayer"></audio>
 <div class="sim-phone-overlay" id="simPhoneOverlay">
     <div class="sim-phone-case">
         <div class="sim-close-btn" onclick="closeSimulatedPhone()">×</div>
@@ -3246,10 +3572,11 @@ ${CORE_PHILOSOPHY}
 [Technical Instruction]
 You must respond with a valid JSON object.
 CRITICAL CHAT HABIT: You are chatting on a mobile instant messaging app. Humans DO NOT send huge blocks of text. You MUST break your response into multiple short, natural messages.
-Format: {"replies": [{"type": "text", "content": "short message 1", "quote": {"name": "TargetName", "content": "quoted text"}}, {"type": "voice", "content": "actual spoken words only"}], "innerVoice": {"heartRate": 85, "location": "City...", "thought": "...", "desire": "..."}}
-Constraint: The "replies" array MUST contain 5 to 8 objects if the response is long. Keep each "content" relatively short. Use the "quote" object ONLY if you are directly replying to a specific previous message. For voice messages, MUST set "type" to "voice" and ONLY put the spoken text in "content", NEVER include timestamps like "0:05" or tags like "[语音]". "innerVoice" MUST contain "heartRate" (number), "location" (>=10 chars), "thought" (>=20 chars), "desire" (>=20 chars). Keep the tone 100% in character.
+Format: {"replies": [{"type": "text", "content": "short message 1", "quote": {"name": "TargetName", "content": "quoted text"}}, {"type": "voice", "content": "actual spoken words only"}, {"type": "image", "content": "exact_image_url"}], "innerVoice": {"heartRate": 85, "location": "City...", "thought": "...", "desire": "..."}, "diary": {"title": "Diary Title", "content": "Diary content..."}}
+Constraint: The "replies" array MUST contain 5 to 8 objects if the response is long. Keep each "content" relatively short. Use the "quote" object ONLY if you are directly replying to a specific previous message. For voice messages, MUST set "type" to "voice" and ONLY put the spoken text in "content". For image/emoticon messages, MUST set "type" to "image" and set "content" to the EXACT URL provided in the system prompt. "innerVoice" MUST contain "heartRate" (number), "location" (>=10 chars), "thought" (>=20 chars), "desire" (>=20 chars). 
+SPECIAL RULE FOR DIARY: If the user explicitly asks you to write a diary (e.g. "写一篇日记"), you MUST include the "diary" object. The diary MUST be highly private, written in the STRICT FIRST PERSON perspective of your character. It must reflect your TRUE internal feelings, hidden desires, and authentic thoughts about the user, perfectly matching your persona, tone, and the current context of the chat. MUST be long, detailed, and use "\\n\\n" for paragraph breaks. DO NOT break character.
+Keep the tone 100% in character.
 `;
-
 
 
 function updateClock() {
@@ -3430,9 +3757,14 @@ document.getElementById('worldbook-trigger').addEventListener('click', () => {
     renderWorldBookList();
 });
 document.getElementById('theme-trigger').addEventListener('click', () => openAppPage('themePage'));
+
 document.getElementById('what-trigger').addEventListener('click', () => {
     openAppPage('whatAppPage');
     renderContactList(); // Ensure list is up to date
+});
+
+document.getElementById('music-trigger').addEventListener('click', () => {
+    openAppPage('musicAppPage');
 });
 function switchWhatTab(tabName, el) {
     // Switch Content
@@ -4191,12 +4523,24 @@ function renderChatMessage(msg, contact, index) {
     } else if (msg.msgType === 'diary_card') {
         try {
             const dData = JSON.parse(msg.content);
+            let authorDisp = dData.author;
+            // 兼容老数据，如果没有记录作者，默认是我
+            if (!authorDisp) authorDisp = '我';
+            
+            // 智能人称转换逻辑
+            let displayStr = authorDisp;
+            if (authorDisp === '我' || authorDisp === contact.user.name) {
+                displayStr = '我';
+            } else if (authorDisp === contact.role.name) {
+                displayStr = '你';
+            }
+
             bubbleClass += ' is-diary';
             bubbleContent = `
                 <div class="chat-diary-card">
                     <div class="chat-diary-header">
                         <div class="chat-diary-icon"></div>
-                        <span>向你分享了一篇日记</span>
+                        <span>分享了一篇[${displayStr}]的日记</span>
                     </div>
                     <div class="chat-diary-body">
                         <div class="chat-diary-title">${dData.title || '无题'}</div>
@@ -4209,6 +4553,7 @@ function renderChatMessage(msg, contact, index) {
             bubbleContent = '[日记解析错误]';
         }
     } else if (msg.msgType === 'voice') {
+
         let sec = Math.ceil(msg.content.length / 3);
         if (sec < 1) sec = 1;
         bubbleClass += ' is-voice';
@@ -4371,7 +4716,15 @@ async function getAiReply() {
     let systemContent = SYSTEM_INSTRUCTION;
     systemContent += `\n\n[Character Setting]\nRole Name: ${contact.role.name}\nRole Description: ${contact.role.details}\nUser Name: ${contact.user.name}\nUser Description: ${contact.user.details}\n\n[CRITICAL REQUIREMENT]: You are ${contact.role.name}. You must speak EXACTLY as they would. Reflect their exact attitude towards ${contact.user.name}. NEVER act as an AI.\n\n[IMPORTANT WARNING]: DO NOT send one giant paragraph! You MUST split your response into multiple short string objects inside the 'replies' JSON array to simulate real human texting behavior!`;
 
+    // 注入表情包库
+    const emoticons = JSON.parse(localStorage.getItem('emoticonData') || '[]');
+    if (emoticons.length > 0) {
+        let emoStr = emoticons.map(e => `描述: ${e.desc} | URL: ${e.url}`).join('\n');
+        systemContent += `\n\n[Available Emoticons]\nYou have the following emoticons available to send. To use one, add an object to "replies" with "type": "image" and "content": "URL". Choose appropriately based on your mood and the chat context:\n${emoStr}`;
+    }
+
     // 2. 注入记忆总结
+
     if (contact.summaries && contact.summaries.length > 0) {
         const allSummaries = contact.summaries.map(s => s.content).join('\n');
         systemContent += `\n\n[Past Memories/Context Summary]:\n${allSummaries}\n(Use these memories to maintain continuity.)`;
@@ -4393,12 +4746,21 @@ async function getAiReply() {
         } else if (msg.msgType === 'voice') {
             contentData = `(Voice Message) ${msg.content}`;
         } else if (msg.msgType === 'diary_card') {
-
             try {
                 const dData = JSON.parse(msg.content);
-                contentData = `[系统提示：用户向你分享了一篇私人日记]\n日记标题：${dData.title}\n记录时间：${dData.time}\n日记内容：${dData.content}\n\n[指令：请仔细阅读这篇日记，体会其中的情感，并作出符合你角色设定的评价和回应。]`;
+                const authorStr = (dData.author && dData.author !== '我') ? dData.author : contact.user.name;
+                
+                let contentDataStr = "";
+                if (authorStr === contact.role.name) {
+                    contentDataStr = `[系统最高警告：用户不知从哪里弄到了你（${contact.role.name}）自己偷偷写的私密日记，并把这篇日记直接发给了你！]\n日记标题：${dData.title}\n日记内容：\n${dData.content}\n\n[强制指令：这绝对是你自己写的日记，绝不是用户写的！你现在的反应必须是被抓包、震惊、害羞、掩饰或者恼羞成怒。完全贴合人设做出反应！]`;
+                } else if (authorStr === contact.user.name) {
+                    contentDataStr = `[系统提示：用户(${contact.user.name})向你分享了Ta自己写的私人日记]\n日记标题：${dData.title}\n日记内容：\n${dData.content}\n\n[指令：请结合你与Ta的关系对这篇日记作出回应。]`;
+                } else {
+                    contentDataStr = `[系统提示：用户向你分享了一篇由 ${authorStr} 写的私人日记]\n日记标题：${dData.title}\n日记内容：\n${dData.content}\n\n[指令：请根据你的性格对该角色及日记内容作出评价和讨论。]`;
+                }
+                contentData = contentDataStr;
             } catch(e) {}
-                    } else if (msg.quote) {
+        } else if (msg.quote) {
                 let qText = msg.quote.content;
                 if (msg.quote.msgType === 'image') qText = '[图片]';
                 else if (msg.quote.msgType === 'voice') qText = '[语音]';
@@ -4451,6 +4813,37 @@ async function getAiReply() {
                 updateInnerVoiceUI(freshContact.innerVoice);
             }
         }
+        
+        // --- 新增：处理 AI 自动生成的日记 ---
+        if (parsed.diary && parsed.diary.title && parsed.diary.content) {
+            const diaries = JSON.parse(localStorage.getItem('diaryData') || '[]');
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            const nowStr = now.toISOString().slice(0, 16).replace('T', ' ');
+            diaries.unshift({
+                id: 'diary_' + Date.now(),
+                title: parsed.diary.title,
+                time: nowStr,
+                content: parsed.diary.content,
+                ownerId: currentChatId // 绑定到当前角色
+            });
+            localStorage.setItem('diaryData', JSON.stringify(diaries));
+            
+            // 在聊天中插入一条系统提示
+            const freshContacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
+            const freshContact = freshContacts.find(c => c.id == currentChatId);
+            if (freshContact) {
+                if(!freshContact.messages) freshContact.messages = [];
+                freshContact.messages.push({
+                    role: 'role',
+                    content: '[系统提示：角色已在Ta的日记中生成了一篇新日记]',
+                    msgType: 'text',
+                    timestamp: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false})
+                });
+                localStorage.setItem('chatContacts', JSON.stringify(freshContacts));
+            }
+        }
+
         let rawReplies = parsed.replies || parsed.messages || [{type: 'text', content: content}];
         let finalReplies = [];
         
@@ -4459,9 +4852,13 @@ async function getAiReply() {
             let msgContent = typeof rawMsg === 'string' ? rawMsg : (rawMsg.content || '');
             let msgQuote = (typeof rawMsg === 'object' && rawMsg !== null) ? rawMsg.quote : null;
             
-            if (typeof rawMsg === 'object' && rawMsg !== null && rawMsg.type === 'voice') msgType = 'voice';
+            if (typeof rawMsg === 'object' && rawMsg !== null) {
+                if (rawMsg.type === 'voice') msgType = 'voice';
+                if (rawMsg.type === 'image') msgType = 'image';
+            }
             
             const voiceMatch = msgContent.match(/([\s\S]*?)\[语音.*?\]([\s\S]*)/);
+
             if (voiceMatch) {
                 msgType = 'voice';
                 msgContent = (voiceMatch[1] + voiceMatch[2]).trim() || '语音消息';
@@ -5289,7 +5686,7 @@ document.getElementById('diary-trigger').addEventListener('click', () => {
 });
 
 function switchDiaryTab(tabName, el) {
-    document.querySelectorAll('.diary-tab-content').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('#diaryAppPage .diary-tab-content').forEach(c => c.classList.remove('active'));
     document.getElementById('diary-tab-' + tabName).classList.add('active');
     
     document.querySelectorAll('.diary-dock-icon').forEach(i => i.classList.remove('active'));
@@ -5299,24 +5696,217 @@ function switchDiaryTab(tabName, el) {
     const actionsEl = document.getElementById('diaryHeaderActions');
     
     if (tabName === 'me') {
-        titleEl.innerText = '我的日记';
+        titleEl.innerText = 'Me的日记';
         actionsEl.style.display = 'flex';
+        renderDiaryList();
     } else {
         titleEl.innerText = 'Ta的日记';
         actionsEl.style.display = 'none';
-
+        renderRoleDiaryGrid();
         if (isDiaryManageMode) toggleManageDiary();
     }
 }
+function renderRoleDiaryGrid() {
+    const grid = document.getElementById('diaryRoleGrid');
+    const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
+    grid.innerHTML = '';
+    
+    if (contacts.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; color: #999; padding: 60px 0; font-size: 13px;">暂无联系人</div>';
+        return;
+    }
+    
+    contacts.forEach(c => {
+        const item = document.createElement('div');
+        item.style.cssText = 'display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer;';
+        const avatarStyle = c.role.avatar ? `background-image:url(${c.role.avatar})` : 'background-color:#eee;';
+        item.innerHTML = `
+            <div style="width:56px; height:56px; border-radius:50%; background-size:cover; background-position:center; box-shadow:0 2px 8px rgba(0,0,0,0.05); ${avatarStyle}"></div>
+            <div style="font-size:12px; color:var(--text-main); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; width:100%; text-align:center; font-weight:500;">${c.remark || c.role.name}</div>
+        `;
+        item.onclick = () => openRoleDiaryPage(c.id, c.remark || c.role.name);
+        grid.appendChild(item);
+    });
+}
 
+let currentDiaryRoleId = null;
+let isRoleDiaryManageMode = false;
+function openRoleDiaryPage(roleId, roleName) {
+    currentDiaryRoleId = roleId;
+    isRoleDiaryManageMode = false;
+    document.getElementById('diaryRolePageTitle').innerText = `${roleName}的日记`;
+    document.getElementById('diaryListRole').classList.remove('manage-mode');
+    document.getElementById('diaryRoleManageBtn').innerText = '管理';
+    document.getElementById('diaryRoleManageBtn').style.color = 'var(--text-main)';
+    
+    renderRoleDiaryList();
+    openAppPage('diaryRolePage');
+}
+// --- 新增：角色自动生成私密日记逻辑 ---
+async function generateRoleDiary() {
+    if (!currentDiaryRoleId) return;
+    const config = JSON.parse(localStorage.getItem('apiConfig') || '{}');
+    if (!config.url || !config.key) {
+        alert("请先在设置中配置API Key和URL");
+        return;
+    }
+
+    const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
+    const contact = contacts.find(c => c.id == currentDiaryRoleId);
+    if (!contact) return;
+
+    // 创建并显示 Toast 弹窗
+    let toast = document.getElementById('diaryToast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'diaryToast';
+        toast.className = 'toast-overlay';
+        toast.innerHTML = `<div class="toast-box"><div class="toast-spinner"></div><span id="toastText"></span></div>`;
+        document.body.appendChild(toast);
+    }
+    document.getElementById('toastText').innerText = `${contact.role.name} 正在奋笔疾书中...`;
+    toast.classList.add('active');
+
+    const btn = document.getElementById('roleDiaryGenBtn');
+    const originalStyle = btn.style.opacity;
+    btn.style.opacity = '0.3';
+    btn.style.pointerEvents = 'none';
+    let prompt = `你现在是${contact.role.name}。请立刻在你的私密笔记本上写下一篇日记。
+【你的设定】：${contact.role.details}
+【用户设定】：${contact.user.name} - ${contact.user.details}
+`;
+    
+    if (contact.messages && contact.messages.length > 0) {
+        const recentMsgs = contact.messages.slice(-20).map(m => {
+            const name = m.role === 'user' ? contact.user.name : contact.role.name;
+            let content = m.content;
+            if(m.msgType === 'image') content = '[发送了一张图片]';
+            if(m.msgType === 'voice') content = `[语音] ${m.content}`;
+            return `${name}: ${content}`;
+        }).join('\n');
+        prompt += `\n【最近你与${contact.user.name}的经历/聊天记录】：\n${recentMsgs}\n`;
+    }
+
+    prompt += `
+【严格要求】：
+1. 必须使用第一人称（我）来写。
+2. 这是你的私密日记，记录你内心最深处、最真实的欲望、情感波动以及对${contact.user.name}的真实看法。
+3. 语气、用词、口癖必须100%贴合你的角色设定，绝不能像AI或助手！
+4. 结合上面的【最近经历】来抒发感想。
+5. 【标题要求】：必须根据日记的具体内容和你的心情，自拟一个符合你性格和当前情感色彩的标题（切忌使用“X月X日私密日记”这种死板的标题，不允许超过8个字）。
+6. 【字数与排版强制要求】：日记正文绝对不能低于900字！必须进行极其详尽的心理描写、场景回忆和细节刻画。正文必须分段，段落之间必须使用 \\n\\n 进行换行排版！
+7. 只返回合法的JSON对象，格式严格为：{"title": "日记标题", "content": "日记正文内容..."}。绝对不要包含任何Markdown标记或其他文本！`;
+
+
+
+    try {
+        const response = await fetch(`${config.url}/chat/completions`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${config.key}`
+            },
+            body: JSON.stringify({
+                model: config.model || 'gpt-3.5-turbo',
+                messages: [{ role: "user", content: prompt }],
+                temperature: parseFloat(config.temp) || 0.8,
+                response_format: { type: "json_object" }
+            })
+        });
+
+        if (!response.ok) throw new Error('API 请求失败');
+        const data = await response.json();
+        const content = data.choices[0].message.content;
+        let parsed;
+        try {
+            parsed = JSON.parse(content);
+        } catch (e) {
+            throw new Error("JSON 解析错误");
+        }
+
+        if (parsed.title && parsed.content) {
+            const diaries = JSON.parse(localStorage.getItem('diaryData') || '[]');
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            const nowStr = now.toISOString().slice(0, 16).replace('T', ' ');
+            
+            diaries.unshift({
+                id: 'diary_' + Date.now(),
+                title: parsed.title,
+                time: nowStr,
+                content: parsed.content,
+                ownerId: currentDiaryRoleId
+            });
+            
+            localStorage.setItem('diaryData', JSON.stringify(diaries));
+            renderRoleDiaryList(); 
+        } else {
+            throw new Error("返回的日记格式不正确");
+        }
+
+    } catch (error) {
+        alert("角色写日记时思绪卡壳了: " + error.message);
+    } finally {
+        toast.classList.remove('active');
+        btn.style.opacity = originalStyle;
+        btn.style.pointerEvents = 'auto';
+    }
+}
+function renderRoleDiaryList() {
+    const container = document.getElementById('diaryListRole');
+    const diaries = JSON.parse(localStorage.getItem('diaryData') || '[]');
+    const roleDiaries = diaries.filter(d => d.ownerId === currentDiaryRoleId);
+    
+    container.innerHTML = '';
+
+    if (roleDiaries.length === 0) {
+        container.innerHTML = '<div class="empty-diary">Ta 还没有记录任何日记。</div>';
+        return;
+    }
+
+    roleDiaries.forEach(d => {
+        const card = document.createElement('div');
+        card.className = 'diary-card';
+        card.onclick = (e) => {
+            if (!isRoleDiaryManageMode) openDiaryWrite(d.id, currentDiaryRoleId);
+        };
+        card.innerHTML = `
+            <div class="diary-del-btn" onclick="event.stopPropagation(); deleteDiary('${d.id}', true)">×</div>
+            <div class="diary-card-title">${d.title}</div>
+            <div class="diary-card-time">${d.time}</div>
+            <div class="diary-card-content">${d.content}</div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+function toggleManageRoleDiary() {
+    const container = document.getElementById('diaryListRole');
+    const btn = document.getElementById('diaryRoleManageBtn');
+    isRoleDiaryManageMode = !isRoleDiaryManageMode;
+    
+    if (isRoleDiaryManageMode) {
+        container.classList.add('manage-mode');
+        btn.innerText = '完成';
+        btn.style.color = 'var(--accent)';
+    } else {
+        container.classList.remove('manage-mode');
+        btn.innerText = '管理';
+        btn.style.color = 'var(--text-main)';
+    }
+}
+
+// --- 原有日记逻辑重构（加入 ownerId 支持） ---
 let currentEditingDiaryId = null;
+let currentDiaryOwnerId = 'me';
 
-function openDiaryWrite(id = null) {
+function openDiaryWrite(id = null, ownerId = 'me') {
     currentEditingDiaryId = id;
+    currentDiaryOwnerId = ownerId;
     const titleInput = document.getElementById('diaryInputTitle');
     const contentInput = document.getElementById('diaryInputContent');
     const timeInput = document.getElementById('diaryInputTime');
-    const forwardBtn = document.getElementById('diaryForwardBtn'); // 获取转发按钮
+    const forwardBtn = document.getElementById('diaryForwardBtn'); 
 
     if (id) {
         const diaries = JSON.parse(localStorage.getItem('diaryData') || '[]');
@@ -5326,7 +5916,8 @@ function openDiaryWrite(id = null) {
             contentInput.value = d.content;
             timeInput.value = d.time.replace(' ', 'T');
             formatDiaryTimeDisplay(timeInput.value);
-            forwardBtn.style.display = 'block'; // 编辑已写日记时显示转发按钮
+            forwardBtn.style.display = 'block'; 
+            currentDiaryOwnerId = d.ownerId || 'me';
         }
     } else {
         titleInput.value = '';
@@ -5336,7 +5927,7 @@ function openDiaryWrite(id = null) {
         const nowStr = now.toISOString().slice(0, 16);
         timeInput.value = nowStr;
         formatDiaryTimeDisplay(nowStr);
-        forwardBtn.style.display = 'none'; // 新建日记时隐藏转发按钮
+        forwardBtn.style.display = 'none'; 
     }
     openAppPage('diaryWritePage');
 }
@@ -5375,16 +5966,30 @@ function forwardDiaryToContact(contactId) {
     if (!d) return;
 
     const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
-    const contactIdx = contacts.findIndex(c => c.id === contactId);
+    const contactIdx = contacts.findIndex(c => c.id == contactId);
     if (contactIdx === -1) return;
 
     const contact = contacts[contactIdx];
     if (!contact.messages) contact.messages = [];
 
+    // 强力判断日记作者
+    let authorName = '我';
+    if (d.ownerId && d.ownerId !== 'me') {
+        const ownerContact = contacts.find(c => c.id == d.ownerId);
+        if (ownerContact) {
+            authorName = ownerContact.role.name;
+        }
+    }
+
     const nowTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
     
-    // 将日记数据转为 JSON 存入消息中
-    const diaryDataStr = JSON.stringify({ title: d.title, time: d.time, content: d.content });
+    // 强制写入 author
+    const diaryDataStr = JSON.stringify({ 
+        title: d.title, 
+        time: d.time, 
+        content: d.content,
+        author: authorName 
+    });
 
     const newMsg = {
         role: 'user',
@@ -5394,25 +5999,28 @@ function forwardDiaryToContact(contactId) {
     };
 
     contact.messages.push(newMsg);
-    contact.lastMsg = '[分享了一篇日记]';
+    
+    // 智能转换列表预览文字的人称
+    let lastMsgAuthor = authorName;
+    if (authorName === '我' || authorName === contact.user.name) {
+        lastMsgAuthor = '我';
+    } else if (authorName === contact.role.name) {
+        lastMsgAuthor = '你';
+    }
+    contact.lastMsg = `[分享了一篇[${lastMsgAuthor}]的日记]`;
     contact.time = nowTime;
 
     localStorage.setItem('chatContacts', JSON.stringify(contacts));
     
     closeForwardModal();
     closeAppPage('diaryWritePage');
-    closeAppPage('diaryAppPage'); // 关闭日记应用
+    if (document.getElementById('diaryRolePage') && document.getElementById('diaryRolePage').classList.contains('active')) {
+        closeAppPage('diaryRolePage');
+    }
+    closeAppPage('diaryAppPage'); 
     
-    // 打开聊天页面并触发 AI 回复
     openChat(contactId);
-    const sendBtn = document.querySelector('.icon-send');
-    const statusDiv = document.querySelector('.chat-status');
-    isAiProcessing = true;
-    sendBtn.classList.add('locked');
-    statusDiv.innerHTML = '<div class="status-dot" style="background-color:#007aff"></div>对方正在阅读日记……';
-    getAiReply();
 }
-
 
 
 function formatDiaryTimeDisplay(val) {
@@ -5427,12 +6035,11 @@ function saveDiary() {
     const time = document.getElementById('diaryInputTime').value;
     const content = document.getElementById('diaryInputContent').value.trim();
 
-    if (!title && !content) return; // 允许只写标题或只写内容，但不能全空
+    if (!title && !content) return; 
 
     const diaries = JSON.parse(localStorage.getItem('diaryData') || '[]');
     
     if (currentEditingDiaryId) {
-        // 更新现有日记
         const index = diaries.findIndex(d => d.id === currentEditingDiaryId);
         if (index !== -1) {
             diaries[index].title = title || '无题';
@@ -5440,37 +6047,42 @@ function saveDiary() {
             diaries[index].content = content;
         }
     } else {
-        // 保存新日记
         const diaryItem = {
             id: 'diary_' + Date.now(),
             title: title || '无题',
             time: time.replace('T', ' '),
-            content: content
+            content: content,
+            ownerId: currentDiaryOwnerId
         };
         diaries.unshift(diaryItem);
     }
 
     localStorage.setItem('diaryData', JSON.stringify(diaries));
     closeAppPage('diaryWritePage');
-    renderDiaryList();
+    
+    if (currentDiaryOwnerId === 'me') {
+        renderDiaryList();
+    } else {
+        renderRoleDiaryList();
+    }
 }
 
 function renderDiaryList() {
     const container = document.getElementById('diaryListMe');
     const diaries = JSON.parse(localStorage.getItem('diaryData') || '[]');
+    const myDiaries = diaries.filter(d => !d.ownerId || d.ownerId === 'me');
     container.innerHTML = '';
 
-    if (diaries.length === 0) {
+    if (myDiaries.length === 0) {
         container.innerHTML = '<div class="empty-diary">还没有记录任何日记，点击右上角开始书写吧。</div>';
         return;
     }
 
-    diaries.forEach(d => {
+    myDiaries.forEach(d => {
         const card = document.createElement('div');
         card.className = 'diary-card';
-        // 管理模式下不触发点击进入编辑
         card.onclick = (e) => {
-            if (!isDiaryManageMode) openDiaryWrite(d.id);
+            if (!isDiaryManageMode) openDiaryWrite(d.id, 'me');
         };
         card.innerHTML = `
             <div class="diary-del-btn" onclick="event.stopPropagation(); deleteDiary('${d.id}')">×</div>
@@ -5481,6 +6093,7 @@ function renderDiaryList() {
         container.appendChild(card);
     });
 }
+
 function toggleManageDiary() {
     const tabMe = document.getElementById('diary-tab-me');
     const btn = document.getElementById('diaryManageBtn');
@@ -5497,12 +6110,17 @@ function toggleManageDiary() {
     }
 }
 
-function deleteDiary(id) {
+function deleteDiary(id, isRole = false) {
     if (!confirm('确定删除这篇日记吗？')) return;
     let diaries = JSON.parse(localStorage.getItem('diaryData') || '[]');
     diaries = diaries.filter(d => d.id !== id);
     localStorage.setItem('diaryData', JSON.stringify(diaries));
-    renderDiaryList();
+    
+    if (isRole) {
+        renderRoleDiaryList();
+    } else {
+        renderDiaryList();
+    }
 }
 function openCheckPhoneTargetSelect() {
     const list = document.getElementById('checkPhoneTargetList');
@@ -5587,8 +6205,8 @@ async function generateSimPhoneData() {
 角色设定：${contact.role.details}
 要求：
 1. 必须返回合法的JSON格式，不包含任何外部说明文本。
-2. 包含4个数组：messages(4-7个), notes(4-7个), shopping(4-7个), browser(4-7个)。
-3. messages格式: {"name": "对方名字", "lastMsg": "最后一句聊天", "history": [{"role": "Other或Me", "content": "聊天内容"}]}，history包含6-9条对话。
+2. 包含4个数组：messages(5-7个), notes(5-7个), shopping(5-7个), browser(5-7个)。
+3. messages格式: {"name": "对方名字", "lastMsg": "最后一句聊天", "history": [{"role": "Other或Me", "content": "聊天内容"}]}，history包含7-9条对话。
    【极度重要】：在history的role中，"Other"代表对方(显示在左侧)，"Me"代表角色本人(显示在右侧)。不要弄反！
 4. notes格式: {"title": "备忘录标题", "content": "具体内容"}。
 5. shopping格式: {"name": "商品名称", "price": "价格数字"}。
@@ -5712,6 +6330,418 @@ function openSimNoteDetail(index) {
 function closeSimDetail() {
     document.getElementById('simDetailPage').classList.remove('active');
 }
+// --- 修改桌面音乐图标的点击事件，加载音乐列表 ---
+document.getElementById('music-trigger').addEventListener('click', () => {
+    openAppPage('musicAppPage');
+    renderMusicList();
+});
+
+// --- 音乐播放器核心逻辑 ---
+const audioPlayer = document.getElementById('globalAudioPlayer');
+let currentSongIndex = -1;
+let musicList = [];
+let parsedLyrics = [];
+let currentLyricIndex = -1;
+let isDraggingProgress = false; // 拖动状态标记
+
+// 格式化时间 M:SS
+function formatTime(sec) {
+    if (isNaN(sec)) return "0:00";
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+}
+
+// 监听音频时间更新进度条和歌词
+audioPlayer.addEventListener('timeupdate', () => {
+    if (audioPlayer.duration && !isDraggingProgress) {
+        const percent = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+        document.getElementById('progressFill').style.width = percent + '%';
+        document.getElementById('fpProgressFill').style.width = percent + '%';
+        document.getElementById('fpTimeCurr').innerText = formatTime(audioPlayer.currentTime);
+        document.getElementById('fpTimeTotal').innerText = formatTime(audioPlayer.duration);
+
+        // 歌词同步滚动
+        if (parsedLyrics.length > 0) {
+            let newIdx = -1;
+            for (let i = 0; i < parsedLyrics.length; i++) {
+                if (audioPlayer.currentTime >= parsedLyrics[i].time) {
+                    newIdx = i;
+                } else {
+                    break;
+                }
+            }
+            if (newIdx !== -1 && newIdx !== currentLyricIndex) {
+                currentLyricIndex = newIdx;
+                const lines = document.querySelectorAll('.fp-lyric-line');
+                lines.forEach(l => l.classList.remove('active'));
+                if (lines[newIdx]) {
+                    lines[newIdx].classList.add('active');
+                    // 滚动到中央
+                    const container = document.getElementById('fpLyricsContainer');
+                    container.scrollTop = lines[newIdx].offsetTop - container.clientHeight / 2 + 20;
+                }
+            }
+        }
+    }
+});
+
+// 播放结束自动下一首
+audioPlayer.addEventListener('ended', () => {
+    playNextSong();
+});
+
+function openAddMusicModal() {
+    document.getElementById('musicModalTitle').innerText = '添加音乐';
+    document.getElementById('mInpEditIndex').value = '-1';
+    document.getElementById('mInpName').value = '';
+    document.getElementById('mInpArtist').value = '';
+    document.getElementById('mInpAudioUrl').value = '';
+    document.getElementById('mInpAudioFile').value = '';
+    document.getElementById('mInpCoverUrl').value = '';
+    document.getElementById('mInpCoverFile').value = '';
+    document.getElementById('mInpLrcFile').value = '';
+    document.getElementById('mInpLyrics').value = '';
+    document.getElementById('addMusicModal').classList.add('active');
+}
+
+function openEditMusicModal(index) {
+    const song = musicList[index];
+    document.getElementById('musicModalTitle').innerText = '编辑音乐';
+    document.getElementById('mInpEditIndex').value = index;
+    document.getElementById('mInpName').value = song.name;
+    document.getElementById('mInpArtist').value = song.artist;
+    document.getElementById('mInpAudioUrl').value = song.audio.startsWith('data:') ? '' : song.audio;
+    document.getElementById('mInpCoverUrl').value = song.cover.startsWith('data:') ? '' : song.cover;
+    document.getElementById('mInpLyrics').value = song.lyrics || '';
+    document.getElementById('addMusicModal').classList.add('active');
+}
+
+function closeAddMusicModal() {
+    document.getElementById('addMusicModal').classList.remove('active');
+}
+
+// 读取本地歌词文件填入文本框
+function readLrcFile(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('mInpLyrics').value = e.target.result;
+        };
+        reader.readAsText(input.files[0]);
+    }
+}
+
+// 将文件转为 Base64
+function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+    });
+}
+
+// 保存音乐到本地存储
+async function saveNewMusic() {
+    const name = document.getElementById('mInpName').value.trim();
+    const artist = document.getElementById('mInpArtist').value.trim();
+    const editIndex = parseInt(document.getElementById('mInpEditIndex').value);
+    
+    if (!name || !artist) { alert("歌名和歌手不能为空！"); return; }
+
+    let audioSrc = document.getElementById('mInpAudioUrl').value.trim();
+    const audioFile = document.getElementById('mInpAudioFile').files[0];
+    
+    if (!audioSrc && !audioFile && editIndex === -1) { 
+        alert("请提供音频URL或选择本地音频文件！"); return; 
+    }
+
+    let coverSrc = document.getElementById('mInpCoverUrl').value.trim();
+    const coverFile = document.getElementById('mInpCoverFile').files[0];
+
+    const btn = event.target;
+    btn.innerText = "处理中...";
+    btn.disabled = true;
+
+    try {
+        if (audioFile) audioSrc = await fileToBase64(audioFile);
+        if (coverFile) {
+            // 提升封面画质到 600x600
+            const base64Cover = await fileToBase64(coverFile);
+            const img = new Image();
+            img.src = base64Cover;
+            await new Promise(r => img.onload = r);
+            const canvas = document.createElement('canvas');
+            canvas.width = 600; canvas.height = 600;
+            canvas.getContext('2d').drawImage(img, 0, 0, 600, 600);
+            coverSrc = canvas.toDataURL('image/jpeg', 0.85);
+        }
+
+        let list = JSON.parse(localStorage.getItem('myMusicList') || '[]');
+        
+        if (editIndex !== -1) {
+            list[editIndex].name = name;
+            list[editIndex].artist = artist;
+            if(audioSrc) list[editIndex].audio = audioSrc;
+            if(coverSrc) list[editIndex].cover = coverSrc;
+            list[editIndex].lyrics = document.getElementById('mInpLyrics').value;
+        } else {
+            const newSong = {
+                id: 'song_' + Date.now(),
+                name: name,
+                artist: artist,
+                audio: audioSrc,
+                cover: coverSrc || 'https://picsum.photos/600/600?random=' + Date.now(),
+                lyrics: document.getElementById('mInpLyrics').value
+            };
+            list.push(newSong);
+        }
+
+        localStorage.setItem('myMusicList', JSON.stringify(list));
+        closeAddMusicModal();
+        renderMusicList();
+        
+        // 如果正在播放被编辑的歌，更新UI
+        if (editIndex !== -1 && currentSongIndex === editIndex) {
+            playMusic(editIndex, false); // 重新加载信息但不中断播放状态
+        }
+    } catch (e) {
+        alert("保存失败，可能是本地文件过大。");
+    } finally {
+        btn.innerText = "保存";
+        btn.disabled = false;
+    }
+}
+
+function renderMusicList() {
+    musicList = JSON.parse(localStorage.getItem('myMusicList') || '[]');
+    const container = document.getElementById('localSongList');
+    container.innerHTML = '';
+    
+    if (musicList.length === 0) {
+        container.innerHTML = '<div class="sim-empty-tip" style="margin-top: 40px;">暂无音乐，点击左上角 + 号添加</div>';
+        return;
+    }
+
+    musicList.forEach((song, index) => {
+        const item = document.createElement('div');
+        item.className = 'song-item';
+        item.innerHTML = `
+            <div class="song-cover" style="background-image: url('${song.cover}')" onclick="playMusic(${index})"></div>
+            <div class="song-info" onclick="playMusic(${index})">
+                <div class="song-name">${song.name}</div>
+                <div class="song-artist">${song.artist}</div>
+            </div>
+            <div class="edit-song-btn" onclick="openEditMusicModal(${index})">编辑</div>
+            <div class="del-song-btn" onclick="deleteMusic(${index})">删除</div>
+        `;
+        container.appendChild(item);
+    });
+}
+
+function deleteMusic(index) {
+    if(!confirm("确定删除这首歌曲吗？")) return;
+    musicList.splice(index, 1);
+    localStorage.setItem('myMusicList', JSON.stringify(musicList));
+    if (currentSongIndex === index) {
+        audioPlayer.pause();
+        document.getElementById('musicPlayerBar').style.display = 'none';
+        currentSongIndex = -1;
+    } else if (currentSongIndex > index) {
+        currentSongIndex--; 
+    }
+    renderMusicList();
+}
+
+function parseLyrics(lrcText) {
+    if (!lrcText) return [];
+    const lines = lrcText.split('\n');
+    const result = [];
+    const timeReg = /\[(\d{2}):(\d{2})\.(\d{2,3})\]/;
+    lines.forEach(line => {
+        const match = timeReg.exec(line);
+        if (match) {
+            const min = parseInt(match[1]);
+            const sec = parseInt(match[2]);
+            const ms = parseInt(match[3]);
+            const time = min * 60 + sec + ms / (match[3].length === 2 ? 100 : 1000);
+            const text = line.replace(timeReg, '').trim();
+            if (text) result.push({ time, text });
+        }
+    });
+    return result;
+}
+
+function renderLyrics() {
+    const container = document.getElementById('fpLyricsContainer');
+    container.innerHTML = '';
+    currentLyricIndex = -1;
+    if (parsedLyrics.length === 0) {
+        container.innerHTML = '<div class="fp-lyric-line" style="color:#1a1a1a;">暂无歌词</div>';
+        return;
+    }
+    parsedLyrics.forEach((lrc, i) => {
+        const div = document.createElement('div');
+        div.className = 'fp-lyric-line';
+        div.innerText = lrc.text;
+        container.appendChild(div);
+    });
+}
+
+function playMusic(index, forceReload = true) {
+    if (index < 0 || index >= musicList.length) return;
+    currentSongIndex = index;
+    const song = musicList[index];
+    
+    if (forceReload || audioPlayer.src !== song.audio) {
+        audioPlayer.src = song.audio;
+        audioPlayer.play().catch(e => alert("播放失败，可能是音频链接失效。"));
+    }
+    
+    // 更新底部控制栏
+    document.getElementById('musicPlayerBar').style.display = 'flex';
+    document.getElementById('playerName').innerText = song.name;
+    document.getElementById('playerArtist').innerText = song.artist;
+    document.getElementById('playerCover').style.backgroundImage = `url('${song.cover}')`;
+    
+    // 更新全屏播放页
+    document.getElementById('fpName').innerText = song.name;
+    document.getElementById('fpArtist').innerText = song.artist;
+    document.getElementById('fpCoverImage').style.backgroundImage = `url('${song.cover}')`;
+    
+    // 解析歌词
+    parsedLyrics = parseLyrics(song.lyrics);
+    renderLyrics();
+
+    updatePlayBtnUI(!audioPlayer.paused);
+}
+
+function togglePlayMusic() {
+    if (currentSongIndex === -1) {
+        if (musicList.length > 0) playMusic(0);
+        return;
+    }
+    if (audioPlayer.paused) {
+        audioPlayer.play();
+        updatePlayBtnUI(true);
+    } else {
+        audioPlayer.pause();
+        updatePlayBtnUI(false);
+    }
+}
+
+function updatePlayBtnUI(isPlaying) {
+    // 小控制栏
+    const cover = document.getElementById('playerCover');
+    const iconPlay = document.getElementById('icon-play');
+    const iconPause = document.getElementById('icon-pause');
+    // 全屏控制栏
+    const fpIconPlay = document.getElementById('fp-icon-play-large');
+    const fpIconPause = document.getElementById('fp-icon-pause-large');
+
+    if (isPlaying) {
+        cover.classList.add('playing');
+        iconPlay.style.display = 'none';
+        iconPause.style.display = 'block';
+        fpIconPlay.style.display = 'none';
+        fpIconPause.style.display = 'block';
+    } else {
+        cover.classList.remove('playing');
+        iconPlay.style.display = 'block';
+        iconPause.style.display = 'none';
+        fpIconPlay.style.display = 'block';
+        fpIconPause.style.display = 'none';
+    }
+}
+
+function playNextSong() {
+    if (musicList.length === 0) return;
+    let nextIdx = currentSongIndex + 1;
+    if (nextIdx >= musicList.length) nextIdx = 0;
+    playMusic(nextIdx);
+}
+
+function playPrevSong() {
+    if (musicList.length === 0) return;
+    let prevIdx = currentSongIndex - 1;
+    if (prevIdx < 0) prevIdx = musicList.length - 1;
+    playMusic(prevIdx);
+}
+
+function seekMusic(e) {
+    if (!audioPlayer.duration) return;
+    const bg = e.currentTarget;
+    const rect = bg.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const percent = clickX / rect.width;
+    audioPlayer.currentTime = percent * audioPlayer.duration;
+}
+
+// --- 全屏拖拽进度条逻辑 ---
+function handleFpDrag(e) {
+    if (!audioPlayer.duration) return 0;
+    const bg = document.querySelector('.fp-progress-bg');
+    const rect = bg.getBoundingClientRect();
+    let clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    let percent = (clientX - rect.left) / rect.width;
+    percent = Math.max(0, Math.min(1, percent));
+    
+    document.getElementById('fpProgressFill').style.width = (percent * 100) + '%';
+    document.getElementById('fpTimeCurr').innerText = formatTime(percent * audioPlayer.duration);
+    
+    // 同步小进度条UI
+    document.getElementById('progressFill').style.width = (percent * 100) + '%';
+    return percent;
+}
+
+function startSeekFp(e) {
+    isDraggingProgress = true;
+    handleFpDrag(e);
+}
+
+function moveSeekFp(e) {
+    if (isDraggingProgress) {
+        handleFpDrag(e);
+    }
+}
+
+function endSeekFp(e) {
+    if (isDraggingProgress) {
+        const percent = handleFpDrag(e.changedTouches ? e : e);
+        audioPlayer.currentTime = percent * audioPlayer.duration;
+        isDraggingProgress = false;
+    }
+}
+
+// --- 全屏播放页与翻转逻辑 ---
+function openFullPlayer() {
+    document.getElementById('fullPlayerPage').classList.add('active');
+}
+
+function closeFullPlayer() {
+    document.getElementById('fullPlayerPage').classList.remove('active');
+}
+
+function toggleFpFlip() {
+    document.getElementById('fpFlipContainer').classList.toggle('flipped');
+}
+
+function seekMusicFp(e) {
+    seekMusic(e);
+}
+function openFullPlayer() {
+    document.getElementById('fullPlayerPage').classList.add('active');
+}
+
+function closeFullPlayer() {
+    document.getElementById('fullPlayerPage').classList.remove('active');
+}
+
+function toggleFpFlip() {
+    document.getElementById('fpFlipContainer').classList.toggle('flipped');
+}
+
 </script>
 </body>
 </html>

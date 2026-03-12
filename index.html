@@ -6159,12 +6159,19 @@ function openSimulatedPhone(contactId) {
         document.getElementById('sim-title-messages').innerText = phoneTitle;
         document.getElementById('sim-title-notes').innerText = phoneTitle;
         document.getElementById('sim-title-shopping').innerText = phoneTitle;
+        if (contact.simPhoneData) {
+            currentSimData = contact.simPhoneData;
+        }
     }
 
-    document.getElementById('sim-content-messages').innerHTML = '<div class="sim-empty-tip">点击右上角刷新获取数据</div>';
-    document.getElementById('sim-content-notes').innerHTML = '<div class="sim-empty-tip">暂无数据</div>';
-    document.getElementById('sim-content-shopping').innerHTML = '<div class="sim-empty-tip">暂无数据</div>';
-    document.getElementById('sim-content-browser').innerHTML = '<div class="sim-empty-tip">暂无数据</div>';
+    if (currentSimData) {
+        renderSimPhoneData();
+    } else {
+        document.getElementById('sim-content-messages').innerHTML = '<div class="sim-empty-tip">点击右上角刷新获取数据</div>';
+        document.getElementById('sim-content-notes').innerHTML = '<div class="sim-empty-tip">暂无数据</div>';
+        document.getElementById('sim-content-shopping').innerHTML = '<div class="sim-empty-tip">暂无数据</div>';
+        document.getElementById('sim-content-browser').innerHTML = '<div class="sim-empty-tip">暂无数据</div>';
+    }
     closeSimDetail();
     document.getElementById('checkPhoneTargetModal').classList.remove('active');
     document.getElementById('simPhoneOverlay').classList.add('active');
@@ -6227,6 +6234,11 @@ async function generateSimPhoneData() {
         if (!response.ok) throw new Error('API Error');
         const data = await response.json();
         currentSimData = JSON.parse(data.choices[0].message.content);
+        const cIndex = contacts.findIndex(c => c.id == currentSimContactId);
+        if (cIndex !== -1) {
+            contacts[cIndex].simPhoneData = currentSimData;
+            localStorage.setItem('chatContacts', JSON.stringify(contacts));
+        }
         renderSimPhoneData();
     } catch (e) {
         alert("生成失败: " + e.message);

@@ -4435,19 +4435,17 @@ function handleSendClick() {
     const text = input.value.trim();
     const sendBtn = document.querySelector('.icon-send');
     const statusDiv = document.querySelector('.chat-status');
-    // Hide panel when sending
     document.getElementById('functionPanel').classList.remove('active');
     if (text === '') {
-        // Trigger AI Reply (Receive)
         isAiProcessing = true;
         sendBtn.classList.add('locked');
         statusDiv.innerHTML = '<div class="status-dot" style="background-color:#007aff"></div>对方正在输入中……';
         getAiReply();
     } else {
-        // Send User Message
         sendUserMessage(text);
     }
 }
+
 function renderChatMessage(msg, contact, index) {
     if (msg.msgType === 'text' && typeof msg.content === 'string') {
         const voiceMatch = msg.content.match(/([\s\S]*?)\[语音.*?\]([\s\S]*)/);
@@ -4598,7 +4596,6 @@ function sendUserMessage(text, msgType = 'text') {
         if (!contact) return;
         if (!contact.messages) contact.messages = [];
         const nowTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
-        
         const newMsg = { 
             role: 'user', 
             content: text, 
@@ -4606,16 +4603,12 @@ function sendUserMessage(text, msgType = 'text') {
             timestamp: nowTime,
             quote: currentQuoteData 
         };
-        
         contact.messages.push(newMsg);
-        
         cancelQuote();
-        
         renderChatMessage(newMsg, contact, contact.messages.length - 1);
         document.getElementById('chatInput').value = '';
         const container = document.getElementById('chatMsgContainer');
         container.scrollTop = container.scrollHeight;
-        
         contact.lastMsg = msgType === 'image' ? '[图片]' : (msgType === 'voice' ? '[语音]' : text);
         contact.time = nowTime;
         localStorage.setItem('chatContacts', JSON.stringify(contacts));
@@ -4624,6 +4617,7 @@ function sendUserMessage(text, msgType = 'text') {
         alert("存储空间已满或发生错误");
     }
 }
+
 
 async function generateSummary(isManual = false) {
     if (!currentChatId) return;

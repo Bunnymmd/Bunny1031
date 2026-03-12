@@ -1065,16 +1065,44 @@ select.setting-input {
 
 
 .quote-in-bubble {
-    background: rgba(0,0,0,0.05);
-    border-left: 2px solid #ccc;
-    padding: 2px 6px;
-    margin-bottom: 4px;
+    background: rgba(0, 0, 0, 0.04);
+    border-left: 3px solid rgba(0, 0, 0, 0.2);
     border-radius: 4px;
-    font-size: 11px;
-    color: #666;
+    padding: 6px 8px;
+    margin-bottom: 6px;
     display: flex;
     flex-direction: column;
 }
+.quote-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+    gap: 12px;
+}
+.quote-name {
+    font-weight: 600;
+    font-size: 11px;
+    color: #8e8e93;
+    white-space: nowrap;
+}
+.quote-time {
+    font-size: 10px;
+    color: #999;
+    white-space: nowrap;
+}
+.quote-text {
+    font-size: 12px;
+    color: #666;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-all;
+}
+
+
+
 
 .msg-toolbar {
     position: absolute;
@@ -1121,19 +1149,6 @@ select.setting-input {
     width: 1px;
     background: #e5e5ea;
 }
-.quote-in-bubble {
-    background: rgba(0,0,0,0.05);
-    border-left: 3px solid #ccc;
-    padding: 4px 8px;
-    margin-bottom: 6px;
-    border-radius: 4px;
-    font-size: 12px;
-    color: #666;
-    display: flex;
-    flex-direction: column;
-}
-.quote-in-bubble .name { font-weight: 600; font-size: 11px; margin-bottom: 2px; }
-.quote-in-bubble .text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .recall-modal-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -3231,9 +3246,10 @@ ${CORE_PHILOSOPHY}
 [Technical Instruction]
 You must respond with a valid JSON object.
 CRITICAL CHAT HABIT: You are chatting on a mobile instant messaging app. Humans DO NOT send huge blocks of text. You MUST break your response into multiple short, natural messages.
-Format: {"replies": [{"type": "text", "content": "short message 1"}, {"type": "text", "content": "short message 2"}, {"type": "text", "content": "short message 3"}], "innerVoice": {"heartRate": 85, "location": "City...", "thought": "...", "desire": "..."}}
-Constraint: The "replies" array MUST contain 5 to 8 objects if the response is long. Keep each "content" relatively short (like a normal chat text). "innerVoice" MUST contain "heartRate" (number), "location" (>=10 chars), "thought" (>=20 chars), "desire" (>=20 chars). Keep the tone 100% in character.
+Format: {"replies": [{"type": "text", "content": "short message 1", "quote": {"name": "TargetName", "content": "quoted text"}}, {"type": "text", "content": "short message 2"}], "innerVoice": {"heartRate": 85, "location": "City...", "thought": "...", "desire": "..."}}
+Constraint: The "replies" array MUST contain 5 to 8 objects if the response is long. Keep each "content" relatively short. Use the "quote" object ONLY if you are directly replying to a specific previous message. "innerVoice" MUST contain "heartRate" (number), "location" (>=10 chars), "thought" (>=20 chars), "desire" (>=20 chars). Keep the tone 100% in character.
 `;
+
 
 function updateClock() {
     const now = new Date();
@@ -4100,10 +4116,18 @@ function handleSendClick() {
     }
 }
 function renderChatMessage(msg, contact, index) {
+    if (msg.msgType === 'text' && typeof msg.content === 'string') {
+        const voiceMatch = msg.content.match(/^\[语音.*?\]\s*([\s\S]*)/);
+        if (voiceMatch) {
+            msg.msgType = 'voice';
+            msg.content = voiceMatch[1].trim() || '...';
+        }
+    }
+
+
     const container = document.getElementById('chatMsgContainer');
     const row = document.createElement('div');
-    
-    // 撤回消息处理 (添加查看功能)
+
     if (msg.type === 'recall') {
         row.className = 'chat-msg-row';
         row.style.justifyContent = 'center';
@@ -4131,13 +4155,30 @@ function renderChatMessage(msg, contact, index) {
     
     let quoteHtml = '';
     if (msg.quote) {
-        let qContent = msg.quote.msgType === 'image' ? '[图片]' : msg.quote.content;
+        let qContent = msg.quote.content;
+        if (msg.quote.msgType === 'image') qContent = '[图片]';
+        else if (msg.quote.msgType === 'voice') qContent = '[语音]';
+        
+        // 尝试获取时间：如果当前引用没有时间(比如AI生成的或旧数据)，去历史记录里找原文的时间
+        let qTimeStr = msg.quote.timestamp;
+        if (!qTimeStr && contact && contact.messages) {
+            const origMsg = contact.messages.find(m => m.content === msg.quote.content);
+            if (origMsg) qTimeStr = origMsg.timestamp || contact.time;
+        }
+        
+        let qTime = qTimeStr ? `<div class="quote-time">${qTimeStr}</div>` : '';
+        
         quoteHtml = `
         <div class="quote-in-bubble">
-            <div class="name">${msg.quote.name}:</div>
-            <div class="text">${qContent}</div>
+            <div class="quote-header">
+                <div class="quote-name">${msg.quote.name}</div>
+                ${qTime}
+            </div>
+            <div class="quote-text">${qContent}</div>
         </div>`;
     }
+
+
 
     let bubbleContent = msg.content;
     let bubbleClass = 'chat-msg-bubble';
@@ -4198,6 +4239,7 @@ function renderChatMessage(msg, contact, index) {
             </div>
         </div>
     `;
+
     container.appendChild(row);
 }
 
@@ -4353,16 +4395,17 @@ async function getAiReply() {
                 const dData = JSON.parse(msg.content);
                 contentData = `[系统提示：用户向你分享了一篇私人日记]\n日记标题：${dData.title}\n记录时间：${dData.time}\n日记内容：${dData.content}\n\n[指令：请仔细阅读这篇日记，体会其中的情感，并作出符合你角色设定的评价和回应。]`;
             } catch(e) {}
-        } else if (msg.quote && msg.quote.msgType === 'image') {
-            contentData = `[引用了图片]\n${msg.content}`;
-        } else if (msg.quote && msg.quote.msgType === 'voice') {
-            contentData = `[引用了语音]\n${msg.content}`;
-        }
+                    } else if (msg.quote) {
+                let qText = msg.quote.content;
+                if (msg.quote.msgType === 'image') qText = '[图片]';
+                else if (msg.quote.msgType === 'voice') qText = '[语音]';
+                contentData = `[引用了 ${msg.quote.name} 的消息: "${qText}"]\n${msg.content}`;
+            }
 
-        messages.push({
-            role: msg.role === 'user' ? 'user' : 'assistant',
-            content: contentData
-        });
+            messages.push({
+                role: msg.role === 'user' ? 'user' : 'assistant',
+                content: contentData
+            });
     });
     try {
         const response = await fetch(`${config.url}/chat/completions`, {
@@ -4411,25 +4454,35 @@ async function getAiReply() {
         rawReplies.forEach(rawMsg => {
             let msgType = 'text';
             let msgContent = typeof rawMsg === 'string' ? rawMsg : (rawMsg.content || '');
+            let msgQuote = (typeof rawMsg === 'object' && rawMsg !== null) ? rawMsg.quote : null;
+            
             if (typeof rawMsg === 'object' && rawMsg !== null && rawMsg.type === 'voice') msgType = 'voice';
             
-                        if (msgType === 'text' && msgContent.length > 20) {
+            const voiceMatch = msgContent.match(/^\[语音.*?\]\s*([\s\S]*)/);
+            if (voiceMatch) {
+                msgType = 'voice';
+                msgContent = voiceMatch[1].trim() || '...';
+            }
+
+            if (msgType === 'text' && msgContent.length > 20) {
                 let chunks = msgContent.match(/[^。！？!?~\n]+[。！？!?~\n]*/g);
                 if (chunks) {
                     let tempChunk = '';
+                    let isFirstChunk = true;
                     chunks.forEach(c => {
                         tempChunk += c;
                         if (tempChunk.length >= 20 || c.includes('\n')) {
-                            finalReplies.push({ type: 'text', content: tempChunk.trim() });
+                            finalReplies.push({ type: 'text', content: tempChunk.trim(), quote: isFirstChunk ? msgQuote : null });
                             tempChunk = '';
+                            isFirstChunk = false;
                         }
                     });
-                    if (tempChunk.trim()) finalReplies.push({ type: 'text', content: tempChunk.trim() });
+                    if (tempChunk.trim()) finalReplies.push({ type: 'text', content: tempChunk.trim(), quote: isFirstChunk ? msgQuote : null });
                 } else {
-                    finalReplies.push({ type: msgType, content: msgContent });
+                    finalReplies.push({ type: msgType, content: msgContent, quote: msgQuote });
                 }
             } else {
-                if (msgContent.trim()) finalReplies.push({ type: msgType, content: msgContent });
+                if (msgContent.trim()) finalReplies.push({ type: msgType, content: msgContent, quote: msgQuote });
             }
         });
         const container = document.getElementById('chatMsgContainer');
@@ -4440,7 +4493,7 @@ async function getAiReply() {
             
             const nowTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
 
-            const newMsg = { role: 'role', content: msgContent, msgType: msgType, timestamp: nowTime };
+            const newMsg = { role: 'role', content: msgContent, msgType: msgType, timestamp: nowTime, quote: finalReplies[i].quote };
             const freshContacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
             const freshContact = freshContacts.find(c => c.id == currentChatId);
             if(freshContact) {
@@ -4905,19 +4958,20 @@ function menuQuote(index) {
     const contact = contacts.find(c => c.id == currentChatId);
     const msg = contact.messages[index];
     const name = msg.role === 'user' ? contact.user.name : contact.role.name;
+    
     currentQuoteData = {
         name: name,
         content: msg.content,
-        msgType: msg.msgType || 'text'
+        msgType: msg.msgType || 'text',
+        timestamp: msg.timestamp || contact.time || ''
     };
+    
     document.getElementById('quoteContent').innerText = msg.msgType === 'image' ? '[图片]' : (msg.msgType === 'voice' ? '[语音]' : msg.content);
     document.getElementById('quotePanel').classList.add('active');
     
     if(activeToolbar) activeToolbar.remove();
     document.getElementById('chatInput').focus();
 }
-
-
 function cancelQuote() {
     currentQuoteData = null;
     document.getElementById('quotePanel').classList.remove('active');

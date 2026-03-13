@@ -726,30 +726,30 @@ select.setting-input {
     width: 100%;
     text-align: center;
 }
-/* What App Specific Styles */
-#whatAppPage {
+/* chat App Specific Styles */
+#chatAppPage {
     background-color: #ffffff;
     padding-top: 0;
 }
-.what-container {
+.chat-container {
     height: 100%;
     display: flex;
     flex-direction: column;
     position: relative;
     background-color: #f7f7f7;
 }
-.what-tab-content {
+.chat-tab-content {
     flex: 1;
     overflow-y: auto;
     display: none;
     position: relative;
     height: 100%;
 }
-.what-tab-content.active {
+.chat-tab-content.active {
     display: block;
 }
-/* Custom Bottom Dock for What App */
-.what-dock {
+/* Custom Bottom Dock for chat App */
+.chat-dock {
     position: absolute;
     bottom: 30px;
     left: 50%;
@@ -766,7 +766,7 @@ select.setting-input {
     align-items: center;
     z-index: 200;
 }
-.what-dock-icon {
+.chat-dock-icon {
     width: 36px; /* Increased */
     height: 36px; /* Increased */
     background-position: center;
@@ -776,7 +776,7 @@ select.setting-input {
     transition: opacity 0.2s, transform 0.2s;
     cursor: pointer;
 }
-.what-dock-icon.active {
+.chat-dock-icon.active {
     opacity: 1;
     transform: scale(1.1);
 }
@@ -785,7 +785,7 @@ select.setting-input {
 .icon-moments { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231a1a1a'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-1.07 3.97-2.9 5.4z'/%3E%3C/svg%3E"); }
 .icon-me { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231a1a1a'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E"); }
 /* Message Tab */
-.what-header {
+.chat-header {
     height: 90px;
     padding: 48px 24px 10px;
     display: flex;
@@ -797,8 +797,8 @@ select.setting-input {
     z-index: 10;
     border-bottom: 1px solid rgba(0,0,0,0.05);
 }
-.what-title { font-size: 18px; font-weight: 600; color: var(--text-main); }
-.what-add { font-size: 26px; font-weight: 300; color: var(--text-main); cursor: pointer; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;}
+.chat-title { font-size: 18px; font-weight: 600; color: var(--text-main); }
+.chat-add { font-size: 26px; font-weight: 300; color: var(--text-main); cursor: pointer; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;}
 /* Message List Styling - Rounded Rectangles & Swipe */
 .msg-list { 
     padding: 10px 16px 120px; 
@@ -3400,7 +3400,7 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                 </div>
             </div>
             <div class="app-item" id="diary-trigger"><div class="app-icon white" id="icon-m-1"></div><span class="app-name">日记</span></div>
-            <div class="app-item" id="what-trigger"><div class="app-icon white" id="icon-m-2"></div><span class="app-name">What</span></div>
+            <div class="app-item" id="chat-trigger"><div class="app-icon white" id="icon-m-2"></div><span class="app-name">chat</span></div>
             <div class="app-item"><div class="app-icon gray" id="icon-m-3"></div><span class="app-name">论坛</span></div>
             <div class="app-item" id="shop-trigger"><div class="app-icon gray" id="icon-m-4"></div><span class="app-name">购物</span></div>
             <div class="app-item" id="music-trigger" onclick="openAppPage('musicAppPage')"><div class="app-icon white" id="icon-m-5"></div><span class="app-name">音乐</span></div>
@@ -3514,7 +3514,7 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                     </div>
                     <div class="icon-edit-item">
                         <div class="icon-preview" id="preview-icon-m-2" onclick="openMenu('icon-m-2', event)"></div>
-                        <span class="icon-edit-label">What</span>
+                        <span class="icon-edit-label">chat</span>
                     </div>
                     <div class="icon-edit-item">
                         <div class="icon-preview" id="preview-icon-m-3" onclick="openMenu('icon-m-3', event)"></div>
@@ -3574,26 +3574,26 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             </div>
         </div>
     </div>
-    <div class="app-page" id="whatAppPage">
-        <div class="what-container">
+    <div class="app-page" id="chatAppPage">
+        <div class="chat-container">
             <!-- Message Tab -->
-            <div class="what-tab-content active" id="what-tab-msg">
-                <div class="what-header">
+            <div class="chat-tab-content active" id="chat-tab-msg">
+                <div class="chat-header">
                     <div class="header-left">
-                        <div class="back-btn" onclick="closeAppPage('whatAppPage')">&#10094;</div>
-                        <div class="what-title">消息</div>
+                        <div class="back-btn" onclick="closeAppPage('chatAppPage')">&#10094;</div>
+                        <div class="chat-title">消息</div>
                     </div>
-                    <div class="what-add" onclick="openAddContact()">+</div>
+                    <div class="chat-add" onclick="openAddContact()">+</div>
                 </div>
                 <div class="msg-list" id="msgListContainer">
                     <!-- Dynamic Content -->
                 </div>
             </div>
             <!-- Moments Tab -->
-            <div class="what-tab-content" id="what-tab-moments">
+            <div class="chat-tab-content" id="chat-tab-moments">
                 <div class="moments-container">
                     <div class="moments-hero" id="moments-cover-img" onclick="openMenu('moments-cover', event)">
-                        <div class="back-btn" style="position:absolute; top:50px; left:20px; color:white; z-index:10; text-shadow:0 1px 3px rgba(0,0,0,0.5);" onclick="event.stopPropagation(); closeAppPage('whatAppPage')">&#10094;</div>
+                        <div class="back-btn" style="position:absolute; top:50px; left:20px; color:white; z-index:10; text-shadow:0 1px 3px rgba(0,0,0,0.5);" onclick="event.stopPropagation(); closeAppPage('chatAppPage')">&#10094;</div>
                         <div class="moments-actions">
                             <div class="action-icon icon-refresh" onclick="event.stopPropagation();"></div>
                             <div class="action-icon icon-camera" onclick="event.stopPropagation();"></div>
@@ -3609,9 +3609,9 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                 </div>
             </div>
             <!-- Me Tab -->
-            <div class="what-tab-content" id="what-tab-me">
+            <div class="chat-tab-content" id="chat-tab-me">
                 <div class="me-container">
-                    <div class="back-btn" style="position:absolute; top:50px; left:20px;" onclick="closeAppPage('whatAppPage')">&#10094;</div>
+                    <div class="back-btn" style="position:absolute; top:50px; left:20px;" onclick="closeAppPage('chatAppPage')">&#10094;</div>
                     <div class="me-profile">
                         <div class="me-big-avatar" id="me-avatar-img" onclick="openMenu('me-avatar', event)"></div>
                         <div class="me-nickname" id="me-name" onclick="editCommonText('me-name')">User</div>
@@ -3637,10 +3637,10 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                 </div>
             </div>
             <!-- Custom Floating Dock -->
-            <div class="what-dock">
-                <div class="what-dock-icon icon-msg active" onclick="switchWhatTab('msg', this)"></div>
-                <div class="what-dock-icon icon-moments" onclick="switchWhatTab('moments', this)"></div>
-                <div class="what-dock-icon icon-me" onclick="switchWhatTab('me', this)"></div>
+            <div class="chat-dock">
+                <div class="chat-dock-icon icon-msg active" onclick="switchchatTab('msg', this)"></div>
+                <div class="chat-dock-icon icon-moments" onclick="switchchatTab('moments', this)"></div>
+                <div class="chat-dock-icon icon-me" onclick="switchchatTab('me', this)"></div>
             </div>
         </div>
     </div>
@@ -5273,8 +5273,8 @@ document.getElementById('worldbook-trigger').addEventListener('click', () => {
     renderWorldBookList();
 });
 document.getElementById('theme-trigger').addEventListener('click', () => openAppPage('themePage'));
-document.getElementById('what-trigger').addEventListener('click', () => {
-    openAppPage('whatAppPage');
+document.getElementById('chat-trigger').addEventListener('click', () => {
+    openAppPage('chatAppPage');
     renderContactList(); // Ensure list is up to date
 });
 document.getElementById('shop-trigger').addEventListener('click', () => {
@@ -5447,12 +5447,12 @@ function closeShopDetail() {
 document.getElementById('music-trigger').addEventListener('click', () => {
     openAppPage('musicAppPage');
 });
-function switchWhatTab(tabName, el) {
+function switchchatTab(tabName, el) {
     // Switch Content
-    document.querySelectorAll('.what-tab-content').forEach(c => c.classList.remove('active'));
-    document.getElementById('what-tab-' + tabName).classList.add('active');
+    document.querySelectorAll('.chat-tab-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('chat-tab-' + tabName).classList.add('active');
     // Switch Icon State
-    document.querySelectorAll('.what-dock-icon').forEach(i => i.classList.remove('active'));
+    document.querySelectorAll('.chat-dock-icon').forEach(i => i.classList.remove('active'));
     el.classList.add('active');
 }
 function updateTempDisplay(val) { document.getElementById('tempVal').innerText = val; }

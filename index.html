@@ -67,7 +67,6 @@ body {
     width: 100%;
     pointer-events: none;
 }
-
 .battery {
     width: 24px;
     height: 12px;
@@ -251,7 +250,6 @@ body {
     z-index: 2000; 
     display: none;
 }
-
 .action-sheet-overlay.active {
     display: block;
 }
@@ -294,13 +292,19 @@ body {
     height: 100%;
     background-color: var(--bg-base);
     z-index: 150;
-    transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1);
     display: flex;
     flex-direction: column;
     padding-top: 48px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: transform;
+    visibility: hidden;
+    transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1), visibility 0s linear 0.35s;
 }
 .app-page.active {
     transform: translateX(-100%);
+    visibility: visible;
+    transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1), visibility 0s linear 0s;
 }
 .page-header {
     padding: 0 24px;
@@ -330,7 +334,6 @@ body {
     font-weight: 700;
     color: var(--text-main);
 }
-
 .header-action {
     font-size: 24px;
     cursor: pointer;
@@ -1066,9 +1069,6 @@ select.setting-input {
     transition: background 0.2s;
     margin-top: 5px;
 }
-
-
-
 .quote-in-bubble {
     background: rgba(0, 0, 0, 0.04);
     border-left: 3px solid rgba(0, 0, 0, 0.2);
@@ -1105,10 +1105,6 @@ select.setting-input {
     overflow: hidden;
     word-break: break-all;
 }
-
-
-
-
 .msg-toolbar {
     position: absolute;
     height: 28px;
@@ -1283,7 +1279,6 @@ select.setting-input {
     from { opacity: 0; transform: translate(-50%, -90%) scale(0.9); }
     to { opacity: 1; transform: translate(-50%, -100%) scale(1); }
 }
-
 .chat-msg-row.select-mode .chat-msg-bubble {
     pointer-events: none;
     opacity: 0.6;
@@ -1293,7 +1288,6 @@ select.setting-input {
     box-shadow: 0 0 0 2px #007aff;
     background: #e1f0ff !important;
 }
-
 .chat-msg-row.left .chat-msg-bubble {
     background: #ffffff;
     color: #1a1a1a;
@@ -1433,7 +1427,6 @@ select.setting-input {
     font-size: 11px;
     color: var(--text-sub);
 }
-
 .emoticon-panel {
     position: absolute;
     bottom: 85px;
@@ -1477,7 +1470,6 @@ select.setting-input {
     transform: scale(0.9);
     background-color: rgba(0,0,0,0.05);
 }
-
 .icon-f-camera { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23555'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E"); }
 .icon-f-pic { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23555'%3E%3Cpath d='M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z'/%3E%3C/svg%3E"); }
 .icon-f-call { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23555'%3E%3Cpath d='M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.43-5.15-3.75-6.59-6.59l1.97-1.57c.26-.26.35-.65.24-1.01-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-0.99-.99-0.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z'/%3E%3C/svg%3E"); }
@@ -1638,7 +1630,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     cursor: pointer;
     display: block;
 }
-
 .chat-msg-bubble.is-image {
     background: transparent !important;
     border: none !important;
@@ -1700,7 +1691,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     width: 100%;
 }
 .voice-wave { display: flex; align-items: center; gap: 3px; margin-left: 4px; }
-
 .wave-line { width: 2px; background: currentColor; border-radius: 1px; }
 .wl-1, .wl-5 { height: 8px; }
 .wl-2 { height: 12px; }
@@ -1722,7 +1712,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     width: fit-content !important;
     min-width: 85px;
 }
-
 .inner-voice-panel {
     position: absolute;
     top: 124px;
@@ -1752,7 +1741,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     opacity: 1;
     pointer-events: auto;
 }
-
 .iv-content-scroll {
     flex: 1;
     overflow-y: auto;
@@ -1883,12 +1871,9 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
 }
 .fc-title { font-size: 12px; color: #8e8e93; margin-bottom: 8px; font-weight: 500; }
 .fc-divider { width: 100%; height: 1px; background-color: #e5e5ea; margin-bottom: 12px; }
-
-
 .fc-amount { font-size: 24px; font-weight: 700; margin-bottom: 4px; font-family: 'SF Pro Display', sans-serif; }
 .fc-user { font-size: 12px; color: #8e8e93; }
 .chat-system-msg { text-align: center; font-size: 12px; color: #999; margin: 16px 0; width: 100%; }
-
 .chat-msg-bubble.is-family-card { padding: 0 !important; background: transparent !important; border: none !important; box-shadow: none !important; }
 .fc-list-container { padding: 16px; display: flex; flex-direction: column; gap: 16px; padding-bottom: 100px; }
 .fc-list-item { position: relative; transition: transform 0.2s; }
@@ -2378,9 +2363,15 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     height: 100%;
     background-color: #f4f4f6;
     z-index: 30;
-    transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
+    visibility: hidden;
+    transition: transform 0.3s ease, visibility 0s linear 0.3s;
+}
+.sim-detail-page.active {
+    transform: translateX(-100%);
+    visibility: visible;
+    transition: transform 0.3s ease, visibility 0s linear 0s;
 }
 .sim-detail-page.active {
     transform: translateX(-100%);
@@ -2647,7 +2638,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     flex-direction: column;
     overflow: hidden;
 }
-
 .shop-header {
     background: #ffffff;
     padding: 48px 16px 0;
@@ -2859,7 +2849,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     margin-bottom: 12px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.02);
 }
-
 .shop-me-avatar {
     width: 84px;
     height: 84px;
@@ -2924,13 +2913,18 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     height: 100%;
     background: #f7f7f7;
     z-index: 600;
-    transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
     display: flex;
     flex-direction: column;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: transform;
+    visibility: hidden;
+    transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1), visibility 0s linear 0.3s;
 }
-
 .shop-detail-page.active {
     transform: translateX(-100%);
+    visibility: visible;
+    transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1), visibility 0s linear 0s;
 }
 .shop-detail-header {
     position: absolute;
@@ -2953,7 +2947,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     overflow-y: auto;
     padding-bottom: 90px;
 }
-
 .shop-detail-img {
     width: 100%;
     aspect-ratio: 1;
@@ -3007,7 +3000,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     line-height: 1.6;
     white-space: pre-wrap;
 }
-
 .shop-detail-bottom {
     position: absolute;
     bottom: 0;
@@ -3164,8 +3156,8 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
 .shop-order-bottom { display: flex; justify-content: space-between; align-items: center; }
 .shop-order-price { font-size: 14px; font-weight: 700; color: var(--danger); }
 .shop-order-status { font-size: 12px; font-weight: 600; color: #007aff; }
-.shop-order-page { position: absolute; top: 0; left: 100%; width: 100%; height: 100%; background: #f7f7f7; z-index: 600; transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1); display: flex; flex-direction: column; }
-.shop-order-page.active { transform: translateX(-100%); }
+.shop-order-page { position: absolute; top: 0; left: 100%; width: 100%; height: 100%; background: #f7f7f7; z-index: 600; display: flex; flex-direction: column; -webkit-backface-visibility: hidden; backface-visibility: hidden; will-change: transform; visibility: hidden; transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1), visibility 0s linear 0.3s; }
+.shop-order-page.active { transform: translateX(-100%); visibility: visible; transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1), visibility 0s linear 0s; }
 .shop-order-header { position: sticky; top: 0; background: #fff; display: flex; align-items: center; padding: 48px 16px 12px; border-bottom: 1px solid rgba(0,0,0,0.05); z-index: 100; }
 .shop-order-back { font-size: 24px; cursor: pointer; color: var(--text-main); width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; margin-right: 12px; }
 .shop-order-title-text { font-size: 18px; font-weight: 700; color: var(--text-main); }
@@ -3244,7 +3236,9 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     background: #ffffff;
     border-radius: 12px;
     padding: 12px;
-    width: 200px;
+    width: 100%;
+    min-width: 180px;
+    box-sizing: border-box;
     text-align: left;
     color: var(--text-main);
 }
@@ -3382,7 +3376,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     width: 30px;
     text-align: center;
 }
-
 </style>
 </head>
 <body>
@@ -3407,14 +3400,10 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                 </div>
             </div>
             <div class="app-item" id="diary-trigger"><div class="app-icon white" id="icon-m-1"></div><span class="app-name">日记</span></div>
-
             <div class="app-item" id="what-trigger"><div class="app-icon white" id="icon-m-2"></div><span class="app-name">What</span></div>
             <div class="app-item"><div class="app-icon gray" id="icon-m-3"></div><span class="app-name">论坛</span></div>
             <div class="app-item" id="shop-trigger"><div class="app-icon gray" id="icon-m-4"></div><span class="app-name">购物</span></div>
-
             <div class="app-item" id="music-trigger" onclick="openAppPage('musicAppPage')"><div class="app-icon white" id="icon-m-5"></div><span class="app-name">音乐</span></div>
-
-
             <div class="app-item"><div class="app-icon gray" id="icon-m-6"></div><span class="app-name">陪伴</span></div>
             <div class="app-item" onclick="openCheckPhoneTargetSelect()"><div class="app-icon white" id="icon-m-7"></div><span class="app-name">查手机</span></div>
             <div class="app-item"><div class="app-icon gray" id="icon-m-8"></div><span class="app-name">情侣空间</span></div>
@@ -3640,7 +3629,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                             <span>表情</span>
                             <div class="arrow-right"></div>
                         </div>
-
                         <div class="me-item">
                             <span>美化</span>
                             <div class="arrow-right"></div>
@@ -3708,7 +3696,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             </div>
         </div>
     </div>
-
     <div class="modal-overlay" id="fcContactModal">
         <div class="modal-container">
             <div class="modal-header">选择赠送对象</div>
@@ -3782,7 +3769,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             </div>
         </div>
     </div>
-
     <!-- Add Emoticon Modal -->
     <div class="modal-overlay" id="addEmoticonModal">
         <div class="modal-container">
@@ -3801,7 +3787,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             </div>
         </div>
     </div>
-
     <div class="app-page" id="selfDesignPage">
         <div class="page-header">
             <div class="header-left">
@@ -4004,7 +3989,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
         </div>
         <div class="chat-content" id="chatMsgContainer" onscroll="hideFunctionPanelOnScroll()" onclick="hideFunctionPanelOnScroll()">
         </div>
-
         <input type="file" id="chatImageInput" hidden accept="image/*" onchange="handleChatImage(this)">
         <div class="image-preview-overlay" id="imagePreviewModal" onclick="this.classList.remove('active')">
             <img class="image-preview-img" id="imagePreviewSrc" src="" />
@@ -4047,13 +4031,11 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                 <button class="recall-close" onclick="closeRecallModal()">关闭</button>
             </div>
         </div>
-
         <!-- 多选操作栏 -->
         <div class="multi-action-bar" id="multiActionBar">
             <div class="btn-danger" onclick="deleteSelectedMsgs()" style="padding:8px 20px; border-radius:20px;">删除选中</div>
             <div class="btn-secondary" onclick="exitMultiSelect()" style="padding:8px 20px; border-radius:20px;">取消</div>
         </div>
-
         <form class="chat-footer" action="javascript:void(0)" onsubmit="handleFormSubmit(event)">
             <div class="chat-icon icon-plus" onclick="toggleFunctionPanel()"></div>
                         <div class="chat-icon icon-face" onclick="toggleEmoticonPanel()"></div>
@@ -4198,7 +4180,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                     <div class="header-text-btn" id="diaryManageBtn" onclick="toggleManageDiary()">管理</div>
                 </div>
             </div>
-            
             <!-- Me Tab -->
             <div class="diary-tab-content active" id="diary-tab-me">
                 <div id="diaryListMe"></div>
@@ -4207,7 +4188,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                 <div class="contact-grid" id="diaryRoleGrid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px 12px; padding-top: 10px;">
                 </div>
             </div>
-
             <!-- Diary Dock -->
             <div class="diary-dock">
                 <div class="diary-dock-icon icon-diary-me active" onclick="switchDiaryTab('me', this)"></div>
@@ -4242,7 +4222,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                 <div class="header-text-btn" style="color: var(--accent); font-weight: 600;" onclick="saveDiary()">保存</div>
             </div>
         </div>
-        
         <div class="diary-write-header">
             <input type="text" id="diaryInputTitle" class="diary-input-title" placeholder="输入标题...">
             <div class="diary-time-wrapper">
@@ -4251,7 +4230,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                 <input type="datetime-local" id="diaryInputTime" class="diary-input-time" onchange="formatDiaryTimeDisplay(this.value)">
             </div>
         </div>
-        
         <textarea id="diaryInputContent" class="diary-input-content" placeholder="开始记录今天的故事..."></textarea>
     </div>
 </div>
@@ -4275,7 +4253,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                             <input type="text" id="shopSearchInput" placeholder="搜索商品、品牌...">
                         </div>
-
                         <div class="shop-header-actions">
                             <div class="shop-action-btn" onclick="searchShopItems()">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -4297,7 +4274,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                 <div class="shop-grid" id="shopGridContainer" style="padding: 0 16px;">
                 </div>
             </div>
-
             <div class="shop-tab-content" id="shop-tab-cart">
                 <div id="shopCartListContainer">
                     <div class="shop-empty-state">
@@ -4310,8 +4286,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                 <div style="padding: 48px 16px 12px; background: #fff; font-size: 18px; font-weight: 700; color: var(--text-main); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.05); text-align: center;">客服消息</div>
                 <div id="shopChatListContainer" style="padding-bottom: 100px;"></div>
             </div>
-
-
             <div class="shop-tab-content" id="shop-tab-me" style="padding: 0 0 100px; background: #f7f7f7;">
                 <div class="shop-me-header">
                     <div class="shop-me-avatar" id="shop-me-avatar-img" onclick="openMenu('shop-me-avatar', event)"></div>
@@ -4372,7 +4346,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             <div class="shop-btn-buy" onclick="handleShopBuy()">立即购买</div>
         </div>
     </div>
-
     <div class="modal-overlay" id="cartAddModal">
         <div class="modal-container">
             <div class="modal-header">选择数量</div>
@@ -4387,7 +4360,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             </div>
         </div>
     </div>
-
     <div class="modal-overlay" id="cartContactModal">
         <div class="modal-container">
             <div class="modal-header">选择联系人</div>
@@ -4397,7 +4369,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             </div>
         </div>
     </div>
-
     <div class="modal-overlay" id="cartActionTypeModal">
         <div class="modal-container">
             <div class="modal-header">选择操作</div>
@@ -4408,7 +4379,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             <button class="btn-secondary" style="width:100%" onclick="closeCartActionTypeModal()">取消</button>
         </div>
     </div>
-
     <div class="app-page" id="shopChatPage" style="z-index: 700; background: #f2f2f2; display: flex; flex-direction: column; padding-top: 0;">
             <div class="chat-header" style="flex-shrink: 0; padding-top: 48px; height: auto; padding-bottom: 10px;">
                 <div class="chat-header-left">
@@ -4450,8 +4420,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             </div>
         </div>
     </div>
-
-
     <div class="app-page" id="musicAppPage">
         <div class="music-header">
             <!-- 左上角加号 -->
@@ -4459,10 +4427,8 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             <!-- 右上角关闭按钮 -->
             <div class="music-btn" onclick="closeAppPage('musicAppPage')">×</div>
         </div>
-        
         <div class="page-content" style="padding: 0; overflow-x: hidden;">
             <div class="music-title">音乐</div>
-            
             <div class="music-section">
                 <div class="music-sec-title">我的曲库</div>
                 <div class="song-list" id="localSongList">
@@ -4496,7 +4462,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             </div>
         </div>
     </div>
-
     <!-- 添加/编辑音乐弹窗 -->
     <div class="modal-overlay" id="addMusicModal">
         <div class="modal-container" style="max-height: 90vh;">
@@ -4505,19 +4470,15 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                 <input type="hidden" id="mInpEditIndex" value="-1">
                 <label class="setting-label">歌曲名称 *</label>
                 <input type="text" class="setting-input" id="mInpName" placeholder="例如：七里香">
-                
                 <label class="setting-label">歌手 *</label>
                 <input type="text" class="setting-input" id="mInpArtist" placeholder="例如：周杰伦">
-                
                 <label class="setting-label">音频源 (输入URL 或 选择本地文件) *</label>
                 <input type="text" class="setting-input" id="mInpAudioUrl" placeholder="https://... (mp3/m4a)">
                 <input type="file" id="mInpAudioFile" accept="audio/*" class="setting-input" style="padding: 8px;">
                 <div style="font-size:10px;color:#ff3b30;margin-top:-10px;margin-bottom:12px;">注: 本地音频过大可能导致存储空间爆满，建议使用URL。</div>
-
                 <label class="setting-label">封面图片 (输入URL 或 选择本地文件)</label>
                 <input type="text" class="setting-input" id="mInpCoverUrl" placeholder="https://...">
                 <input type="file" id="mInpCoverFile" accept="image/*" class="setting-input" style="padding: 8px;">
-
                 <label class="setting-label">歌词 (粘贴文本 或 选择.lrc文件)</label>
                 <input type="file" id="mInpLrcFile" accept=".lrc,text/plain" class="setting-input" style="padding: 8px;" onchange="readLrcFile(this)">
                 <textarea class="setting-textarea" id="mInpLyrics" placeholder="[00:00.00] 粘贴歌词..."></textarea>
@@ -4528,7 +4489,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             </div>
         </div>
     </div>
-    
     <div class="full-player-page" id="fullPlayerPage">
         <div class="fp-header">
             <div class="fp-close" onclick="closeFullPlayer()">
@@ -4564,7 +4524,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                 </div>
             </div>
             <div class="fp-controls">
-
                 <div class="fp-btn" onclick="playPrevSong()">
                     <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
                 </div>
@@ -4598,7 +4557,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
         <input type="hidden" id="reviewStarValue" value="5">
     </div>
 </div>
-
 <div class="sim-phone-overlay" id="simPhoneOverlay">
     <div class="sim-phone-case">
         <div class="sim-close-btn" onclick="closeSimulatedPhone()">×</div>
@@ -4611,7 +4569,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                         <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
                     </button>
                     <span class="sim-header-title" id="sim-title-messages">消息</span>
-
                     <button class="sim-icon-btn" onclick="generateSimPhoneData()">
                         <svg viewBox="0 0 24 24"><path d="M23 4v6h-6"></path><path d="M1 20v-6h6"></path><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
                     </button>
@@ -4624,7 +4581,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                 <div class="sim-status-bar-placeholder"></div>
                 <div class="sim-header" style="justify-content: center;">
                     <span class="sim-header-title" id="sim-title-notes">备忘录</span>
-
                 </div>
                 <div class="sim-content" id="sim-content-notes">
                     <div class="sim-empty-tip">暂无数据</div>
@@ -4662,12 +4618,10 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                 </div>
                 <div class="sim-detail-content" id="simDetailContent"></div>
             </div>
-            
             <div class="sim-loading-overlay" id="simLoading">
                 <div class="sim-spinner"></div>
                 <div style="color:#007aff; font-size:14px; font-weight:600;">正在获取终端数据...</div>
             </div>
-
             <div class="sim-dock">
                 <button class="sim-dock-item active" onclick="switchSimPage('messages', this)">
                     <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
@@ -4689,9 +4643,15 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
         </div>
     </div>
 </div>
-
 <script>
-let currentTargetId = null;
+document.addEventListener('gesturestart', function(event) {
+    event.preventDefault();
+});
+document.addEventListener('touchmove', function(event) {
+    if (event.touches.length > 1) {
+        event.preventDefault();
+    }
+}, { passive: false });let currentTargetId = null;
 let tempAvatarContext = null; // 'widget' or context string like 'sd-new', 'contact-role'
 let currentChatId = null;
 let isAiProcessing = false;
@@ -4707,8 +4667,6 @@ Constraint: The "replies" array MUST contain 5 to 8 objects if the response is l
 SPECIAL RULE FOR DIARY: If the user explicitly asks you to write a diary (e.g. "写一篇日记"), you MUST include the "diary" object. The diary MUST be highly private, written in the STRICT FIRST PERSON perspective of your character. It must reflect your TRUE internal feelings, hidden desires, and authentic thoughts about the user, perfectly matching your persona, tone, and the current context of the chat. MUST be long, detailed, and use "\\n\\n" for paragraph breaks. DO NOT break character.
 Keep the tone 100% in character.
 `;
-
-
 function updateClock() {
     const now = new Date();
     const hours = String(now.getHours()).padStart(2, '0');
@@ -4881,7 +4839,6 @@ function openAppPage(pageId) {
 let currentInputPwd = '';
 let confirmTempPwd = '';
 let payPwdMode = 'verify';
-
 function openPayPwdModal() {
     const savedPwd = localStorage.getItem('userPayPwd');
     currentInputPwd = '';
@@ -4897,11 +4854,9 @@ function openPayPwdModal() {
     updatePayPwdDots();
     document.getElementById('payPwdModal').classList.add('active');
 }
-
 function closePayPwdModal() {
     document.getElementById('payPwdModal').classList.remove('active');
 }
-
 function updatePayPwdDots() {
     const dots = document.querySelectorAll('#payPwdDots .pay-pwd-dot');
     dots.forEach((dot, index) => {
@@ -4912,7 +4867,6 @@ function updatePayPwdDots() {
         }
     });
 }
-
 function inputPayPwd(num) {
     if (currentInputPwd.length < 6) {
         currentInputPwd += num;
@@ -4922,16 +4876,13 @@ function inputPayPwd(num) {
         }
     }
 }
-
 function deletePayPwd() {
     if (currentInputPwd.length > 0) {
         currentInputPwd = currentInputPwd.slice(0, -1);
         updatePayPwdDots();
     }
 }
-
 let pendingPayAction = null;
-
 function processPayPwd() {
     if (payPwdMode === 'set_first') {
         confirmTempPwd = currentInputPwd;
@@ -4977,27 +4928,22 @@ function processPayPwd() {
         }
     }
 }
-
 function openNoPwdModal() {
     const isNoPwd = localStorage.getItem('isNoPwd') === 'true';
     document.getElementById('noPwdToggle').checked = isNoPwd;
     document.getElementById('noPwdModal').classList.add('active');
 }
-
 function closeNoPwdModal() {
     document.getElementById('noPwdModal').classList.remove('active');
 }
-
 function toggleNoPwd(el) {
     localStorage.setItem('isNoPwd', el.checked);
 }
-
 function updateBalanceDisplay() {
     let balance = parseFloat(localStorage.getItem('userBalance') || '0');
     const el = document.getElementById('displayBalance');
     if(el) el.innerText = '¥ ' + balance.toFixed(2);
 }
-
 function renderBills() {
     const container = document.getElementById('billList');
     if (!container) return;
@@ -5021,7 +4967,6 @@ function renderBills() {
         `;
     });
 }
-
 function addBillRecord(title, amount) {
     const bills = JSON.parse(localStorage.getItem('payBills') || '[]');
     const now = new Date();
@@ -5031,7 +4976,6 @@ function addBillRecord(title, amount) {
     renderBills();
     updateBalanceDisplay();
 }
-
 function initiatePayment(actionCallback, title, amount) {
     const isNoPwd = localStorage.getItem('isNoPwd') === 'true';
     if (isNoPwd) {
@@ -5055,7 +4999,6 @@ function initiatePayment(actionCallback, title, amount) {
         document.getElementById('payPwdModal').classList.add('active');
     }
 }
-
 function handleRecharge() {
     const amt = parseFloat(prompt("请输入充值金额"));
     if(isNaN(amt) || amt <= 0) return;
@@ -5066,7 +5009,6 @@ function handleRecharge() {
         alert("充值成功");
     }, "充值", amt);
 }
-
 function handleWithdraw() {
     const amt = parseFloat(prompt("请输入提现金额"));
     if(isNaN(amt) || amt <= 0) return;
@@ -5078,9 +5020,7 @@ function handleWithdraw() {
         alert("提现成功");
     }, "提现", -amt);
 }
-
 let isFcManageMode = false;
-
 function openFamilyCardPage() {
     isFcManageMode = false;
     document.getElementById('fcListContainer').classList.remove('manage-mode');
@@ -5089,17 +5029,14 @@ function openFamilyCardPage() {
     renderFamilyCards();
     openAppPage('familyCardPage');
 }
-
 function renderFamilyCards() {
     const container = document.getElementById('fcListContainer');
     const cards = JSON.parse(localStorage.getItem('familyCardsData') || '[]');
     container.innerHTML = '';
-    
     if (cards.length === 0) {
         container.innerHTML = '<div style="text-align:center; color:#999; padding:60px 0; font-size:13px;">暂未赠送任何亲属卡</div>';
         return;
     }
-    
     cards.forEach(card => {
         const item = document.createElement('div');
         item.className = 'fc-list-item';
@@ -5115,7 +5052,6 @@ function renderFamilyCards() {
         container.appendChild(item);
     });
 }
-
 function toggleManageFamilyCard() {
     const container = document.getElementById('fcListContainer');
     const btn = document.getElementById('fcManageBtn');
@@ -5130,7 +5066,6 @@ function toggleManageFamilyCard() {
         btn.style.color = 'var(--text-main)';
     }
 }
-
 function deleteFamilyCard(id) {
     if(!confirm('确定作废该亲属卡吗？')) return;
     let cards = JSON.parse(localStorage.getItem('familyCardsData') || '[]');
@@ -5138,7 +5073,6 @@ function deleteFamilyCard(id) {
     localStorage.setItem('familyCardsData', JSON.stringify(cards));
     renderFamilyCards();
 }
-
 function openFamilyCardContactSelect() {
     const list = document.getElementById('fcContactList');
     const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
@@ -5163,11 +5097,9 @@ function openFamilyCardContactSelect() {
     }
     document.getElementById('fcContactModal').classList.add('active');
 }
-
 function closeFamilyCardContactSelect() {
     document.getElementById('fcContactModal').classList.remove('active');
 }
-
 function sendFamilyCardFromChat() {
     if (!currentChatId) return;
     const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
@@ -5177,7 +5109,6 @@ function sendFamilyCardFromChat() {
     document.getElementById('emoticonPanel').classList.remove('active');
     handleSendFamilyCard(currentChatId, contact.remark || contact.role.name);
 }
-
 function handleSendFamilyCard(targetId, targetName) {
     const amtStr = prompt(`请输入赠送给 ${targetName} 的亲属卡额度`);
     if (amtStr === null) return;
@@ -5195,12 +5126,10 @@ function handleSendFamilyCard(targetId, targetName) {
         executeFamilyCardSend(targetId, targetName, amt);
     }, `赠送亲属卡 - ${targetName}`, -amt);
 }
-
 function executeFamilyCardSend(targetId, targetName, amount) {
     let bal = parseFloat(localStorage.getItem('userBalance') || '0');
     bal -= amount;
     localStorage.setItem('userBalance', bal);
-    
     const fcData = {
         id: 'fc_' + Date.now(),
         targetId: targetId,
@@ -5208,45 +5137,37 @@ function executeFamilyCardSend(targetId, targetName, amount) {
         amount: amount,
         time: new Date().toLocaleString()
     };
-    
     const cards = JSON.parse(localStorage.getItem('familyCardsData') || '[]');
     cards.unshift(fcData);
     localStorage.setItem('familyCardsData', JSON.stringify(cards));
-    
     const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
     const contactIdx = contacts.findIndex(c => c.id == targetId);
     if (contactIdx !== -1) {
         const contact = contacts[contactIdx];
         if (!contact.messages) contact.messages = [];
         const nowTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
-        
         const newMsg = {
             role: 'user',
             content: JSON.stringify(fcData),
             msgType: 'family_card',
             timestamp: nowTime
         };
-        
         contact.messages.push(newMsg);
         contact.lastMsg = '[亲属卡]';
         contact.time = nowTime;
         localStorage.setItem('chatContacts', JSON.stringify(contacts));
-        
         if (currentChatId == targetId && document.getElementById('chatPage').classList.contains('active')) {
             renderChatMessage(newMsg, contact, contact.messages.length - 1);
             const container = document.getElementById('chatMsgContainer');
             container.scrollTop = container.scrollHeight;
         }
     }
-    
     if (document.getElementById('familyCardPage').classList.contains('active')) {
         renderFamilyCards();
     }
-    
     updateBalanceDisplay();
     alert(`成功赠送给 ${targetName} ¥${amount.toFixed(2)} 亲属卡`);
 }
-
 function handleShopBuy() {
     const priceText = document.getElementById('sd-price').innerText;
     const title = document.getElementById('sd-title').innerText;
@@ -5343,7 +5264,6 @@ function renderShopOrders(filter = 'all') {
     });
     container.innerHTML = html;
 }
-
 function closeAppPage(pageId) {
     document.getElementById(pageId).classList.remove('active');
 }
@@ -5353,7 +5273,6 @@ document.getElementById('worldbook-trigger').addEventListener('click', () => {
     renderWorldBookList();
 });
 document.getElementById('theme-trigger').addEventListener('click', () => openAppPage('themePage'));
-
 document.getElementById('what-trigger').addEventListener('click', () => {
     openAppPage('whatAppPage');
     renderContactList(); // Ensure list is up to date
@@ -5361,7 +5280,6 @@ document.getElementById('what-trigger').addEventListener('click', () => {
 document.getElementById('shop-trigger').addEventListener('click', () => {
     openAppPage('shopAppPage');
 });
-
 function switchShopTab(tabName, el) {
     document.querySelectorAll('#shopAppPage .shop-tab-content').forEach(c => c.classList.remove('active'));
     document.getElementById('shop-tab-' + tabName).classList.add('active');
@@ -5374,10 +5292,7 @@ function switchShopTab(tabName, el) {
         renderShopCart();
     }
 }
-
-
 let currentShopCategory = '推荐';
-
 function switchShopCategory(cat, el) {
     document.querySelectorAll('.shop-tab').forEach(t => t.classList.remove('active'));
     el.classList.add('active');
@@ -5435,21 +5350,18 @@ async function searchShopItems() {
             localStorage.setItem('shopData_' + currentShopCategory, JSON.stringify(shopData));
             renderShopItems();
         }
-
     } catch (e) {
         alert("生成失败: " + e.message);
     } finally {
         toast.classList.remove('active');
     }
 }
-
 async function generateShopItems() {
     const config = JSON.parse(localStorage.getItem('apiConfig') || '{}');
     if (!config.url || !config.key) {
         alert("请先在设置中配置API Key和URL");
         return;
     }
-
     let toast = document.getElementById('diaryToast');
     if (!toast) {
         toast = document.createElement('div');
@@ -5460,14 +5372,12 @@ async function generateShopItems() {
     }
     document.getElementById('toastText').innerText = `正在搜罗${currentShopCategory}好物...`;
     toast.classList.add('active');
-
     const prompt = `请生成10个完全符合“${currentShopCategory}”分类的电商真实商品。
 返回JSON格式：
 {"items": [
   {"title": "商品吸引人的长标题", "price": "价格数字保留两位小数", "img": "https://image.uglycat.cc/3k6if6.png", "location": "国内真实城市发货地", "desc": "极其详细的商品图文描述文字，突出卖点、材质或功能，不少于60字"}
 ]}
 只能返回合法的JSON，不要任何其他文本。图片统一使用给定的URL。`;
-
     try {
         const response = await fetch(`${config.url}/chat/completions`, {
             method: 'POST',
@@ -5482,11 +5392,9 @@ async function generateShopItems() {
                 response_format: { type: "json_object" }
             })
         });
-
         if (!response.ok) throw new Error('API Error');
         const data = await response.json();
         const parsed = JSON.parse(data.choices[0].message.content);
-        
         if (parsed.items && Array.isArray(parsed.items)) {
             let shopData = parsed.items;
             localStorage.setItem('shopData_' + currentShopCategory, JSON.stringify(shopData));
@@ -5498,17 +5406,14 @@ async function generateShopItems() {
         toast.classList.remove('active');
     }
 }
-
 function renderShopItems() {
     const container = document.getElementById('shopGridContainer');
     container.innerHTML = '';
     let shopData = JSON.parse(localStorage.getItem('shopData_' + currentShopCategory) || '[]');
-    
     if (shopData.length === 0) {
         container.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 100px 0; color: #999; font-size: 13px;">该分类下暂无商品<br><br>点击右上角刷新图标生成</div>`;
         return;
     }
-
     shopData.forEach((item, index) => {
         const card = document.createElement('div');
         card.className = 'shop-card';
@@ -5523,23 +5428,19 @@ function renderShopItems() {
         container.appendChild(card);
     });
 }
-
 let currentShopItem = null;
 function openShopDetail(index) {
     let shopData = JSON.parse(localStorage.getItem('shopData_' + currentShopCategory) || '[]');
     const item = shopData[index];
     if (!item) return;
     currentShopItem = item;
-
     document.getElementById('sd-img').style.backgroundImage = `url('${item.img}')`;
     document.getElementById('sd-price').innerText = item.price;
     document.getElementById('sd-title').innerText = item.title;
     document.getElementById('sd-loc').innerText = `发货地: ${item.location}`;
     document.getElementById('sd-desc').innerText = item.desc;
-
     document.getElementById('shopDetailPage').classList.add('active');
 }
-
 function closeShopDetail() {
     document.getElementById('shopDetailPage').classList.remove('active');
 }
@@ -6196,7 +6097,6 @@ function openChat(id) {
             });
             setTimeout(() => { container.scrollTop = container.scrollHeight; }, 50);
         }
-
     }
 }
 function toggleFunctionPanel() {
@@ -6226,7 +6126,6 @@ function handleSendClick() {
         sendUserMessage(text);
     }
 }
-
 function renderChatMessage(msg, contact, index) {
     if (msg.msgType === 'text' && typeof msg.content === 'string') {
         const voiceMatch = msg.content.match(/([\s\S]*?)$$语音.*?$$([\s\S]*)/);
@@ -6235,9 +6134,6 @@ function renderChatMessage(msg, contact, index) {
             msg.content = (voiceMatch[1] + voiceMatch[2]).trim() || '语音消息';
         }
     }
-
-
-
     const container = document.getElementById('chatMsgContainer');
     const row = document.createElement('div');
     if (msg.msgType === 'system') {
@@ -6256,12 +6152,10 @@ function renderChatMessage(msg, contact, index) {
         container.appendChild(row);
         return;
     }
-
     const isUser = msg.role === 'user';
     row.className = `chat-msg-row ${isUser ? 'right' : 'left'}`;
     row.dataset.index = index;
     row.onclick = (e) => handleMsgClick(e, index);
-
     let avatarUrl = '';
     if (isUser) {
         avatarUrl = contact.user.avatar ? `url(${contact.user.avatar})` : '';
@@ -6270,22 +6164,18 @@ function renderChatMessage(msg, contact, index) {
     }
     const avatarStyle = avatarUrl ? `background-image:${avatarUrl}` : 'background-color:#ccc';
     const timeStr = msg.timestamp || contact.time || '12:00';
-    
     let quoteHtml = '';
     if (msg.quote) {
         let qContent = msg.quote.content || '';
         if (msg.quote.msgType === 'image') qContent = '[图片]';
         else if (msg.quote.msgType === 'voice') qContent = '[语音]';
-        
         let qTimeStr = msg.quote.timestamp;
         if (!qTimeStr && contact && contact.messages) {
             const origMsg = contact.messages.find(m => m.content && m.content.includes(msg.quote.content));
             qTimeStr = origMsg ? (origMsg.timestamp || contact.time) : (msg.timestamp || contact.time);
         }
         if (!qTimeStr) qTimeStr = msg.timestamp || '12:00';
-        
         let qTime = `<div class="quote-time">${qTimeStr}</div>`;
-        
         quoteHtml = `
         <div class="quote-in-bubble">
             <div class="quote-header">
@@ -6295,9 +6185,6 @@ function renderChatMessage(msg, contact, index) {
             <div class="quote-text">${qContent}</div>
         </div>`;
     }
-
-
-
     let bubbleContent = msg.content;
     let bubbleClass = 'chat-msg-bubble';
     let extraHtml = '';
@@ -6330,7 +6217,6 @@ function renderChatMessage(msg, contact, index) {
             } else if (authorDisp === contact.role.name) {
                 displayStr = '你';
             }
-
             bubbleClass += ' is-diary';
             bubbleContent = `
                 <div class="chat-diary-card">
@@ -6355,7 +6241,7 @@ function renderChatMessage(msg, contact, index) {
             bubbleContent = `
                 <div class="chat-diary-card" style="width: 240px; padding: 12px; background: #ffffff; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 4px 16px rgba(0,0,0,0.03);">
                     <div style="font-size: 11px; color: #8e8e93; margin-bottom: 10px; border-bottom: 1px solid #f0f0f2; padding-bottom: 8px; font-weight: 600; display: flex; align-items: center; gap: 4px;">
-                        ${gData.type === 'pay_for_me' ? '<span style="font-size:14px">QAQ</span> 请求代付' : '<span style="font-size:14px">OvO</span> 赠送礼物'}
+                        ${gData.type === 'pay_for_me' ? '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg> 请求代付' : '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg> 赠送礼物'}
                     </div>
                     <div style="display: flex; gap: 10px;">
                         <div style="width: 54px; height: 54px; border-radius: 8px; background-image: url('${gData.img}'); background-size: cover; background-position: center; flex-shrink: 0; background-color: #eee;"></div>
@@ -6370,7 +6256,6 @@ function renderChatMessage(msg, contact, index) {
             bubbleContent = '[商品卡片解析错误]';
         }
     } else if (msg.msgType === 'voice') {
-
         let sec = Math.ceil(msg.content.length / 3);
         if (sec < 1) sec = 1;
         bubbleClass += ' is-voice';
@@ -6389,7 +6274,6 @@ function renderChatMessage(msg, contact, index) {
         `;
         extraHtml = '';
     }
-
     let clickAttr = msg.msgType === 'voice' ? `onclick="toggleVoiceText(event, ${index})"` : '';
     row.innerHTML = `
         <div class="chat-msg-col">
@@ -6403,10 +6287,8 @@ function renderChatMessage(msg, contact, index) {
             </div>
         </div>
     `;
-
     container.appendChild(row);
 }
-
 function sendUserMessage(text, msgType = 'text') {
     if (!currentChatId) return;
     try {
@@ -6436,8 +6318,6 @@ function sendUserMessage(text, msgType = 'text') {
         alert("存储空间已满或发生错误");
     }
 }
-
-
 async function generateSummary(isManual = false) {
     if (!currentChatId) return;
     const config = JSON.parse(localStorage.getItem('apiConfig') || '{}');
@@ -6525,19 +6405,15 @@ async function getAiReply() {
         });
         localStorage.setItem('chatContacts', JSON.stringify(contacts));
     }
-
     let systemContent = SYSTEM_INSTRUCTION;
     systemContent += `\n\n[Character Setting]\nRole Name: ${contact.role.name}\nRole Description: ${contact.role.details}\nUser Name: ${contact.user.name}\nUser Description: ${contact.user.details}\n\n[CRITICAL REQUIREMENT]: You are ${contact.role.name}. You must speak EXACTLY as they would. Reflect their exact attitude towards ${contact.user.name}. NEVER act as an AI.\n\n[IMPORTANT WARNING]: DO NOT send one giant paragraph! You MUST split your response into multiple short string objects inside the 'replies' JSON array to simulate real human texting behavior!`;
-
     // 注入表情包库
     const emoticons = JSON.parse(localStorage.getItem('emoticonData') || '[]');
     if (emoticons.length > 0) {
         let emoStr = emoticons.map(e => `描述: ${e.desc} | URL: ${e.url}`).join('\n');
         systemContent += `\n\n[Available Emoticons]\nYou have the following emoticons available to send. To use one, add an object to "replies" with "type": "image" and "content": "URL". Choose appropriately based on your mood and the chat context:\n${emoStr}`;
     }
-
     // 2. 注入记忆总结
-
     if (contact.summaries && contact.summaries.length > 0) {
         const allSummaries = contact.summaries.map(s => s.content).join('\n');
         systemContent += `\n\n[Past Memories/Context Summary]:\n${allSummaries}\n(Use these memories to maintain continuity.)`;
@@ -6562,7 +6438,6 @@ async function getAiReply() {
             try {
                 const dData = JSON.parse(msg.content);
                 const authorStr = (dData.author && dData.author !== '我') ? dData.author : contact.user.name;
-                
                 let contentDataStr = "";
                 if (authorStr === contact.role.name) {
                     contentDataStr = `[系统最高警告：用户不知从哪里弄到了你（${contact.role.name}）自己偷偷写的私密日记，并把这篇日记直接发给了你！]\n日记标题：${dData.title}\n日记内容：\n${dData.content}\n\n[强制指令：这绝对是你自己写的日记，绝不是用户写的！你现在的反应必须是被抓包、震惊、害羞、掩饰或者恼羞成怒。完全贴合人设做出反应！]`;
@@ -6585,13 +6460,11 @@ async function getAiReply() {
                 contentData = '[商品卡片]';
             }
         } else if (msg.quote) {
-
                 let qText = msg.quote.content;
                 if (msg.quote.msgType === 'image') qText = '[图片]';
                 else if (msg.quote.msgType === 'voice') qText = '[语音]';
                 contentData = `[引用了 ${msg.quote.name} 的消息: "${qText}"]\n${msg.content}`;
             }
-
             messages.push({
                 role: msg.role === 'user' ? 'user' : 'assistant',
                 content: contentData
@@ -6607,7 +6480,6 @@ async function getAiReply() {
             } catch(e){}
         }
     });
-
     if (hasFamilyCard) {
         messages.push({
             role: "system",
@@ -6671,14 +6543,11 @@ async function getAiReply() {
                 };
                 freshContact.messages.push(sysMsg);
                 localStorage.setItem('chatContacts', JSON.stringify(freshContacts));
-                
                 renderChatMessage(sysMsg, freshContact, freshContact.messages.length - 1);
-                
                 if (parsed.familyCardAction === 'reject') {
                     let bal = parseFloat(localStorage.getItem('userBalance') || '0');
                     bal += lastFamilyCardAmount;
                     localStorage.setItem('userBalance', bal);
-                    
                     let cards = JSON.parse(localStorage.getItem('familyCardsData') || '[]');
                     if (cards.length > 0) {
                         cards.shift();
@@ -6698,7 +6567,6 @@ async function getAiReply() {
                 ownerId: currentChatId // 绑定到当前角色
             });
             localStorage.setItem('diaryData', JSON.stringify(diaries));
-            
             // 在聊天中插入一条系统提示
             const freshContacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
         if (hasFamilyCard) {
@@ -6716,14 +6584,11 @@ async function getAiReply() {
                 };
                 freshContact.messages.push(sysMsg);
                 localStorage.setItem('chatContacts', JSON.stringify(freshContacts));
-                
                 renderChatMessage(sysMsg, freshContact, freshContact.messages.length - 1);
-                
                 if (action === 'reject') {
                     let bal = parseFloat(localStorage.getItem('userBalance') || '0');
                     bal += lastFamilyCardAmount;
                     localStorage.setItem('userBalance', bal);
-                    
                     let cards = JSON.parse(localStorage.getItem('familyCardsData') || '[]');
                     if (cards.length > 0) {
                         cards.shift();
@@ -6760,14 +6625,11 @@ async function getAiReply() {
                 };
                 freshContact.messages.push(sysMsg);
                 localStorage.setItem('chatContacts', JSON.stringify(freshContacts));
-                
                 renderChatMessage(sysMsg, freshContact, freshContact.messages.length - 1);
-                
                 if (action === 'reject') {
                     let bal = parseFloat(localStorage.getItem('userBalance') || '0');
                     bal += lastFamilyCardAmount;
                     localStorage.setItem('userBalance', bal);
-                    
                     let cards = JSON.parse(localStorage.getItem('familyCardsData') || '[]');
                     if (cards.length > 0) {
                         cards.shift();
@@ -6779,24 +6641,19 @@ async function getAiReply() {
         }
         let rawReplies = parsed.replies || parsed.messages || [{type: 'text', content: content}];
         let finalReplies = [];
-        
         rawReplies.forEach(rawMsg => {
             let msgType = 'text';
             let msgContent = typeof rawMsg === 'string' ? rawMsg : (rawMsg.content || '');
             let msgQuote = (typeof rawMsg === 'object' && rawMsg !== null) ? rawMsg.quote : null;
-            
             if (typeof rawMsg === 'object' && rawMsg !== null) {
                 if (rawMsg.type === 'voice') msgType = 'voice';
                 if (rawMsg.type === 'image') msgType = 'image';
             }
-            
             const voiceMatch = msgContent.match(/([\s\S]*?)$$语音.*?$$([\s\S]*)/);
-
             if (voiceMatch) {
                 msgType = 'voice';
                 msgContent = (voiceMatch[1] + voiceMatch[2]).trim() || '语音消息';
             }
-
             if (msgType === 'text' && msgContent.length > 20) {
                 let chunks = msgContent.match(/[^。！？!?~\n]+[。！？!?~\n]*/g);
                 if (chunks) {
@@ -6823,9 +6680,7 @@ async function getAiReply() {
             await new Promise(resolve => setTimeout(resolve, 800));
             let msgType = finalReplies[i].type;
             let msgContent = finalReplies[i].content;
-            
             const nowTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
-
             const newMsg = { role: 'role', content: msgContent, msgType: msgType, timestamp: nowTime, quote: finalReplies[i].quote };
             const freshContacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
             const freshContact = freshContacts.find(c => c.id == currentChatId);
@@ -6838,8 +6693,6 @@ async function getAiReply() {
                 }
                 localStorage.setItem('chatContacts', JSON.stringify(freshContacts));
                 renderChatMessage(newMsg, freshContact, freshContact.messages.length - 1);
-
-
                 container.scrollTop = container.scrollHeight;
                 renderContactList();
                 // 5. 检查是否触发自动总结
@@ -7203,7 +7056,6 @@ function loadSavedData() {
     renderBills();
 }
 loadSavedData();
-
 let activeToolbar = null;
 let currentQuoteData = null;
 let isMultiSelectMode = false;
@@ -7211,20 +7063,16 @@ let selectedMsgIndices = new Set();
 function showBubbleMenu(event, index, isUser) {
     event.stopPropagation();
     event.preventDefault();
-    
     if (activeToolbar) activeToolbar.remove();
-    
     const bubble = event.currentTarget;
     const rect = bubble.getBoundingClientRect();
     const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
     const contact = contacts.find(c => c.id == currentChatId);
     const msg = contact.messages[index];
-    
     const toolbar = document.createElement('div');
     toolbar.className = 'msg-toolbar';
     toolbar.style.top = (rect.top - 6) + 'px'; 
     toolbar.style.left = (rect.left + rect.width / 2) + 'px';
-    
     let html = '';
     if (msg.msgType !== 'image') {
         html += `<div class="toolbar-btn" onclick="menuCopy('${msg.content.replace(/'/g, "\\'")}')">复制</div>`;
@@ -7239,11 +7087,9 @@ function showBubbleMenu(event, index, isUser) {
         html += `<div class="toolbar-btn" style="color:#ff453a" onclick="menuDeleteOne(${index})">删除</div>`;
         html += `<div class="toolbar-btn" onclick="menuRegenerate(${index})">重回</div>`;
     }
-
     toolbar.innerHTML = html;
     document.body.appendChild(toolbar);
     activeToolbar = toolbar;
-    
     // 点击其他地方关闭菜单
     const closeMenu = (e) => {
         if (!toolbar.contains(e.target)) {
@@ -7268,7 +7114,6 @@ function menuEdit(index) {
     const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
     const contact = contacts.find(c => c.id == currentChatId);
     const msg = contact.messages[index];
-    
     const newText = prompt("编辑消息内容:", msg.content);
     if (newText !== null && newText.trim() !== "") {
         contact.messages[index].content = newText;
@@ -7290,18 +7135,13 @@ function menuQuote(index) {
     };
     document.getElementById('quoteContent').innerText = msg.msgType === 'image' ? '[图片]' : (msg.msgType === 'voice' ? '[语音]' : msg.content);
     document.getElementById('quotePanel').classList.add('active');
-    
     if(activeToolbar) activeToolbar.remove();
     document.getElementById('chatInput').focus();
 }
-
-
-
 function cancelQuote() {
     currentQuoteData = null;
     document.getElementById('quotePanel').classList.remove('active');
 }
-
 function handleMsgClick(e, index) {
     if (!isMultiSelectMode) return;
     const row = e.currentTarget;
@@ -7313,7 +7153,6 @@ function handleMsgClick(e, index) {
         row.classList.add('selected');
     }
 }
-
 function menuMultiSelect() {
     isMultiSelectMode = true;
     selectedMsgIndices.clear();
@@ -7323,7 +7162,6 @@ function menuMultiSelect() {
     rows.forEach(row => row.classList.add('select-mode'));
     if(activeToolbar) activeToolbar.remove();
 }
-
 function exitMultiSelect() {
     isMultiSelectMode = false;
     selectedMsgIndices.clear();
@@ -7338,21 +7176,17 @@ function exitMultiSelect() {
         row.classList.remove('selected');
     });
 }
-
 // 退出多选模式
 function exitMultiSelect() {
     isMultiSelectMode = false;
     selectedMsgIndices.clear();
-    
     // 1. 隐藏多选操作栏
     document.getElementById('multiActionBar').classList.remove('active');
-    
     // 2. 强制显示输入栏 (关键修复)
     const chatFooter = document.querySelector('.chat-footer');
     if (chatFooter) {
         chatFooter.style.display = 'flex';
     }
-    
     // 3. 移除消息的选择样式
     const rows = document.querySelectorAll('.chat-msg-row');
     rows.forEach(row => {
@@ -7360,7 +7194,6 @@ function exitMultiSelect() {
         row.classList.remove('selected');
     });
 }
-
 function deleteSelectedMsgs() {
     if (selectedMsgIndices.size === 0) return;
     if (!confirm(`Delete ${selectedMsgIndices.size} selected items?`)) return;
@@ -7396,12 +7229,10 @@ function deleteSelectedMsgs() {
         openChat(currentChatId);
     }
 }
-
 function menuRecall(index) {
     const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
     const cIdx = contacts.findIndex(c => c.id == currentChatId);
     contacts[cIdx].messages[index].type = 'recall';
-    
     localStorage.setItem('chatContacts', JSON.stringify(contacts));
     openChat(currentChatId);
     if(activeToolbar) activeToolbar.remove();
@@ -7409,25 +7240,19 @@ function menuRecall(index) {
 function menuDeleteOne(index) {
     const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
     const cIdx = contacts.findIndex(c => c.id == currentChatId);
-    
     contacts[cIdx].messages.splice(index, 1);
-    
     localStorage.setItem('chatContacts', JSON.stringify(contacts));
     openChat(currentChatId);
     if(activeToolbar) activeToolbar.remove();
 }
-
 function menuRegenerate(index) {
     const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
     const cIdx = contacts.findIndex(c => c.id == currentChatId);
     const msgs = contacts[cIdx].messages;
-    
     contacts[cIdx].messages = msgs.slice(0, index);
-    
     localStorage.setItem('chatContacts', JSON.stringify(contacts));
     openChat(currentChatId);
     if(activeToolbar) activeToolbar.remove();
-    
     const sendBtn = document.querySelector('.icon-send');
     const statusDiv = document.querySelector('.chat-status');
     isAiProcessing = true;
@@ -7440,7 +7265,6 @@ function viewRecalledMsg(encodedContent) {
     document.getElementById('recallText').innerText = content;
     document.getElementById('recallModal').classList.add('active');
 }
-
 function closeRecallModal(e) {
     document.getElementById('recallModal').classList.remove('active');
 }
@@ -7474,7 +7298,6 @@ function handleChatImage(input) {
     input.value = '';
     document.getElementById('functionPanel').classList.remove('active');
 }
-
 function previewImage(src) {
     document.getElementById('imagePreviewSrc').src = src;
     document.getElementById('imagePreviewModal').classList.add('active');
@@ -7505,27 +7328,22 @@ function hideFunctionPanelOnScroll() {
     document.getElementById('emoticonPanel').classList.remove('active');
     document.getElementById('innerVoicePanel').classList.remove('active');
 }
-
 function toggleEmoticonPanel() {
     const panel = document.getElementById('emoticonPanel');
     document.getElementById('functionPanel').classList.remove('active'); // 互斥关闭功能面板
-    
     if (!panel.classList.contains('active')) {
         renderChatEmoticons();
     }
     panel.classList.toggle('active');
 }
-
 function renderChatEmoticons() {
     const grid = document.getElementById('chatEmoticonGrid');
     const emoticons = JSON.parse(localStorage.getItem('emoticonData') || '[]');
     grid.innerHTML = '';
-    
     if (emoticons.length === 0) {
         grid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; color: #999; font-size: 12px; padding-top: 40px;">暂无表情包，请在"我-表情"中添加</div>';
         return;
     }
-    
     emoticons.forEach(emo => {
         const item = document.createElement('div');
         item.className = 'chat-emoticon-item';
@@ -7555,27 +7373,22 @@ function updateInnerVoiceUI(data) {
     document.getElementById('iv-time').innerText = data.time;
 }
 let isEmoticonManageMode = false;
-
 function openAddEmoticonModal() {
     document.getElementById('emoticonInput').value = '';
     document.getElementById('addEmoticonModal').classList.add('active');
 }
-
 function closeAddEmoticonModal() {
     document.getElementById('addEmoticonModal').classList.remove('active');
 }
-
 function saveEmoticons() {
     const input = document.getElementById('emoticonInput').value.trim();
     if (!input) {
         alert('请输入表情包信息');
         return;
     }
-
     const lines = input.split('\n');
     let addedCount = 0;
     let emoticons = JSON.parse(localStorage.getItem('emoticonData') || '[]');
-
     lines.forEach(line => {
         const parts = line.trim().split(/\s+/);
         if (parts.length >= 2) {
@@ -7589,7 +7402,6 @@ function saveEmoticons() {
             addedCount++;
         }
     });
-
     if (addedCount > 0) {
         localStorage.setItem('emoticonData', JSON.stringify(emoticons));
         closeAddEmoticonModal();
@@ -7599,17 +7411,14 @@ function saveEmoticons() {
         alert('格式不正确，未能添加。请确保格式为：描述 URL');
     }
 }
-
 function renderEmoticons() {
     const grid = document.getElementById('emoticonGrid');
     const emoticons = JSON.parse(localStorage.getItem('emoticonData') || '[]');
     grid.innerHTML = '';
-
     if (emoticons.length === 0) {
         grid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; color: #999; padding: 60px 0; font-size: 13px;">暂无表情包<br><br>点击右上角 + 号添加</div>';
         return;
     }
-
     emoticons.forEach(emo => {
         const item = document.createElement('div');
         item.className = 'emoticon-item';
@@ -7621,12 +7430,10 @@ function renderEmoticons() {
         grid.appendChild(item);
     });
 }
-
 function toggleManageEmoticons() {
     const grid = document.getElementById('emoticonGrid');
     const btn = document.getElementById('emoticonManageBtn');
     isEmoticonManageMode = !isEmoticonManageMode;
-    
     if (isEmoticonManageMode) {
         grid.classList.add('manage-mode');
         btn.innerText = '完成';
@@ -7637,7 +7444,6 @@ function toggleManageEmoticons() {
         btn.style.color = 'var(--text-main)';
     }
 }
-
 function deleteEmoticon(id) {
     if (!confirm('确定删除该表情吗？')) return;
     let emoticons = JSON.parse(localStorage.getItem('emoticonData') || '[]');
@@ -7646,22 +7452,17 @@ function deleteEmoticon(id) {
     renderEmoticons();
 }
 let isDiaryManageMode = false;
-
 document.getElementById('diary-trigger').addEventListener('click', () => {
     openAppPage('diaryAppPage');
     renderDiaryList();
 });
-
 function switchDiaryTab(tabName, el) {
     document.querySelectorAll('#diaryAppPage .diary-tab-content').forEach(c => c.classList.remove('active'));
     document.getElementById('diary-tab-' + tabName).classList.add('active');
-    
     document.querySelectorAll('.diary-dock-icon').forEach(i => i.classList.remove('active'));
     el.classList.add('active');
-
     const titleEl = document.getElementById('diaryPageTitle');
     const actionsEl = document.getElementById('diaryHeaderActions');
-    
     if (tabName === 'me') {
         titleEl.innerText = 'Me的日记';
         actionsEl.style.display = 'flex';
@@ -7677,12 +7478,10 @@ function renderRoleDiaryGrid() {
     const grid = document.getElementById('diaryRoleGrid');
     const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
     grid.innerHTML = '';
-    
     if (contacts.length === 0) {
         grid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; color: #999; padding: 60px 0; font-size: 13px;">暂无联系人</div>';
         return;
     }
-    
     contacts.forEach(c => {
         const item = document.createElement('div');
         item.style.cssText = 'display:flex; flex-direction:column; align-items:center; gap:8px; cursor:pointer;';
@@ -7695,7 +7494,6 @@ function renderRoleDiaryGrid() {
         grid.appendChild(item);
     });
 }
-
 let currentDiaryRoleId = null;
 let isRoleDiaryManageMode = false;
 function openRoleDiaryPage(roleId, roleName) {
@@ -7705,7 +7503,6 @@ function openRoleDiaryPage(roleId, roleName) {
     document.getElementById('diaryListRole').classList.remove('manage-mode');
     document.getElementById('diaryRoleManageBtn').innerText = '管理';
     document.getElementById('diaryRoleManageBtn').style.color = 'var(--text-main)';
-    
     renderRoleDiaryList();
     openAppPage('diaryRolePage');
 }
@@ -7717,11 +7514,9 @@ async function generateRoleDiary() {
         alert("请先在设置中配置API Key和URL");
         return;
     }
-
     const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
     const contact = contacts.find(c => c.id == currentDiaryRoleId);
     if (!contact) return;
-
     // 创建并显示 Toast 弹窗
     let toast = document.getElementById('diaryToast');
     if (!toast) {
@@ -7733,7 +7528,6 @@ async function generateRoleDiary() {
     }
     document.getElementById('toastText').innerText = `${contact.role.name} 正在奋笔疾书中...`;
     toast.classList.add('active');
-
     const btn = document.getElementById('roleDiaryGenBtn');
     const originalStyle = btn.style.opacity;
     btn.style.opacity = '0.3';
@@ -7742,7 +7536,6 @@ async function generateRoleDiary() {
 【你的设定】：${contact.role.details}
 【用户设定】：${contact.user.name} - ${contact.user.details}
 `;
-    
     if (contact.messages && contact.messages.length > 0) {
         const recentMsgs = contact.messages.slice(-20).map(m => {
             const name = m.role === 'user' ? contact.user.name : contact.role.name;
@@ -7753,7 +7546,6 @@ async function generateRoleDiary() {
         }).join('\n');
         prompt += `\n【最近你与${contact.user.name}的经历/聊天记录】：\n${recentMsgs}\n`;
     }
-
     prompt += `
 【严格要求】：
 1. 必须使用第一人称（我）来写。
@@ -7763,9 +7555,6 @@ async function generateRoleDiary() {
 5. 【标题要求】：必须根据日记的具体内容和你的心情，自拟一个符合你性格和当前情感色彩的标题（切忌使用“X月X日私密日记”这种死板的标题，不允许超过8个字）。
 6. 【字数与排版强制要求】：日记正文绝对不能低于900字！必须进行极其详尽的心理描写、场景回忆和细节刻画。正文必须分段，段落之间必须使用 \\n\\n 进行换行排版！
 7. 只返回合法的JSON对象，格式严格为：{"title": "日记标题", "content": "日记正文内容..."}。绝对不要包含任何Markdown标记或其他文本！`;
-
-
-
     try {
         const response = await fetch(`${config.url}/chat/completions`, {
             method: 'POST',
@@ -7780,7 +7569,6 @@ async function generateRoleDiary() {
                 response_format: { type: "json_object" }
             })
         });
-
         if (!response.ok) throw new Error('API 请求失败');
         const data = await response.json();
         const content = data.choices[0].message.content;
@@ -7790,13 +7578,11 @@ async function generateRoleDiary() {
         } catch (e) {
             throw new Error("JSON 解析错误");
         }
-
         if (parsed.title && parsed.content) {
             const diaries = JSON.parse(localStorage.getItem('diaryData') || '[]');
             const now = new Date();
             now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
             const nowStr = now.toISOString().slice(0, 16).replace('T', ' ');
-            
             diaries.unshift({
                 id: 'diary_' + Date.now(),
                 title: parsed.title,
@@ -7804,13 +7590,11 @@ async function generateRoleDiary() {
                 content: parsed.content,
                 ownerId: currentDiaryRoleId
             });
-            
             localStorage.setItem('diaryData', JSON.stringify(diaries));
             renderRoleDiaryList(); 
         } else {
             throw new Error("返回的日记格式不正确");
         }
-
     } catch (error) {
         alert("角色写日记时思绪卡壳了: " + error.message);
     } finally {
@@ -7823,14 +7607,11 @@ function renderRoleDiaryList() {
     const container = document.getElementById('diaryListRole');
     const diaries = JSON.parse(localStorage.getItem('diaryData') || '[]');
     const roleDiaries = diaries.filter(d => d.ownerId === currentDiaryRoleId);
-    
     container.innerHTML = '';
-
     if (roleDiaries.length === 0) {
         container.innerHTML = '<div class="empty-diary">Ta 还没有记录任何日记。</div>';
         return;
     }
-
     roleDiaries.forEach(d => {
         const card = document.createElement('div');
         card.className = 'diary-card';
@@ -7846,12 +7627,10 @@ function renderRoleDiaryList() {
         container.appendChild(card);
     });
 }
-
 function toggleManageRoleDiary() {
     const container = document.getElementById('diaryListRole');
     const btn = document.getElementById('diaryRoleManageBtn');
     isRoleDiaryManageMode = !isRoleDiaryManageMode;
-    
     if (isRoleDiaryManageMode) {
         container.classList.add('manage-mode');
         btn.innerText = '完成';
@@ -7862,11 +7641,9 @@ function toggleManageRoleDiary() {
         btn.style.color = 'var(--text-main)';
     }
 }
-
 // --- 原有日记逻辑重构（加入 ownerId 支持） ---
 let currentEditingDiaryId = null;
 let currentDiaryOwnerId = 'me';
-
 function openDiaryWrite(id = null, ownerId = 'me') {
     currentEditingDiaryId = id;
     currentDiaryOwnerId = ownerId;
@@ -7874,7 +7651,6 @@ function openDiaryWrite(id = null, ownerId = 'me') {
     const contentInput = document.getElementById('diaryInputContent');
     const timeInput = document.getElementById('diaryInputTime');
     const forwardBtn = document.getElementById('diaryForwardBtn'); 
-
     if (id) {
         const diaries = JSON.parse(localStorage.getItem('diaryData') || '[]');
         const d = diaries.find(item => item.id === id);
@@ -7898,7 +7674,6 @@ function openDiaryWrite(id = null, ownerId = 'me') {
     }
     openAppPage('diaryWritePage');
 }
-
 /* --- 日记转发逻辑 --- */
 function openForwardModal() {
     const list = document.getElementById('forwardContactList');
@@ -7921,24 +7696,19 @@ function openForwardModal() {
     }
     document.getElementById('forwardContactModal').classList.add('active');
 }
-
 function closeForwardModal() {
     document.getElementById('forwardContactModal').classList.remove('active');
 }
-
 function forwardDiaryToContact(contactId) {
     if (!currentEditingDiaryId) return;
     const diaries = JSON.parse(localStorage.getItem('diaryData') || '[]');
     const d = diaries.find(item => item.id === currentEditingDiaryId);
     if (!d) return;
-
     const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
     const contactIdx = contacts.findIndex(c => c.id == contactId);
     if (contactIdx === -1) return;
-
     const contact = contacts[contactIdx];
     if (!contact.messages) contact.messages = [];
-
     // 强力判断日记作者
     let authorName = '我';
     if (d.ownerId && d.ownerId !== 'me') {
@@ -7947,9 +7717,7 @@ function forwardDiaryToContact(contactId) {
             authorName = ownerContact.role.name;
         }
     }
-
     const nowTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
-    
     // 强制写入 author
     const diaryDataStr = JSON.stringify({ 
         title: d.title, 
@@ -7957,16 +7725,13 @@ function forwardDiaryToContact(contactId) {
         content: d.content,
         author: authorName 
     });
-
     const newMsg = {
         role: 'user',
         content: diaryDataStr,
         msgType: 'diary_card',
         timestamp: nowTime
     };
-
     contact.messages.push(newMsg);
-    
     // 智能转换列表预览文字的人称
     let lastMsgAuthor = authorName;
     if (authorName === '我' || authorName === contact.user.name) {
@@ -7976,36 +7741,27 @@ function forwardDiaryToContact(contactId) {
     }
     contact.lastMsg = `[分享了一篇[${lastMsgAuthor}]的日记]`;
     contact.time = nowTime;
-
     localStorage.setItem('chatContacts', JSON.stringify(contacts));
-    
     closeForwardModal();
     closeAppPage('diaryWritePage');
     if (document.getElementById('diaryRolePage') && document.getElementById('diaryRolePage').classList.contains('active')) {
         closeAppPage('diaryRolePage');
     }
     closeAppPage('diaryAppPage'); 
-    
     openChat(contactId);
 }
-
-
 function formatDiaryTimeDisplay(val) {
     if (!val) return;
     const d = new Date(val);
     const text = `${d.getFullYear()}年${String(d.getMonth()+1).padStart(2,'0')}月${String(d.getDate()).padStart(2,'0')}日 ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
     document.getElementById('diaryTimeText').innerText = text;
 }
-
 function saveDiary() {
     const title = document.getElementById('diaryInputTitle').value.trim();
     const time = document.getElementById('diaryInputTime').value;
     const content = document.getElementById('diaryInputContent').value.trim();
-
     if (!title && !content) return; 
-
     const diaries = JSON.parse(localStorage.getItem('diaryData') || '[]');
-    
     if (currentEditingDiaryId) {
         const index = diaries.findIndex(d => d.id === currentEditingDiaryId);
         if (index !== -1) {
@@ -8023,28 +7779,23 @@ function saveDiary() {
         };
         diaries.unshift(diaryItem);
     }
-
     localStorage.setItem('diaryData', JSON.stringify(diaries));
     closeAppPage('diaryWritePage');
-    
     if (currentDiaryOwnerId === 'me') {
         renderDiaryList();
     } else {
         renderRoleDiaryList();
     }
 }
-
 function renderDiaryList() {
     const container = document.getElementById('diaryListMe');
     const diaries = JSON.parse(localStorage.getItem('diaryData') || '[]');
     const myDiaries = diaries.filter(d => !d.ownerId || d.ownerId === 'me');
     container.innerHTML = '';
-
     if (myDiaries.length === 0) {
         container.innerHTML = '<div class="empty-diary">还没有记录任何日记，点击右上角开始书写吧。</div>';
         return;
     }
-
     myDiaries.forEach(d => {
         const card = document.createElement('div');
         card.className = 'diary-card';
@@ -8060,12 +7811,10 @@ function renderDiaryList() {
         container.appendChild(card);
     });
 }
-
 function toggleManageDiary() {
     const tabMe = document.getElementById('diary-tab-me');
     const btn = document.getElementById('diaryManageBtn');
     isDiaryManageMode = !isDiaryManageMode;
-    
     if (isDiaryManageMode) {
         tabMe.classList.add('manage-mode');
         btn.innerText = '完成';
@@ -8076,13 +7825,11 @@ function toggleManageDiary() {
         btn.style.color = 'var(--text-main)';
     }
 }
-
 function deleteDiary(id, isRole = false) {
     if (!confirm('确定删除这篇日记吗？')) return;
     let diaries = JSON.parse(localStorage.getItem('diaryData') || '[]');
     diaries = diaries.filter(d => d.id !== id);
     localStorage.setItem('diaryData', JSON.stringify(diaries));
-    
     if (isRole) {
         renderRoleDiaryList();
     } else {
@@ -8110,18 +7857,14 @@ function openCheckPhoneTargetSelect() {
     }
     document.getElementById('checkPhoneTargetModal').classList.add('active');
 }
-
 function closeCheckPhoneTargetSelect() {
     document.getElementById('checkPhoneTargetModal').classList.remove('active');
 }
-
 let currentSimContactId = null;
 let currentSimData = null;
-
 function openSimulatedPhone(contactId) {
     currentSimContactId = contactId;
     currentSimData = null;
-    
     const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
     const contact = contacts.find(c => c.id == contactId);
     if (contact) {
@@ -8133,7 +7876,6 @@ function openSimulatedPhone(contactId) {
             currentSimData = contact.simPhoneData;
         }
     }
-
     if (currentSimData) {
         renderSimPhoneData();
     } else {
@@ -8146,13 +7888,9 @@ function openSimulatedPhone(contactId) {
     document.getElementById('checkPhoneTargetModal').classList.remove('active');
     document.getElementById('simPhoneOverlay').classList.add('active');
 }
-
-
-
 function closeSimulatedPhone() {
     document.getElementById('simPhoneOverlay').classList.remove('active');
 }
-
 function switchSimPage(pageId, btnElement) {
     const pages = document.querySelectorAll('.sim-page');
     pages.forEach(page => page.classList.remove('active'));
@@ -8172,9 +7910,7 @@ async function generateSimPhoneData() {
     const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
     const contact = contacts.find(c => c.id == currentSimContactId);
     if (!contact) return;
-
     document.getElementById('simLoading').classList.add('active');
-
     const prompt = `你现在要完全沉浸在角色设定中，生成该角色手机里此刻的数据。务必100%贴合角色人设！你需要考虑角色的职业、性格、说话语气、隐藏的秘密以及近期的心理状态。内容要显得极度真实、私人化。
 角色名字：${contact.role.name}
 角色设定：${contact.role.details}
@@ -8186,7 +7922,6 @@ async function generateSimPhoneData() {
 4. notes格式: {"title": "备忘录标题", "content": "具体内容"}。
 5. shopping格式: {"name": "商品名称", "price": "价格数字"}。
 6. browser格式: 纯字符串数组，代表搜索关键词。`;
-
     try {
         const response = await fetch(`${config.url}/chat/completions`, {
             method: 'POST',
@@ -8201,7 +7936,6 @@ async function generateSimPhoneData() {
                 response_format: { type: "json_object" }
             })
         });
-
         if (!response.ok) throw new Error('API Error');
         const data = await response.json();
         currentSimData = JSON.parse(data.choices[0].message.content);
@@ -8214,14 +7948,11 @@ async function generateSimPhoneData() {
     } catch (e) {
         alert("生成失败: " + e.message);
     } finally {
-
         document.getElementById('simLoading').classList.remove('active');
     }
 }
-
 function renderSimPhoneData() {
     if (!currentSimData) return;
-
     const msgContainer = document.getElementById('sim-content-messages');
     msgContainer.innerHTML = '';
     if (currentSimData.messages && currentSimData.messages.length > 0) {
@@ -8234,7 +7965,6 @@ function renderSimPhoneData() {
             msgContainer.appendChild(div);
         });
     }
-
     const noteContainer = document.getElementById('sim-content-notes');
     noteContainer.innerHTML = '';
     if (currentSimData.notes && currentSimData.notes.length > 0) {
@@ -8247,7 +7977,6 @@ function renderSimPhoneData() {
             noteContainer.appendChild(div);
         });
     }
-
     const shopContainer = document.getElementById('sim-content-shopping');
     shopContainer.innerHTML = '';
     if (currentSimData.shopping && currentSimData.shopping.length > 0) {
@@ -8263,7 +7992,6 @@ function renderSimPhoneData() {
             shopContainer.appendChild(div);
         });
     }
-
     const browserContainer = document.getElementById('sim-content-browser');
     browserContainer.innerHTML = '';
     if (currentSimData.browser && currentSimData.browser.length > 0) {
@@ -8275,14 +8003,12 @@ function renderSimPhoneData() {
         });
     }
 }
-
 function openSimChatDetail(index) {
     if (!currentSimData || !currentSimData.messages[index]) return;
     const msgData = currentSimData.messages[index];
     document.getElementById('simDetailTitle').innerText = msgData.name;
     const content = document.getElementById('simDetailContent');
     content.innerHTML = '';
-    
     if (msgData.history) {
         msgData.history.forEach(chat => {
             const isMe = chat.role === 'Me' || chat.role.toLowerCase() === 'me';
@@ -8294,8 +8020,6 @@ function openSimChatDetail(index) {
     }
     document.getElementById('simDetailPage').classList.add('active');
 }
-
-
 function openSimNoteDetail(index) {
     if (!currentSimData || !currentSimData.notes[index]) return;
     const noteData = currentSimData.notes[index];
@@ -8307,7 +8031,6 @@ function openSimNoteDetail(index) {
     `;
     document.getElementById('simDetailPage').classList.add('active');
 }
-
 function closeSimDetail() {
     document.getElementById('simDetailPage').classList.remove('active');
 }
@@ -8316,7 +8039,6 @@ document.getElementById('music-trigger').addEventListener('click', () => {
     openAppPage('musicAppPage');
     renderMusicList();
 });
-
 // --- 音乐播放器核心逻辑 ---
 const audioPlayer = document.getElementById('globalAudioPlayer');
 let currentSongIndex = -1;
@@ -8324,7 +8046,6 @@ let musicList = [];
 let parsedLyrics = [];
 let currentLyricIndex = -1;
 let isDraggingProgress = false; // 拖动状态标记
-
 // 格式化时间 M:SS
 function formatTime(sec) {
     if (isNaN(sec)) return "0:00";
@@ -8332,7 +8053,6 @@ function formatTime(sec) {
     const s = Math.floor(sec % 60).toString().padStart(2, '0');
     return `${m}:${s}`;
 }
-
 // 监听音频时间更新进度条和歌词
 audioPlayer.addEventListener('timeupdate', () => {
     if (audioPlayer.duration && !isDraggingProgress) {
@@ -8341,7 +8061,6 @@ audioPlayer.addEventListener('timeupdate', () => {
         document.getElementById('fpProgressFill').style.width = percent + '%';
         document.getElementById('fpTimeCurr').innerText = formatTime(audioPlayer.currentTime);
         document.getElementById('fpTimeTotal').innerText = formatTime(audioPlayer.duration);
-
         // 歌词同步滚动
         if (parsedLyrics.length > 0) {
             let newIdx = -1;
@@ -8366,12 +8085,10 @@ audioPlayer.addEventListener('timeupdate', () => {
         }
     }
 });
-
 // 播放结束自动下一首
 audioPlayer.addEventListener('ended', () => {
     playNextSong();
 });
-
 function openAddMusicModal() {
     document.getElementById('musicModalTitle').innerText = '添加音乐';
     document.getElementById('mInpEditIndex').value = '-1';
@@ -8385,7 +8102,6 @@ function openAddMusicModal() {
     document.getElementById('mInpLyrics').value = '';
     document.getElementById('addMusicModal').classList.add('active');
 }
-
 function openEditMusicModal(index) {
     const song = musicList[index];
     document.getElementById('musicModalTitle').innerText = '编辑音乐';
@@ -8397,11 +8113,9 @@ function openEditMusicModal(index) {
     document.getElementById('mInpLyrics').value = song.lyrics || '';
     document.getElementById('addMusicModal').classList.add('active');
 }
-
 function closeAddMusicModal() {
     document.getElementById('addMusicModal').classList.remove('active');
 }
-
 // 读取本地歌词文件填入文本框
 function readLrcFile(input) {
     if (input.files && input.files[0]) {
@@ -8412,7 +8126,6 @@ function readLrcFile(input) {
         reader.readAsText(input.files[0]);
     }
 }
-
 // 将文件转为 Base64
 function fileToBase64(file) {
     return new Promise((resolve, reject) => {
@@ -8422,29 +8135,22 @@ function fileToBase64(file) {
         reader.onerror = error => reject(error);
     });
 }
-
 // 保存音乐到本地存储
 async function saveNewMusic() {
     const name = document.getElementById('mInpName').value.trim();
     const artist = document.getElementById('mInpArtist').value.trim();
     const editIndex = parseInt(document.getElementById('mInpEditIndex').value);
-    
     if (!name || !artist) { alert("歌名和歌手不能为空！"); return; }
-
     let audioSrc = document.getElementById('mInpAudioUrl').value.trim();
     const audioFile = document.getElementById('mInpAudioFile').files[0];
-    
     if (!audioSrc && !audioFile && editIndex === -1) { 
         alert("请提供音频URL或选择本地音频文件！"); return; 
     }
-
     let coverSrc = document.getElementById('mInpCoverUrl').value.trim();
     const coverFile = document.getElementById('mInpCoverFile').files[0];
-
     const btn = event.target;
     btn.innerText = "处理中...";
     btn.disabled = true;
-
     try {
         if (audioFile) audioSrc = await fileToBase64(audioFile);
         if (coverFile) {
@@ -8458,9 +8164,7 @@ async function saveNewMusic() {
             canvas.getContext('2d').drawImage(img, 0, 0, 600, 600);
             coverSrc = canvas.toDataURL('image/jpeg', 0.85);
         }
-
         let list = JSON.parse(localStorage.getItem('myMusicList') || '[]');
-        
         if (editIndex !== -1) {
             list[editIndex].name = name;
             list[editIndex].artist = artist;
@@ -8478,11 +8182,9 @@ async function saveNewMusic() {
             };
             list.push(newSong);
         }
-
         localStorage.setItem('myMusicList', JSON.stringify(list));
         closeAddMusicModal();
         renderMusicList();
-        
         // 如果正在播放被编辑的歌，更新UI
         if (editIndex !== -1 && currentSongIndex === editIndex) {
             playMusic(editIndex, false); // 重新加载信息但不中断播放状态
@@ -8494,17 +8196,14 @@ async function saveNewMusic() {
         btn.disabled = false;
     }
 }
-
 function renderMusicList() {
     musicList = JSON.parse(localStorage.getItem('myMusicList') || '[]');
     const container = document.getElementById('localSongList');
     container.innerHTML = '';
-    
     if (musicList.length === 0) {
         container.innerHTML = '<div class="sim-empty-tip" style="margin-top: 40px;">暂无音乐，点击左上角 + 号添加</div>';
         return;
     }
-
     musicList.forEach((song, index) => {
         const item = document.createElement('div');
         item.className = 'song-item';
@@ -8520,7 +8219,6 @@ function renderMusicList() {
         container.appendChild(item);
     });
 }
-
 function deleteMusic(index) {
     if(!confirm("确定删除这首歌曲吗？")) return;
     musicList.splice(index, 1);
@@ -8534,7 +8232,6 @@ function deleteMusic(index) {
     }
     renderMusicList();
 }
-
 function parseLyrics(lrcText) {
     if (!lrcText) return [];
     const lines = lrcText.split('\n');
@@ -8553,7 +8250,6 @@ function parseLyrics(lrcText) {
     });
     return result;
 }
-
 function renderLyrics() {
     const container = document.getElementById('fpLyricsContainer');
     container.innerHTML = '';
@@ -8569,35 +8265,28 @@ function renderLyrics() {
         container.appendChild(div);
     });
 }
-
 function playMusic(index, forceReload = true) {
     if (index < 0 || index >= musicList.length) return;
     currentSongIndex = index;
     const song = musicList[index];
-    
     if (forceReload || audioPlayer.src !== song.audio) {
         audioPlayer.src = song.audio;
         audioPlayer.play().catch(e => alert("播放失败，可能是音频链接失效。"));
     }
-    
     // 更新底部控制栏
     document.getElementById('musicPlayerBar').style.display = 'flex';
     document.getElementById('playerName').innerText = song.name;
     document.getElementById('playerArtist').innerText = song.artist;
     document.getElementById('playerCover').style.backgroundImage = `url('${song.cover}')`;
-    
     // 更新全屏播放页
     document.getElementById('fpName').innerText = song.name;
     document.getElementById('fpArtist').innerText = song.artist;
     document.getElementById('fpCoverImage').style.backgroundImage = `url('${song.cover}')`;
-    
     // 解析歌词
     parsedLyrics = parseLyrics(song.lyrics);
     renderLyrics();
-
     updatePlayBtnUI(!audioPlayer.paused);
 }
-
 function togglePlayMusic() {
     if (currentSongIndex === -1) {
         if (musicList.length > 0) playMusic(0);
@@ -8611,7 +8300,6 @@ function togglePlayMusic() {
         updatePlayBtnUI(false);
     }
 }
-
 function updatePlayBtnUI(isPlaying) {
     // 小控制栏
     const cover = document.getElementById('playerCover');
@@ -8620,7 +8308,6 @@ function updatePlayBtnUI(isPlaying) {
     // 全屏控制栏
     const fpIconPlay = document.getElementById('fp-icon-play-large');
     const fpIconPause = document.getElementById('fp-icon-pause-large');
-
     if (isPlaying) {
         cover.classList.add('playing');
         iconPlay.style.display = 'none';
@@ -8635,21 +8322,18 @@ function updatePlayBtnUI(isPlaying) {
         fpIconPause.style.display = 'none';
     }
 }
-
 function playNextSong() {
     if (musicList.length === 0) return;
     let nextIdx = currentSongIndex + 1;
     if (nextIdx >= musicList.length) nextIdx = 0;
     playMusic(nextIdx);
 }
-
 function playPrevSong() {
     if (musicList.length === 0) return;
     let prevIdx = currentSongIndex - 1;
     if (prevIdx < 0) prevIdx = musicList.length - 1;
     playMusic(prevIdx);
 }
-
 function seekMusic(e) {
     if (!audioPlayer.duration) return;
     const bg = e.currentTarget;
@@ -8658,7 +8342,6 @@ function seekMusic(e) {
     const percent = clickX / rect.width;
     audioPlayer.currentTime = percent * audioPlayer.duration;
 }
-
 // --- 全屏拖拽进度条逻辑 ---
 function handleFpDrag(e) {
     if (!audioPlayer.duration) return 0;
@@ -8667,26 +8350,21 @@ function handleFpDrag(e) {
     let clientX = e.touches ? e.touches[0].clientX : e.clientX;
     let percent = (clientX - rect.left) / rect.width;
     percent = Math.max(0, Math.min(1, percent));
-    
     document.getElementById('fpProgressFill').style.width = (percent * 100) + '%';
     document.getElementById('fpTimeCurr').innerText = formatTime(percent * audioPlayer.duration);
-    
     // 同步小进度条UI
     document.getElementById('progressFill').style.width = (percent * 100) + '%';
     return percent;
 }
-
 function startSeekFp(e) {
     isDraggingProgress = true;
     handleFpDrag(e);
 }
-
 function moveSeekFp(e) {
     if (isDraggingProgress) {
         handleFpDrag(e);
     }
 }
-
 function endSeekFp(e) {
     if (isDraggingProgress) {
         const percent = handleFpDrag(e.changedTouches ? e : e);
@@ -8694,42 +8372,34 @@ function endSeekFp(e) {
         isDraggingProgress = false;
     }
 }
-
 // --- 全屏播放页与翻转逻辑 ---
 function openFullPlayer() {
     document.getElementById('fullPlayerPage').classList.add('active');
 }
-
 function closeFullPlayer() {
     document.getElementById('fullPlayerPage').classList.remove('active');
 }
-
 function toggleFpFlip() {
     document.getElementById('fpFlipContainer').classList.toggle('flipped');
 }
-
 function seekMusicFp(e) {
     seekMusic(e);
 }
 function openFullPlayer() {
     document.getElementById('fullPlayerPage').classList.add('active');
 }
-
 function closeFullPlayer() {
     document.getElementById('fullPlayerPage').classList.remove('active');
 }
-
 function toggleFpFlip() {
     document.getElementById('fpFlipContainer').classList.toggle('flipped');
 }
 renderShopItems();
 let currentShopChatId = null;
 let isShopAiProcessing = false;
-
 function openShopChat(chatId = null) {
     let chats = JSON.parse(localStorage.getItem('shopChats') || '[]');
     let chat = null;
-
     if (chatId) {
         chat = chats.find(c => c.id === chatId);
     } else {
@@ -8755,43 +8425,34 @@ function openShopChat(chatId = null) {
             localStorage.setItem('shopChats', JSON.stringify(chats));
         }
     }
-
     if (!chat) return;
     currentShopChatId = chat.id;
     currentShopItem = chat.item; 
-
     document.getElementById('shopChatSellerName').innerText = chat.sellerName;
     document.getElementById('sc-goods-img').style.backgroundImage = `url('${chat.item.img}')`;
     document.getElementById('sc-goods-price').innerText = chat.item.price;
     document.getElementById('sc-goods-title').innerText = chat.item.title;
-
     renderShopChatMessages();
     document.getElementById('shopChatPage').classList.add('active');
 }
-
 function closeShopChat() {
     document.getElementById('shopChatPage').classList.remove('active');
     renderShopChatList();
 }
-
 function renderShopChatMessages() {
     const container = document.getElementById('shopChatMsgContainer');
     container.innerHTML = '';
     const chats = JSON.parse(localStorage.getItem('shopChats') || '[]');
     const chat = chats.find(c => c.id === currentShopChatId);
     if (!chat) return;
-
     chat.messages.forEach(msg => {
         const row = document.createElement('div');
         const isUser = msg.role === 'user';
         row.className = `chat-msg-row ${isUser ? 'right' : 'left'}`;
-        
         const myAvatar = localStorage.getItem('shop-me-avatar') || 'https://image.uglycat.cc/3k6if6.png';
         const avatarStyle = isUser ? `background-image:url(${myAvatar})` : 'background-color:#007aff;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:18px;';
-
         const avatarInner = isUser ? '' : '店';
-        let bubbleStyle = msg.content.includes('chat-review-card') ? 'padding:0; background:transparent; border:none; box-shadow:0 4px 16px rgba(0,0,0,0.06);' : 'max-width:100%;';
-
+        let bubbleStyle = msg.content.includes('chat-review-card') ? 'max-width:100%; padding:0; background:transparent; border:none; box-shadow:0 4px 16px rgba(0,0,0,0.06);' : 'max-width:100%;';
         row.innerHTML = `
             <div class="chat-msg-col">
                 <div class="chat-msg-avatar" style="${avatarStyle}; background-size:cover; background-position:center;">${avatarInner}</div>
@@ -8805,19 +8466,15 @@ function renderShopChatMessages() {
     });
     container.scrollTop = container.scrollHeight;
 }
-
 async function handleShopChatSubmit(e) {
     if (e) e.preventDefault();
     if (isShopAiProcessing || !currentShopChatId) return;
     const input = document.getElementById('shopChatInput');
     const text = input.value.trim();
-    
     let chats = JSON.parse(localStorage.getItem('shopChats') || '[]');
     let chatIndex = chats.findIndex(c => c.id === currentShopChatId);
     if (chatIndex === -1) return;
-
     const nowTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
-    
     if (text !== '') {
         input.value = '';
         chats[chatIndex].messages.push({ role: 'user', content: text, time: nowTime });
@@ -8826,10 +8483,8 @@ async function handleShopChatSubmit(e) {
         localStorage.setItem('shopChats', JSON.stringify(chats));
         renderShopChatMessages();
     }
-
     isShopAiProcessing = true;
     document.getElementById('shopChatSendBtn').classList.add('locked');
-
     const config = JSON.parse(localStorage.getItem('apiConfig') || '{}');
     if (!config.url || !config.key) {
         alert("请先在设置中配置API");
@@ -8837,18 +8492,15 @@ async function handleShopChatSubmit(e) {
         document.getElementById('shopChatSendBtn').classList.remove('locked');
         return;
     }
-
     const prompt = `你现在是一个电商卖家，你的性格设定是：${chats[chatIndex].persona}。
 用户正在咨询你的商品：${chats[chatIndex].item.title}，当前价格：${chats[chatIndex].item.price}。
 请完全按照你的性格设定来回答用户的问题，绝不能暴露自己是AI。
 必须返回如下JSON格式：{"replies": [{"type": "text", "content": "回复内容"}]}`;
-
     const apiMsgs = [{ role: "system", content: prompt }];
     const history = chats[chatIndex].messages.slice(-10);
     history.forEach(m => {
         apiMsgs.push({ role: m.role === 'user' ? 'user' : 'assistant', content: m.content });
     });
-
     try {
         const response = await fetch(`${config.url}/chat/completions`, {
             method: 'POST',
@@ -8863,14 +8515,11 @@ async function handleShopChatSubmit(e) {
                 response_format: { type: "json_object" }
             })
         });
-
         if (!response.ok) throw new Error('API Error');
         const data = await response.json();
         const parsed = JSON.parse(data.choices[0].message.content);
-        
         chats = JSON.parse(localStorage.getItem('shopChats') || '[]');
         chatIndex = chats.findIndex(c => c.id === currentShopChatId);
-        
         if (parsed.replies && parsed.replies.length > 0) {
             let finalReplies = [];
             parsed.replies.forEach(r => {
@@ -8894,7 +8543,6 @@ async function handleShopChatSubmit(e) {
                     if (msgContent.trim()) finalReplies.push(msgContent);
                 }
             });
-
             for (let i = 0; i < finalReplies.length; i++) {
                 await new Promise(resolve => setTimeout(resolve, 800));
                 chats = JSON.parse(localStorage.getItem('shopChats') || '[]');
@@ -8914,7 +8562,6 @@ async function handleShopChatSubmit(e) {
         document.getElementById('shopChatSendBtn').classList.remove('locked');
     }
 }
-
 function renderShopChatList() {
     const container = document.getElementById('shopChatListContainer');
     if (!container) return;
@@ -8928,7 +8575,6 @@ function renderShopChatList() {
             </div>`;
         return;
     }
-
     chats.forEach(chat => {
         const item = document.createElement('div');
         item.className = 'shop-chat-item';
@@ -8954,18 +8600,15 @@ function confirmReceive(orderId) {
         openReviewModal(orderId);
     }
 }
-
 function openReviewModal(orderId) {
     document.getElementById('reviewOrderId').value = orderId;
     document.getElementById('reviewContent').value = '';
     setReviewStar(5);
     document.getElementById('reviewModal').classList.add('active');
 }
-
 function closeReviewModal() {
     document.getElementById('reviewModal').classList.remove('active');
 }
-
 function submitReview() {
     let orderId = document.getElementById('reviewOrderId').value;
     let content = document.getElementById('reviewContent').value.trim();
@@ -8999,12 +8642,10 @@ function setReviewStar(star) {
         else el.classList.remove('active');
     });
 }
-
 async function triggerSellerReaction(order, star, content) {
     let chats = JSON.parse(localStorage.getItem('shopChats') || '[]');
     let chatIndex = chats.findIndex(c => c.itemId === order.item.title);
     let chat;
-
     if (chatIndex === -1) {
         const personas = ['热情话痨型', '佛系随缘型', '高冷专业型', '精明砍价型', '温柔贴心型', '暴躁直球型'];
         const storeNames = ['喵星人严选', '深夜便利店', '暴躁老哥的店', '佛系青年杂货', '品牌直营店', '海外代购C店', '潮流前线专营', '杂货小铺'];
@@ -9025,33 +8666,27 @@ async function triggerSellerReaction(order, star, content) {
     } else {
         chat = chats[chatIndex];
     }
-
     let starStr = '★'.repeat(star) + '☆'.repeat(5 - star);
     let reviewHtml = `<div class="chat-review-card"><div class="crc-title">商品评价</div><div class="crc-stars">${starStr}</div><div class="crc-content">${content}</div></div>`;
-    
     const nowTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
     chat.messages.push({ role: 'user', content: reviewHtml, time: nowTime });
     chat.lastMsg = '[商品评价]';
     chat.lastTime = nowTime;
     localStorage.setItem('shopChats', JSON.stringify(chats));
-
     if (document.getElementById('shopChatPage').classList.contains('active') && currentShopChatId === chat.id) {
         renderShopChatMessages();
     }
     if (document.getElementById('shop-tab-chat').classList.contains('active')) {
         renderShopChatList();
     }
-
     const config = JSON.parse(localStorage.getItem('apiConfig') || '{}');
     if (!config.url || !config.key) return;
-
     const prompt = `你是一个电商卖家，店铺名是“${chat.sellerName}”，你的性格设定是：${chat.persona}。
 买家刚刚对你的商品“${order.item.title}”给出了 ${star} 星评价（满分5星）。
 买家的评价内容是：“${content}”。
 请根据你的性格设定，马上给买家发一条消息。如果是差评（1-2星）且你是暴躁直球型，请直接极其激烈地对线、骂街理论；如果是好评，可以感谢或推销。
 必须返回如下JSON格式：{"replies": [{"type": "text", "content": "回复内容"}]}
 注意：回复内容不要超过100字，保持聊天的口语化。`;
-
     try {
         const response = await fetch(`${config.url}/chat/completions`, {
             method: 'POST',
@@ -9066,21 +8701,18 @@ async function triggerSellerReaction(order, star, content) {
                 response_format: { type: "json_object" }
             })
         });
-
         if (response.ok) {
             const data = await response.json();
             const parsed = JSON.parse(data.choices[0].message.content);
             if (parsed.replies && parsed.replies.length > 0) {
                 chats = JSON.parse(localStorage.getItem('shopChats') || '[]');
                 chatIndex = chats.findIndex(c => c.id === chat.id);
-                
                 const rTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
                 const replyText = parsed.replies[0].content;
                 chats[chatIndex].messages.push({ role: 'seller', content: replyText, time: rTime });
                 chats[chatIndex].lastMsg = replyText;
                 chats[chatIndex].lastTime = rTime;
                 localStorage.setItem('shopChats', JSON.stringify(chats));
-
                 if (document.getElementById('shopChatPage').classList.contains('active') && currentShopChatId === chat.id) {
                     renderShopChatMessages();
                 }
@@ -9094,24 +8726,20 @@ async function triggerSellerReaction(order, star, content) {
 let tempCartCount = 1;
 let currentForwardCartId = null;
 let currentForwardContactId = null;
-
 function openCartAddModal() {
     tempCartCount = 1;
     document.getElementById('cartAddCount').innerText = tempCartCount;
     document.getElementById('cartAddModal').classList.add('active');
 }
-
 function closeCartAddModal() {
     document.getElementById('cartAddModal').classList.remove('active');
 }
-
 function changeCartCount(delta) {
     tempCartCount += delta;
     if (tempCartCount < 1) tempCartCount = 1;
     if (tempCartCount > 99) tempCartCount = 99;
     document.getElementById('cartAddCount').innerText = tempCartCount;
 }
-
 function confirmAddCart() {
     if (!currentShopItem) return;
     let cart = JSON.parse(localStorage.getItem('shopCart') || '[]');
@@ -9125,7 +8753,6 @@ function confirmAddCart() {
     alert('已加入购物车');
     closeCartAddModal();
 }
-
 function renderShopCart() {
     const container = document.getElementById('shopCartListContainer');
     let cart = JSON.parse(localStorage.getItem('shopCart') || '[]');
@@ -9163,7 +8790,6 @@ function renderShopCart() {
     html += '</div>';
     container.innerHTML = html;
 }
-
 function deleteCartItem(id) {
     if (!confirm('确定从购物车移除该商品吗？')) return;
     let cart = JSON.parse(localStorage.getItem('shopCart') || '[]');
@@ -9171,7 +8797,6 @@ function deleteCartItem(id) {
     localStorage.setItem('shopCart', JSON.stringify(cart));
     renderShopCart();
 }
-
 function buyFromCart(id) {
     let cart = JSON.parse(localStorage.getItem('shopCart') || '[]');
     let c = cart.find(item => item.id === id);
@@ -9179,7 +8804,6 @@ function buyFromCart(id) {
     let total = parseFloat(c.item.price) * c.count;
     let bal = parseFloat(localStorage.getItem('userBalance') || '0');
     if (total > bal) { alert("余额不足，请先充值"); return; }
-    
     initiatePayment(() => {
         bal -= total;
         localStorage.setItem('userBalance', bal);
@@ -9187,11 +8811,9 @@ function buyFromCart(id) {
         const now = Date.now();
         const shipTime = now + Math.floor(Math.random() * 4 * 60 * 60 * 1000);
         const deliverTime = shipTime + Math.floor(Math.random() * 2 * 60 * 60 * 1000);
-        
         let orderItem = JSON.parse(JSON.stringify(c.item));
         orderItem.title = `[x${c.count}] ` + orderItem.title;
         orderItem.price = total.toFixed(2);
-
         orders.unshift({
             id: 'order_' + now,
             item: orderItem,
@@ -9202,15 +8824,12 @@ function buyFromCart(id) {
             isReviewed: false
         });
         localStorage.setItem('shopOrders', JSON.stringify(orders));
-        
         cart = cart.filter(item => item.id !== id);
         localStorage.setItem('shopCart', JSON.stringify(cart));
-        
         alert("购买成功");
         renderShopCart();
     }, "购买商品 - " + c.item.title, -total);
 }
-
 function forwardFromCart(id) {
     currentForwardCartId = id;
     const list = document.getElementById('cartContactList');
@@ -9233,33 +8852,27 @@ function forwardFromCart(id) {
     }
     document.getElementById('cartContactModal').classList.add('active');
 }
-
 function closeCartContactModal() {
     document.getElementById('cartContactModal').classList.remove('active');
 }
-
 function selectCartContact(contactId) {
     currentForwardContactId = contactId;
     closeCartContactModal();
     document.getElementById('cartActionTypeModal').classList.add('active');
 }
-
 function closeCartActionTypeModal() {
     document.getElementById('cartActionTypeModal').classList.remove('active');
 }
-
 function handleCartAction(type) {
     closeCartActionTypeModal();
     let cart = JSON.parse(localStorage.getItem('shopCart') || '[]');
     let c = cart.find(item => item.id === currentForwardCartId);
     if (!c) return;
-    
     let total = parseFloat(c.item.price) * c.count;
     const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
     const contactIdx = contacts.findIndex(ct => ct.id == currentForwardContactId);
     if (contactIdx === -1) return;
     const contact = contacts[contactIdx];
-
     if (type === 'pay_for_me') {
         let cardData = JSON.stringify({
             type: 'pay_for_me',
@@ -9270,15 +8883,12 @@ function handleCartAction(type) {
         });
         sendSysUserMessage(contact, cardData, 'goods_card', '[代付请求]');
         triggerCartAiReaction(type, c, contact, total);
-        
     } else if (type === 'gift') {
         let bal = parseFloat(localStorage.getItem('userBalance') || '0');
         if (total > bal) { alert("余额不足以购买赠礼，请先充值"); return; }
-        
         initiatePayment(() => {
             bal -= total;
             localStorage.setItem('userBalance', bal);
-            
             let orders = JSON.parse(localStorage.getItem('shopOrders') || '[]');
             const now = Date.now();
             let orderItem = JSON.parse(JSON.stringify(c.item));
@@ -9294,11 +8904,9 @@ function handleCartAction(type) {
                 isReviewed: true 
             });
             localStorage.setItem('shopOrders', JSON.stringify(orders));
-
             cart = cart.filter(item => item.id !== currentForwardCartId);
             localStorage.setItem('shopCart', JSON.stringify(cart));
             renderShopCart();
-
             let cardData = JSON.stringify({
                 type: 'gift',
                 title: c.item.title,
@@ -9308,12 +8916,10 @@ function handleCartAction(type) {
             });
             sendSysUserMessage(contact, cardData, 'goods_card', '[赠送礼物]');
             triggerCartAiReaction(type, c, contact, total);
-
             alert("赠礼购买成功！");
         }, "赠礼 - " + c.item.title, -total);
     }
 }
-
 function sendSysUserMessage(contact, text, msgType = 'text', previewText = null) {
     if (!contact.messages) contact.messages = [];
     const nowTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
@@ -9326,7 +8932,6 @@ function sendSysUserMessage(contact, text, msgType = 'text', previewText = null)
     contact.messages.push(newMsg);
     contact.lastMsg = previewText || text;
     contact.time = nowTime;
-    
     let allContacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
     let idx = allContacts.findIndex(ct => ct.id == contact.id);
     if(idx !== -1) {
@@ -9334,24 +8939,20 @@ function sendSysUserMessage(contact, text, msgType = 'text', previewText = null)
         localStorage.setItem('chatContacts', JSON.stringify(allContacts));
     }
 }
-
 async function triggerCartAiReaction(type, cartItem, contact, total) {
     const config = JSON.parse(localStorage.getItem('apiConfig') || '{}');
     if (!config.url || !config.key) return;
-
     let prompt = '';
     if (type === 'pay_for_me') {
         prompt = `[系统强制指令：用户请求你代付购买商品 "${cartItem.item.title}"，数量 ${cartItem.count}，总价 ¥${total.toFixed(2)}。请结合你的性格和与用户的关系决定是否帮忙付款。你必须在返回的JSON根目录中添加 "payAction": "accept" 或 "reject"，并在 replies 中作出相应的语言回复。]`;
     } else {
         prompt = `[系统提示：用户刚刚花钱为你购买了礼物 "${cartItem.item.title}"，数量 ${cartItem.count}。请结合你的性格对这份礼物作出反应，在 replies 中回复。]`;
     }
-
     let systemContent = `你是${contact.role.name}。${contact.role.details}\n用户是${contact.user.name}。${contact.user.details}\n请严格按照你的性格说话。\n必须返回JSON格式：{"replies": [{"type": "text", "content": "回复内容"}]}`;
     const messages = [
         { role: "system", content: systemContent },
         { role: "user", content: prompt }
     ];
-
     try {
         const response = await fetch(`${config.url}/chat/completions`, {
             method: 'POST',
@@ -9366,22 +8967,17 @@ async function triggerCartAiReaction(type, cartItem, contact, total) {
                 response_format: { type: "json_object" }
             })
         });
-
         if (response.ok) {
             const data = await response.json();
             const parsed = JSON.parse(data.choices[0].message.content);
-            
             let allContacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
             let idx = allContacts.findIndex(ct => ct.id == contact.id);
             if(idx === -1) return;
             let freshContact = allContacts[idx];
-
             const nowTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
-
             if (type === 'pay_for_me' && parsed.payAction) {
                 let sysText = parsed.payAction === 'accept' ? `${freshContact.role.name}已为你代付成功` : `${freshContact.role.name}拒绝了你的代付请求`;
                 freshContact.messages.push({ role: 'role', content: sysText, msgType: 'system', timestamp: nowTime });
-                
                 if (parsed.payAction === 'accept') {
                     let orders = JSON.parse(localStorage.getItem('shopOrders') || '[]');
                     const now = Date.now();
@@ -9398,7 +8994,6 @@ async function triggerCartAiReaction(type, cartItem, contact, total) {
                         isReviewed: false
                     });
                     localStorage.setItem('shopOrders', JSON.stringify(orders));
-                    
                     let cart = JSON.parse(localStorage.getItem('shopCart') || '[]');
                     cart = cart.filter(item => item.id !== currentForwardCartId);
                     localStorage.setItem('shopCart', JSON.stringify(cart));
@@ -9407,17 +9002,14 @@ async function triggerCartAiReaction(type, cartItem, contact, total) {
                     }
                 }
             }
-
             if (parsed.replies && parsed.replies.length > 0) {
                 const replyText = parsed.replies[0].content;
                 freshContact.messages.push({ role: 'role', content: replyText, msgType: 'text', timestamp: nowTime });
                 freshContact.lastMsg = replyText;
                 freshContact.time = nowTime;
             }
-
             allContacts[idx] = freshContact;
             localStorage.setItem('chatContacts', JSON.stringify(allContacts));
-
             if (currentChatId == contact.id && document.getElementById('chatPage').classList.contains('active')) {
                 openChat(contact.id); 
             }
@@ -9427,4 +9019,3 @@ async function triggerCartAiReaction(type, cartItem, contact, total) {
 </script>
 </body>
 </html>
-

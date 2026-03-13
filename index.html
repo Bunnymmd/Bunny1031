@@ -248,9 +248,10 @@ body {
     width: 100%;
     height: 100%;
     background-color: transparent;
-    z-index: 900; 
+    z-index: 2000; 
     display: none;
 }
+
 .action-sheet-overlay.active {
     display: block;
 }
@@ -1818,9 +1819,62 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     color: var(--text-main);
     font-weight: 600;
 }
+.bill-section { margin-top: 24px; background: #fff; border-radius: 16px; padding: 20px 16px; box-shadow: var(--shadow); }
+.bill-header { font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 16px; }
+.bill-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f0f0f2; }
+.bill-item:last-child { border-bottom: none; padding-bottom: 0; }
+.bill-info { display: flex; flex-direction: column; gap: 4px; }
+.bill-title { font-size: 14px; font-weight: 600; color: var(--text-main); }
+.bill-time { font-size: 11px; color: var(--text-sub); }
+.bill-amount { font-size: 16px; font-weight: 700; font-family: 'SF Pro Display', sans-serif; }
+.fc-metal-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 16px 20px;
+    color: #1a1a1a;
+    width: 220px;
+    text-align: left;
+    box-sizing: border-box;
+    border: 1px solid #e5e5ea;
+}
+.fc-title { font-size: 12px; color: #8e8e93; margin-bottom: 8px; font-weight: 500; }
+.fc-divider { width: 100%; height: 1px; background-color: #e5e5ea; margin-bottom: 12px; }
+
+
+.fc-amount { font-size: 24px; font-weight: 700; margin-bottom: 4px; font-family: 'SF Pro Display', sans-serif; }
+.fc-user { font-size: 12px; color: #8e8e93; }
+.chat-system-msg { text-align: center; font-size: 12px; color: #999; margin: 16px 0; width: 100%; }
+
+.chat-msg-bubble.is-family-card { padding: 0 !important; background: transparent !important; border: none !important; box-shadow: none !important; }
+.fc-list-container { padding: 16px; display: flex; flex-direction: column; gap: 16px; padding-bottom: 100px; }
+.fc-list-item { position: relative; transition: transform 0.2s; }
+.fc-del-btn {
+    position: absolute; top: -8px; right: -8px; width: 24px; height: 24px;
+    background: #ff3b30; color: #fff; border-radius: 50%;
+    display: none; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: bold; cursor: pointer; z-index: 10;
+    box-shadow: 0 2px 8px rgba(255,59,48,0.4);
+}
+.fc-list-container.manage-mode .fc-del-btn { display: flex; animation: popIn 0.2s ease; }
+.fc-list-container.manage-mode .fc-metal-card { animation: iconShake 0.3s infinite ease-in-out; }
 .icon-pay-pwd { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z'/%3E%3C/svg%3E"); background-size: 26px; background-position: center; background-repeat: no-repeat; }
 .icon-pay-family { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z'/%3E%3C/svg%3E"); background-size: 26px; background-position: center; background-repeat: no-repeat; }
 .icon-pay-nopwd { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z'/%3E%3C/svg%3E"); background-size: 26px; background-position: center; background-repeat: no-repeat; }
+.pay-pwd-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 3000; display: none; align-items: flex-end; justify-content: center; }
+.pay-pwd-overlay.active { display: flex; }
+.pay-pwd-container { width: 100%; background: #f7f7f7; border-radius: 16px 16px 0 0; padding-bottom: 20px; animation: slideUp 0.3s ease; }
+.pay-pwd-header { display: flex; justify-content: space-between; align-items: center; padding: 16px; border-bottom: 1px solid #e5e5e5; }
+.pay-pwd-close { font-size: 24px; color: #333; cursor: pointer; line-height: 1; width: 24px; }
+.pay-pwd-title { font-size: 16px; font-weight: 600; color: #333; }
+.pay-pwd-dots { display: flex; justify-content: center; gap: 10px; margin: 30px 0; }
+.pay-pwd-dot { width: 16px; height: 16px; border-radius: 50%; border: 1px solid #ccc; background: #fff; }
+.pay-pwd-dot.filled { background: #000; border-color: #000; }
+.pay-keyboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #e5e5e5; border-top: 1px solid #e5e5e5; }
+.pay-key { background: #fff; height: 50px; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 500; color: #000; cursor: pointer; }
+.pay-key:active { background: #e5e5e5; }
+.pay-key.empty { background: #f7f7f7; pointer-events: none; }
+.pay-key.del { background: #f7f7f7; font-size: 16px; }
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 .header-right {
     display: flex;
     align-items: center;
@@ -2536,6 +2590,414 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
 .fp-btn { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #1a1a1a; transition: transform 0.1s;}
 .fp-btn:active { transform: scale(0.9); }
 .fp-btn.play-pause { width: 68px; height: 68px; background: #1a1a1a; color: #fff; border-radius: 50%; box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+#shopAppPage {
+    background-color: #f7f7f7;
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.shop-header {
+    background: #ffffff;
+    padding: 48px 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+}
+.shop-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+.shop-back-btn {
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-main);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+}
+.shop-search-box {
+    flex: 1;
+    height: 36px;
+    background: #f0f0f2;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    margin-right: 16px;
+}
+.shop-search-box svg {
+    width: 16px;
+    height: 16px;
+    color: #8e8e93;
+    margin-right: 8px;
+}
+.shop-search-box input {
+    border: none;
+    background: transparent;
+    flex: 1;
+    font-size: 14px;
+    color: var(--text-main);
+}
+.shop-search-box input::placeholder {
+    color: #8e8e93;
+}
+.shop-header-actions {
+    display: flex;
+    gap: 14px;
+}
+.shop-action-btn {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+    cursor: pointer;
+}
+.shop-action-btn svg {
+    width: 22px;
+    height: 22px;
+}
+.shop-tabs {
+    display: flex;
+    overflow-x: auto;
+    gap: 24px;
+    padding: 0 4px 10px;
+    scrollbar-width: none;
+}
+.shop-tabs::-webkit-scrollbar {
+    display: none;
+}
+.shop-tab {
+    font-size: 14px;
+    color: var(--text-sub);
+    white-space: nowrap;
+    position: relative;
+    padding-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.shop-tab.active {
+    color: var(--text-main);
+    font-weight: 700;
+    font-size: 15px;
+}
+.shop-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 3px;
+    background: var(--text-main);
+    border-radius: 2px;
+}
+.shop-content-container {
+    flex: 1;
+    overflow-y: auto;
+    position: relative;
+}
+.shop-tab-content {
+    display: none;
+    padding: 16px 16px 100px;
+}
+.shop-tab-content.active {
+    display: block;
+}
+.shop-dock {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 86px;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-around;
+    padding-top: 12px;
+    z-index: 200;
+}
+.shop-dock-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-sub);
+    cursor: pointer;
+    width: 60px;
+    transition: color 0.2s;
+}
+.shop-dock-item.active {
+    color: var(--text-main);
+}
+.shop-dock-item svg {
+    width: 24px;
+    height: 24px;
+}
+.shop-dock-item span {
+    font-size: 10px;
+    font-weight: 600;
+}
+.shop-empty-state {
+    text-align: center;
+    padding-top: 120px;
+    color: var(--text-sub);
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.shop-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+.shop-card {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+}
+.shop-card-img {
+    width: 100%;
+    aspect-ratio: 1;
+    background: #f0f0f2;
+    background-size: cover;
+    background-position: center;
+}
+.shop-card-info {
+    padding: 12px;
+}
+.shop-card-title {
+    font-size: 13px;
+    color: var(--text-main);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 8px;
+    line-height: 1.4;
+    font-weight: 500;
+}
+.shop-card-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--danger);
+}
+.shop-card-price::before {
+    content: '¥';
+    font-size: 12px;
+    margin-right: 2px;
+}
+.shop-me-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 140px 20px 40px;
+    background: #fff;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+}
+
+.shop-me-avatar {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    background-color: #eee;
+    background-image: url('https://image.uglycat.cc/tm7moi.png');
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.shop-me-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 28px;
+}
+.shop-me-stats {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 16px;
+}
+.shop-me-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+.shop-me-stat-icon {
+    width: 26px;
+    height: 26px;
+    color: var(--text-main);
+}
+.shop-me-stat-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-main);
+}
+.shop-global-back {
+    position: absolute;
+    top: 48px;
+    left: 16px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: var(--text-main);
+    z-index: 500;
+    cursor: pointer;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.shop-detail-page {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    height: 100%;
+    background: #f7f7f7;
+    z-index: 600;
+    transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.shop-detail-page.active {
+    transform: translateX(-100%);
+}
+.shop-detail-header {
+    position: absolute;
+    top: 48px;
+    left: 16px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #fff;
+    z-index: 310;
+    cursor: pointer;
+    background: rgba(0,0,0,0.5);
+    border-radius: 50%;
+}
+.shop-detail-content {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 90px;
+}
+
+.shop-detail-img {
+    width: 100%;
+    aspect-ratio: 1;
+    background-size: cover;
+    background-position: center;
+    background-color: #eee;
+}
+.shop-detail-info {
+    padding: 16px;
+    background: #fff;
+    margin-bottom: 12px;
+}
+.shop-detail-price {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--danger);
+    margin-bottom: 8px;
+}
+.shop-detail-price::before {
+    content: '¥';
+    font-size: 16px;
+    margin-right: 2px;
+}
+.shop-detail-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-main);
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+.shop-detail-meta {
+    font-size: 12px;
+    color: var(--text-sub);
+    display: flex;
+    justify-content: space-between;
+}
+.shop-detail-desc-box {
+    background: #fff;
+    padding: 16px;
+    min-height: 200px;
+}
+.shop-detail-desc-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-main);
+}
+.shop-detail-desc-text {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+.shop-detail-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0 16px 20px;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+    z-index: 310;
+    gap: 12px;
+}
+.shop-btn-cart {
+    flex: 1;
+    height: 40px;
+    border-radius: 20px;
+    background: #ffe4e6;
+    color: var(--danger);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+}
+.shop-btn-buy {
+    flex: 1;
+    height: 40px;
+    border-radius: 20px;
+    background: var(--danger);
+    color: #fff;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -2563,7 +3025,8 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
 
             <div class="app-item" id="what-trigger"><div class="app-icon white" id="icon-m-2"></div><span class="app-name">What</span></div>
             <div class="app-item"><div class="app-icon gray" id="icon-m-3"></div><span class="app-name">论坛</span></div>
-            <div class="app-item"><div class="app-icon gray" id="icon-m-4"></div><span class="app-name">购物</span></div>
+            <div class="app-item" id="shop-trigger"><div class="app-icon gray" id="icon-m-4"></div><span class="app-name">购物</span></div>
+
             <div class="app-item" id="music-trigger" onclick="openAppPage('musicAppPage')"><div class="app-icon white" id="icon-m-5"></div><span class="app-name">音乐</span></div>
 
 
@@ -2818,30 +3281,105 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
         <div class="page-content" style="background-color: #f7f7f7; padding: 20px 16px;">
             <div class="balance-panel">
                 <div class="balance-title">我的零钱</div>
-                <div class="balance-amount">¥ 0.00</div>
+                <div class="balance-amount" id="displayBalance">¥ 0.00</div>
                 <div class="balance-actions">
-                    <button class="balance-btn">充值</button>
-                    <button class="balance-btn outline">提现</button>
+                    <button class="balance-btn" onclick="handleRecharge()">充值</button>
+                    <button class="balance-btn outline" onclick="handleWithdraw()">提现</button>
                 </div>
             </div>
             <div class="pay-func-grid">
-                <div class="pay-func-item">
+                <div class="pay-func-item" onclick="openPayPwdModal()">
                     <div class="pay-func-icon icon-pay-pwd" style="background-color: #007aff;"></div>
                     <span>支付密码</span>
                 </div>
-                <div class="pay-func-item">
+                <div class="pay-func-item" onclick="openFamilyCardPage()">
                     <div class="pay-func-icon icon-pay-family" style="background-color: #ff9500;"></div>
                     <span>亲属卡</span>
                 </div>
-                <div class="pay-func-item">
+                <div class="pay-func-item" onclick="openNoPwdModal()">
                     <div class="pay-func-icon icon-pay-nopwd" style="background-color: #34c759;"></div>
                     <span>免密支付</span>
                 </div>
             </div>
+            <div class="bill-section">
+                <div class="bill-header">账单记录</div>
+                <div id="billList"></div>
+            </div>
+        </div>
+    </div>
+    <div class="app-page" id="familyCardPage">
+        <div class="page-header">
+            <div class="header-left">
+                <div class="back-btn" onclick="closeAppPage('familyCardPage')">&#10094;</div>
+                <div class="page-title">亲属卡</div>
+            </div>
+            <div class="header-right">
+                <div class="header-text-btn" onclick="openFamilyCardContactSelect()">添加</div>
+                <div class="header-text-btn" id="fcManageBtn" onclick="toggleManageFamilyCard()" style="margin-left: 12px;">管理</div>
+            </div>
+        </div>
+        <div class="page-content" style="padding: 0; background: #f7f7f7;">
+            <div class="fc-list-container" id="fcListContainer">
+            </div>
         </div>
     </div>
 
-    <!-- Emoticon Page -->
+    <div class="modal-overlay" id="fcContactModal">
+        <div class="modal-container">
+            <div class="modal-header">选择赠送对象</div>
+            <div class="contact-list-modal" id="fcContactList"></div>
+            <div class="btn-row" style="margin-top: 16px;">
+                <button class="btn-secondary" style="width: 100%" onclick="closeFamilyCardContactSelect()">取消</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="noPwdModal">
+        <div class="modal-container">
+            <div class="modal-header">免密支付设置</div>
+            <div class="modal-scroll">
+                <div class="setting-group" style="box-shadow: none; padding: 0; margin: 0;">
+                    <div class="toggle-wrapper">
+                        <span class="setting-label" style="margin:0; font-size:15px; color:var(--text-main);">开启免密支付</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="noPwdToggle" onchange="toggleNoPwd(this)">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div style="font-size:11px; color:#999; margin-top:12px; line-height:1.5;">开启后，充值、提现、购买商品及赠送亲属卡时无需输入支付密码。</div>
+                </div>
+            </div>
+            <div class="btn-row" style="margin-top: 20px;">
+                <button class="btn-secondary" style="width:100%" onclick="closeNoPwdModal()">关闭</button>
+            </div>
+        </div>
+    </div>
+    <div class="pay-pwd-overlay" id="payPwdModal">
+        <div class="pay-pwd-container">
+            <div class="pay-pwd-header">
+                <div class="pay-pwd-close" onclick="closePayPwdModal()">×</div>
+                <div class="pay-pwd-title" id="payPwdTitle">请输入支付密码</div>
+                <div style="width: 24px;"></div>
+            </div>
+            <div class="pay-pwd-dots" id="payPwdDots">
+                <div class="pay-pwd-dot"></div><div class="pay-pwd-dot"></div><div class="pay-pwd-dot"></div>
+                <div class="pay-pwd-dot"></div><div class="pay-pwd-dot"></div><div class="pay-pwd-dot"></div>
+            </div>
+            <div class="pay-keyboard">
+                <div class="pay-key" onclick="inputPayPwd('1')">1</div>
+                <div class="pay-key" onclick="inputPayPwd('2')">2</div>
+                <div class="pay-key" onclick="inputPayPwd('3')">3</div>
+                <div class="pay-key" onclick="inputPayPwd('4')">4</div>
+                <div class="pay-key" onclick="inputPayPwd('5')">5</div>
+                <div class="pay-key" onclick="inputPayPwd('6')">6</div>
+                <div class="pay-key" onclick="inputPayPwd('7')">7</div>
+                <div class="pay-key" onclick="inputPayPwd('8')">8</div>
+                <div class="pay-key" onclick="inputPayPwd('9')">9</div>
+                <div class="pay-key empty"></div>
+                <div class="pay-key" onclick="inputPayPwd('0')">0</div>
+                <div class="pay-key del" onclick="deletePayPwd()">删除</div>
+                        </div>
+        </div>
+    </div>
     <div class="app-page" id="emoticonPage">
         <div class="page-header">
             <div class="header-left">
@@ -3105,7 +3643,7 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                 <div class="f-item"><div class="f-icon icon-f-loc"></div><span class="f-text">Locate</span></div>
                 <div class="f-item"><div class="f-icon icon-f-gift"></div><span class="f-text">Gift</span></div>
                 <div class="f-item"><div class="f-icon icon-f-off"></div><span class="f-text">Offline</span></div>
-                <div class="f-item"><div class="f-icon icon-f-card"></div><span class="f-text">Family Card</span></div>
+                <div class="f-item" onclick="sendFamilyCardFromChat()"><div class="f-icon icon-f-card"></div><span class="f-text">Family Card</span></div>
             </div>
         </div>
         
@@ -3341,7 +3879,121 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
         </div>
     </div>
 </div>
-    <!-- Music App Page -->
+    <div class="app-page" id="shopAppPage">
+        <div class="shop-global-back" onclick="closeAppPage('shopAppPage')">&#10094;</div>
+        <div class="shop-content-container" style="padding-top: 0;">
+            <div class="shop-tab-content active" id="shop-tab-home" style="padding: 0 0 100px;">
+                <div class="shop-header" style="box-shadow: none;">
+                    <div class="shop-header-top" style="padding-left: 46px;">
+                        <div class="shop-search-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            <input type="text" id="shopSearchInput" placeholder="搜索商品、品牌...">
+                        </div>
+
+                        <div class="shop-header-actions">
+                            <div class="shop-action-btn" onclick="searchShopItems()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            </div>
+                            <div class="shop-action-btn" onclick="generateShopItems()">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="shop-tabs">
+                        <div class="shop-tab active" onclick="switchShopCategory('推荐', this)">推荐</div>
+                        <div class="shop-tab" onclick="switchShopCategory('奢侈品', this)">奢侈品</div>
+                        <div class="shop-tab" onclick="switchShopCategory('女装', this)">女装</div>
+                        <div class="shop-tab" onclick="switchShopCategory('美妆', this)">美妆</div>
+                        <div class="shop-tab" onclick="switchShopCategory('数码', this)">数码</div>
+                        <div class="shop-tab" onclick="switchShopCategory('成人用品', this)">成人用品</div>
+                    </div>
+                </div>
+                <div class="shop-grid" id="shopGridContainer" style="padding: 0 16px;">
+                </div>
+            </div>
+
+            <div class="shop-tab-content" id="shop-tab-cart">
+                <div class="shop-empty-state">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:48px;height:48px;margin-bottom:16px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                    <div>购物车空空如也</div>
+                </div>
+            </div>
+
+            <div class="shop-tab-content" id="shop-tab-chat">
+                <div class="shop-empty-state">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:48px;height:48px;margin-bottom:16px;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                    <div>暂无客服消息</div>
+                </div>
+            </div>
+
+            <div class="shop-tab-content" id="shop-tab-me" style="padding: 0 0 100px; background: #f7f7f7;">
+                <div class="shop-me-header">
+                    <div class="shop-me-avatar" id="shop-me-avatar-img" onclick="openMenu('shop-me-avatar', event)"></div>
+                    <div class="shop-me-name" id="shop-me-name" onclick="editCommonText('shop-me-name')">购物达人</div>
+                    <div class="shop-me-stats">
+                        <div class="shop-me-stat-item">
+                            <svg class="shop-me-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            <span class="shop-me-stat-text">订单</span>
+                        </div>
+                        <div class="shop-me-stat-item">
+                            <svg class="shop-me-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                            <span class="shop-me-stat-text">已发货</span>
+                        </div>
+                        <div class="shop-me-stat-item">
+                            <svg class="shop-me-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                            <span class="shop-me-stat-text">待收货</span>
+                        </div>
+                        <div class="shop-me-stat-item">
+                            <svg class="shop-me-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="9" y1="10" x2="15" y2="10"></line></svg>
+                            <span class="shop-me-stat-text">评价</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="shop-detail-page" id="shopDetailPage">
+            <div class="shop-detail-header" onclick="closeShopDetail()">&#10094;</div>
+            <div class="shop-detail-content">
+                <div class="shop-detail-img" id="sd-img"></div>
+                <div class="shop-detail-info">
+                    <div class="shop-detail-price" id="sd-price">0.00</div>
+                    <div class="shop-detail-title" id="sd-title">加载中...</div>
+                    <div class="shop-detail-meta">
+                        <span id="sd-loc">发货地: 未知</span>
+                        <span>月销 1000+</span>
+                    </div>
+                </div>
+                <div class="shop-detail-desc-box">
+                    <div class="shop-detail-desc-title">商品详情</div>
+                    <div class="shop-detail-desc-text" id="sd-desc">加载中...</div>
+                </div>
+            </div>
+            <div class="shop-detail-bottom">
+                <div class="shop-btn-cart">加入购物车</div>
+                <div class="shop-btn-buy" onclick="handleShopBuy()">立即购买</div>
+            </div>
+        </div>
+        <div class="shop-dock">
+            <div class="shop-dock-item active" onclick="switchShopTab('home', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <span>首页</span>
+            </div>
+            <div class="shop-dock-item" onclick="switchShopTab('cart', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                <span>购物车</span>
+            </div>
+            <div class="shop-dock-item" onclick="switchShopTab('chat', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <span>聊天</span>
+            </div>
+            <div class="shop-dock-item" onclick="switchShopTab('me', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <span>我</span>
+            </div>
+        </div>
+    </div>
+
+
     <div class="app-page" id="musicAppPage">
         <div class="music-header">
             <!-- 左上角加号 -->
@@ -3751,6 +4403,387 @@ function handleFileInput(input) {
 function openAppPage(pageId) {
     document.getElementById(pageId).classList.add('active');
 }
+let currentInputPwd = '';
+let confirmTempPwd = '';
+let payPwdMode = 'verify';
+
+function openPayPwdModal() {
+    const savedPwd = localStorage.getItem('userPayPwd');
+    currentInputPwd = '';
+    confirmTempPwd = '';
+    const titleEl = document.getElementById('payPwdTitle');
+    if (!savedPwd) {
+        payPwdMode = 'set_first';
+        titleEl.innerText = '设置支付密码';
+    } else {
+        payPwdMode = 'verify';
+        titleEl.innerText = '请输入支付密码';
+    }
+    updatePayPwdDots();
+    document.getElementById('payPwdModal').classList.add('active');
+}
+
+function closePayPwdModal() {
+    document.getElementById('payPwdModal').classList.remove('active');
+}
+
+function updatePayPwdDots() {
+    const dots = document.querySelectorAll('#payPwdDots .pay-pwd-dot');
+    dots.forEach((dot, index) => {
+        if (index < currentInputPwd.length) {
+            dot.classList.add('filled');
+        } else {
+            dot.classList.remove('filled');
+        }
+    });
+}
+
+function inputPayPwd(num) {
+    if (currentInputPwd.length < 6) {
+        currentInputPwd += num;
+        updatePayPwdDots();
+        if (currentInputPwd.length === 6) {
+            setTimeout(processPayPwd, 100);
+        }
+    }
+}
+
+function deletePayPwd() {
+    if (currentInputPwd.length > 0) {
+        currentInputPwd = currentInputPwd.slice(0, -1);
+        updatePayPwdDots();
+    }
+}
+
+let pendingPayAction = null;
+
+function processPayPwd() {
+    if (payPwdMode === 'set_first') {
+        confirmTempPwd = currentInputPwd;
+        currentInputPwd = '';
+        payPwdMode = 'set_confirm';
+        document.getElementById('payPwdTitle').innerText = '请再次输入以确认';
+        updatePayPwdDots();
+    } else if (payPwdMode === 'set_confirm') {
+        if (currentInputPwd === confirmTempPwd) {
+            localStorage.setItem('userPayPwd', currentInputPwd);
+            alert('支付密码设置成功');
+            closePayPwdModal();
+        } else {
+            alert('两次输入不一致，请重新设置');
+            currentInputPwd = '';
+            confirmTempPwd = '';
+            payPwdMode = 'set_first';
+            document.getElementById('payPwdTitle').innerText = '设置支付密码';
+            updatePayPwdDots();
+        }
+    } else if (payPwdMode === 'verify') {
+        const savedPwd = localStorage.getItem('userPayPwd');
+        if (currentInputPwd === savedPwd) {
+            alert('支付密码验证成功');
+            closePayPwdModal();
+        } else {
+            alert('支付密码错误，请重试');
+            currentInputPwd = '';
+            updatePayPwdDots();
+        }
+    } else if (payPwdMode === 'verify_pay') {
+        const savedPwd = localStorage.getItem('userPayPwd');
+        if (currentInputPwd === savedPwd) {
+            closePayPwdModal();
+            if (pendingPayAction) {
+                pendingPayAction();
+                pendingPayAction = null;
+            }
+        } else {
+            alert('支付密码错误，请重试');
+            currentInputPwd = '';
+            updatePayPwdDots();
+        }
+    }
+}
+
+function openNoPwdModal() {
+    const isNoPwd = localStorage.getItem('isNoPwd') === 'true';
+    document.getElementById('noPwdToggle').checked = isNoPwd;
+    document.getElementById('noPwdModal').classList.add('active');
+}
+
+function closeNoPwdModal() {
+    document.getElementById('noPwdModal').classList.remove('active');
+}
+
+function toggleNoPwd(el) {
+    localStorage.setItem('isNoPwd', el.checked);
+}
+
+function updateBalanceDisplay() {
+    let balance = parseFloat(localStorage.getItem('userBalance') || '0');
+    const el = document.getElementById('displayBalance');
+    if(el) el.innerText = '¥ ' + balance.toFixed(2);
+}
+
+function renderBills() {
+    const container = document.getElementById('billList');
+    if (!container) return;
+    const bills = JSON.parse(localStorage.getItem('payBills') || '[]');
+    container.innerHTML = '';
+    if(bills.length === 0) {
+        container.innerHTML = '<div style="text-align:center; padding:30px 0; color:#999; font-size:13px;">暂无账单记录</div>';
+        return;
+    }
+    bills.forEach(b => {
+        const color = b.amount > 0 ? '#34c759' : '#1a1a1a';
+        const sign = b.amount > 0 ? '+' : '';
+        container.innerHTML += `
+            <div class="bill-item">
+                <div class="bill-info">
+                    <div class="bill-title">${b.title}</div>
+                    <div class="bill-time">${b.time}</div>
+                </div>
+                <div class="bill-amount" style="color:${color}">${sign}${b.amount.toFixed(2)}</div>
+            </div>
+        `;
+    });
+}
+
+function addBillRecord(title, amount) {
+    const bills = JSON.parse(localStorage.getItem('payBills') || '[]');
+    const now = new Date();
+    const timeStr = `${now.getMonth()+1}-${now.getDate()} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+    bills.unshift({ title, amount, time: timeStr });
+    localStorage.setItem('payBills', JSON.stringify(bills));
+    renderBills();
+    updateBalanceDisplay();
+}
+
+function initiatePayment(actionCallback, title, amount) {
+    const isNoPwd = localStorage.getItem('isNoPwd') === 'true';
+    if (isNoPwd) {
+        actionCallback();
+        addBillRecord(title, amount);
+    } else {
+        const savedPwd = localStorage.getItem('userPayPwd');
+        if (!savedPwd) {
+            alert("请先设置支付密码");
+            openPayPwdModal();
+            return;
+        }
+        pendingPayAction = () => {
+            actionCallback();
+            addBillRecord(title, amount);
+        };
+        currentInputPwd = '';
+        payPwdMode = 'verify_pay';
+        document.getElementById('payPwdTitle').innerText = '请输入支付密码';
+        updatePayPwdDots();
+        document.getElementById('payPwdModal').classList.add('active');
+    }
+}
+
+function handleRecharge() {
+    const amt = parseFloat(prompt("请输入充值金额"));
+    if(isNaN(amt) || amt <= 0) return;
+    initiatePayment(() => {
+        let bal = parseFloat(localStorage.getItem('userBalance') || '0');
+        bal += amt;
+        localStorage.setItem('userBalance', bal);
+        alert("充值成功");
+    }, "充值", amt);
+}
+
+function handleWithdraw() {
+    const amt = parseFloat(prompt("请输入提现金额"));
+    if(isNaN(amt) || amt <= 0) return;
+    let bal = parseFloat(localStorage.getItem('userBalance') || '0');
+    if(amt > bal) { alert("余额不足"); return; }
+    initiatePayment(() => {
+        bal -= amt;
+        localStorage.setItem('userBalance', bal);
+        alert("提现成功");
+    }, "提现", -amt);
+}
+
+let isFcManageMode = false;
+
+function openFamilyCardPage() {
+    isFcManageMode = false;
+    document.getElementById('fcListContainer').classList.remove('manage-mode');
+    document.getElementById('fcManageBtn').innerText = '管理';
+    document.getElementById('fcManageBtn').style.color = 'var(--text-main)';
+    renderFamilyCards();
+    openAppPage('familyCardPage');
+}
+
+function renderFamilyCards() {
+    const container = document.getElementById('fcListContainer');
+    const cards = JSON.parse(localStorage.getItem('familyCardsData') || '[]');
+    container.innerHTML = '';
+    
+    if (cards.length === 0) {
+        container.innerHTML = '<div style="text-align:center; color:#999; padding:60px 0; font-size:13px;">暂未赠送任何亲属卡</div>';
+        return;
+    }
+    
+    cards.forEach(card => {
+        const item = document.createElement('div');
+        item.className = 'fc-list-item';
+        item.innerHTML = `
+            <div class="fc-del-btn" onclick="deleteFamilyCard('${card.id}')">×</div>
+            <div class="fc-metal-card">
+                <div class="fc-title">FAMILY CARD</div>
+                <div class="fc-divider"></div>
+                <div class="fc-amount">¥ ${parseFloat(card.amount).toFixed(2)}</div>
+                <div class="fc-user">持卡人: ${card.targetName}</div>
+            </div>
+        `;
+        container.appendChild(item);
+    });
+}
+
+function toggleManageFamilyCard() {
+    const container = document.getElementById('fcListContainer');
+    const btn = document.getElementById('fcManageBtn');
+    isFcManageMode = !isFcManageMode;
+    if (isFcManageMode) {
+        container.classList.add('manage-mode');
+        btn.innerText = '完成';
+        btn.style.color = 'var(--accent)';
+    } else {
+        container.classList.remove('manage-mode');
+        btn.innerText = '管理';
+        btn.style.color = 'var(--text-main)';
+    }
+}
+
+function deleteFamilyCard(id) {
+    if(!confirm('确定作废该亲属卡吗？')) return;
+    let cards = JSON.parse(localStorage.getItem('familyCardsData') || '[]');
+    cards = cards.filter(c => c.id !== id);
+    localStorage.setItem('familyCardsData', JSON.stringify(cards));
+    renderFamilyCards();
+}
+
+function openFamilyCardContactSelect() {
+    const list = document.getElementById('fcContactList');
+    const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
+    list.innerHTML = '';
+    if (contacts.length === 0) {
+        list.innerHTML = '<div style="text-align:center; color:#999; padding:20px; font-size:13px;">暂无联系人</div>';
+    } else {
+        contacts.forEach(c => {
+            const item = document.createElement('div');
+            item.className = 'contact-select-item';
+            const avatarStyle = c.role.avatar ? `background-image:url(${c.role.avatar})` : '';
+            item.innerHTML = `
+                <div class="contact-select-avatar" style="${avatarStyle}"></div>
+                <div class="contact-select-name">${c.remark || c.role.name}</div>
+            `;
+            item.onclick = () => {
+                closeFamilyCardContactSelect();
+                handleSendFamilyCard(c.id, c.remark || c.role.name);
+            };
+            list.appendChild(item);
+        });
+    }
+    document.getElementById('fcContactModal').classList.add('active');
+}
+
+function closeFamilyCardContactSelect() {
+    document.getElementById('fcContactModal').classList.remove('active');
+}
+
+function sendFamilyCardFromChat() {
+    if (!currentChatId) return;
+    const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
+    const contact = contacts.find(c => c.id == currentChatId);
+    if (!contact) return;
+    document.getElementById('functionPanel').classList.remove('active');
+    handleSendFamilyCard(currentChatId, contact.remark || contact.role.name);
+}
+
+function handleSendFamilyCard(targetId, targetName) {
+    const amtStr = prompt(`请输入赠送给 ${targetName} 的亲属卡额度`);
+    if (amtStr === null) return;
+    const amt = parseFloat(amtStr);
+    if (isNaN(amt) || amt <= 0) {
+        alert("请输入有效的金额");
+        return;
+    }
+    let bal = parseFloat(localStorage.getItem('userBalance') || '0');
+    if (amt > bal) {
+        alert("余额不足，请先充值");
+        return;
+    }
+    initiatePayment(() => {
+        executeFamilyCardSend(targetId, targetName, amt);
+    }, `赠送亲属卡 - ${targetName}`, -amt);
+}
+
+function executeFamilyCardSend(targetId, targetName, amount) {
+    let bal = parseFloat(localStorage.getItem('userBalance') || '0');
+    bal -= amount;
+    localStorage.setItem('userBalance', bal);
+    
+    const fcData = {
+        id: 'fc_' + Date.now(),
+        targetId: targetId,
+        targetName: targetName,
+        amount: amount,
+        time: new Date().toLocaleString()
+    };
+    
+    const cards = JSON.parse(localStorage.getItem('familyCardsData') || '[]');
+    cards.unshift(fcData);
+    localStorage.setItem('familyCardsData', JSON.stringify(cards));
+    
+    const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
+    const contactIdx = contacts.findIndex(c => c.id == targetId);
+    if (contactIdx !== -1) {
+        const contact = contacts[contactIdx];
+        if (!contact.messages) contact.messages = [];
+        const nowTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
+        
+        const newMsg = {
+            role: 'user',
+            content: JSON.stringify(fcData),
+            msgType: 'family_card',
+            timestamp: nowTime
+        };
+        
+        contact.messages.push(newMsg);
+        contact.lastMsg = '[亲属卡]';
+        contact.time = nowTime;
+        localStorage.setItem('chatContacts', JSON.stringify(contacts));
+        
+        if (currentChatId == targetId && document.getElementById('chatPage').classList.contains('active')) {
+            renderChatMessage(newMsg, contact, contact.messages.length - 1);
+            const container = document.getElementById('chatMsgContainer');
+            container.scrollTop = container.scrollHeight;
+        }
+    }
+    
+    if (document.getElementById('familyCardPage').classList.contains('active')) {
+        renderFamilyCards();
+    }
+    
+    updateBalanceDisplay();
+    alert(`成功赠送给 ${targetName} ¥${amount.toFixed(2)} 亲属卡`);
+}
+
+function handleShopBuy() {
+    const priceText = document.getElementById('sd-price').innerText;
+    const title = document.getElementById('sd-title').innerText;
+    const price = parseFloat(priceText);
+    let bal = parseFloat(localStorage.getItem('userBalance') || '0');
+    if(price > bal) { alert("余额不足，请先充值"); return; }
+    initiatePayment(() => {
+        bal -= price;
+        localStorage.setItem('userBalance', bal);
+        alert("购买成功");
+        closeShopDetail();
+    }, "购买商品 - " + title, -price);
+}
 function closeAppPage(pageId) {
     document.getElementById(pageId).classList.remove('active');
 }
@@ -3765,7 +4798,187 @@ document.getElementById('what-trigger').addEventListener('click', () => {
     openAppPage('whatAppPage');
     renderContactList(); // Ensure list is up to date
 });
+document.getElementById('shop-trigger').addEventListener('click', () => {
+    openAppPage('shopAppPage');
+});
 
+function switchShopTab(tabName, el) {
+    document.querySelectorAll('#shopAppPage .shop-tab-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('shop-tab-' + tabName).classList.add('active');
+    document.querySelectorAll('#shopAppPage .shop-dock-item').forEach(i => i.classList.remove('active'));
+    el.classList.add('active');
+}
+
+let currentShopCategory = '推荐';
+
+function switchShopCategory(cat, el) {
+    document.querySelectorAll('.shop-tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+    currentShopCategory = cat;
+    renderShopItems();
+}
+async function searchShopItems() {
+    const keyword = document.getElementById('shopSearchInput').value.trim();
+    if (!keyword) {
+        alert("请输入搜索关键词");
+        return;
+    }
+    document.querySelectorAll('.shop-tab').forEach(t => t.classList.remove('active'));
+    currentShopCategory = "搜索:" + keyword;
+    const config = JSON.parse(localStorage.getItem('apiConfig') || '{}');
+    if (!config.url || !config.key) {
+        alert("请先在设置中配置API Key和URL");
+        return;
+    }
+    let toast = document.getElementById('diaryToast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'diaryToast';
+        toast.className = 'toast-overlay';
+        toast.innerHTML = `<div class="toast-box"><div class="toast-spinner"></div><span id="toastText"></span></div>`;
+        document.body.appendChild(toast);
+    }
+    document.getElementById('toastText').innerText = `正在搜索 ${keyword} ...`;
+    toast.classList.add('active');
+    const prompt = `请生成10个完全符合“${keyword}”关键词的电商真实商品。
+返回JSON格式：
+{"items": [
+  {"title": "商品吸引人的长标题", "price": "价格数字保留两位小数", "img": "https://image.uglycat.cc/tm7moi.png", "location": "国内真实城市发货地", "desc": "极其详细的商品图文描述文字，突出卖点、材质或功能，不少于60字"}
+]}
+只能返回合法的JSON，不要任何其他文本。图片统一使用给定的URL。`;
+    try {
+        const response = await fetch(`${config.url}/chat/completions`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${config.key}`
+            },
+            body: JSON.stringify({
+                model: config.model || 'gpt-3.5-turbo',
+                messages: [{ role: "user", content: prompt }],
+                temperature: 0.8,
+                response_format: { type: "json_object" }
+            })
+        });
+        if (!response.ok) throw new Error('API Error');
+        const data = await response.json();
+        const parsed = JSON.parse(data.choices[0].message.content);
+        if (parsed.items && Array.isArray(parsed.items)) {
+            let shopData = JSON.parse(localStorage.getItem('shopData_' + currentShopCategory) || '[]');
+            parsed.items.reverse().forEach(item => {
+                shopData.unshift(item);
+            });
+            localStorage.setItem('shopData_' + currentShopCategory, JSON.stringify(shopData));
+            renderShopItems();
+        }
+    } catch (e) {
+        alert("生成失败: " + e.message);
+    } finally {
+        toast.classList.remove('active');
+    }
+}
+
+async function generateShopItems() {
+    const config = JSON.parse(localStorage.getItem('apiConfig') || '{}');
+    if (!config.url || !config.key) {
+        alert("请先在设置中配置API Key和URL");
+        return;
+    }
+
+    let toast = document.getElementById('diaryToast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'diaryToast';
+        toast.className = 'toast-overlay';
+        toast.innerHTML = `<div class="toast-box"><div class="toast-spinner"></div><span id="toastText"></span></div>`;
+        document.body.appendChild(toast);
+    }
+    document.getElementById('toastText').innerText = `正在搜罗${currentShopCategory}好物...`;
+    toast.classList.add('active');
+
+    const prompt = `请生成10个完全符合“${currentShopCategory}”分类的电商真实商品。
+返回JSON格式：
+{"items": [
+  {"title": "商品吸引人的长标题", "price": "价格数字保留两位小数", "img": "https://image.uglycat.cc/tm7moi.png", "location": "国内真实城市发货地", "desc": "极其详细的商品图文描述文字，突出卖点、材质或功能，不少于60字"}
+]}
+只能返回合法的JSON，不要任何其他文本。图片统一使用给定的URL。`;
+
+    try {
+        const response = await fetch(`${config.url}/chat/completions`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${config.key}`
+            },
+            body: JSON.stringify({
+                model: config.model || 'gpt-3.5-turbo',
+                messages: [{ role: "user", content: prompt }],
+                temperature: 0.8,
+                response_format: { type: "json_object" }
+            })
+        });
+
+        if (!response.ok) throw new Error('API Error');
+        const data = await response.json();
+        const parsed = JSON.parse(data.choices[0].message.content);
+        
+        if (parsed.items && Array.isArray(parsed.items)) {
+            let shopData = JSON.parse(localStorage.getItem('shopData_' + currentShopCategory) || '[]');
+            parsed.items.reverse().forEach(item => {
+                shopData.unshift(item);
+            });
+            localStorage.setItem('shopData_' + currentShopCategory, JSON.stringify(shopData));
+            renderShopItems();
+        }
+    } catch (e) {
+        alert("生成失败: " + e.message);
+    } finally {
+        toast.classList.remove('active');
+    }
+}
+
+function renderShopItems() {
+    const container = document.getElementById('shopGridContainer');
+    container.innerHTML = '';
+    let shopData = JSON.parse(localStorage.getItem('shopData_' + currentShopCategory) || '[]');
+    
+    if (shopData.length === 0) {
+        container.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 100px 0; color: #999; font-size: 13px;">该分类下暂无商品<br><br>点击右上角刷新图标生成</div>`;
+        return;
+    }
+
+    shopData.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'shop-card';
+        card.onclick = () => openShopDetail(index);
+        card.innerHTML = `
+            <div class="shop-card-img" style="background-image:url('${item.img}')"></div>
+            <div class="shop-card-info">
+                <div class="shop-card-title">${item.title}</div>
+                <div class="shop-card-price">${item.price}</div>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+function openShopDetail(index) {
+    let shopData = JSON.parse(localStorage.getItem('shopData_' + currentShopCategory) || '[]');
+    const item = shopData[index];
+    if (!item) return;
+
+    document.getElementById('sd-img').style.backgroundImage = `url('${item.img}')`;
+    document.getElementById('sd-price').innerText = item.price;
+    document.getElementById('sd-title').innerText = item.title;
+    document.getElementById('sd-loc').innerText = `发货地: ${item.location}`;
+    document.getElementById('sd-desc').innerText = item.desc;
+
+    document.getElementById('shopDetailPage').classList.add('active');
+}
+
+function closeShopDetail() {
+    document.getElementById('shopDetailPage').classList.remove('active');
+}
 document.getElementById('music-trigger').addEventListener('click', () => {
     openAppPage('musicAppPage');
 });
@@ -4462,7 +5675,12 @@ function renderChatMessage(msg, contact, index) {
 
     const container = document.getElementById('chatMsgContainer');
     const row = document.createElement('div');
-
+    if (msg.msgType === 'system') {
+        row.className = 'chat-system-msg';
+        row.innerText = msg.content;
+        container.appendChild(row);
+        return;
+    }
     if (msg.type === 'recall') {
         row.className = 'chat-msg-row';
         row.style.justifyContent = 'center';
@@ -4521,14 +5739,31 @@ function renderChatMessage(msg, contact, index) {
     if (msg.msgType === 'image') {
         bubbleContent = `<img src="${msg.content}" class="chat-msg-image" onclick="previewImage('${msg.content}')">`;
         bubbleClass += ' is-image';
+    } else if (msg.msgType === 'family_card') {
+        bubbleClass += ' is-family-card';
+        try {
+            const fcData = JSON.parse(msg.content);
+            bubbleContent = `
+                <div class="fc-metal-card">
+                    <div class="fc-title">FAMILY CARD</div>
+                    <div class="fc-divider"></div>
+                    <div class="fc-amount">¥ ${parseFloat(fcData.amount).toFixed(2)}</div>
+                    <div class="fc-user">持卡人: ${fcData.targetName}</div>
+                </div>
+            `;
+        } catch(e) {
+            bubbleContent = '[亲属卡解析错误]';
+        }
     } else if (msg.msgType === 'diary_card') {
+        } else if (msg.msgType === 'family_card') {
+            try {
+                const fcData = JSON.parse(msg.content);
+                contentData = `[系统提示：用户向你赠送了一张额度为 ¥${fcData.amount} 的亲属卡]`;
+            } catch(e) {}
         try {
             const dData = JSON.parse(msg.content);
             let authorDisp = dData.author;
-            // 兼容老数据，如果没有记录作者，默认是我
             if (!authorDisp) authorDisp = '我';
-            
-            // 智能人称转换逻辑
             let displayStr = authorDisp;
             if (authorDisp === '我' || authorDisp === contact.user.name) {
                 displayStr = '我';
@@ -4769,6 +6004,23 @@ async function getAiReply() {
                 content: contentData
             });
     });
+    let lastFamilyCardAmount = 0;
+    let hasFamilyCard = false;
+    unrepliedUserMsgs.forEach(m => {
+        if (m.msgType === 'family_card') {
+            hasFamilyCard = true;
+            try {
+                lastFamilyCardAmount = parseFloat(JSON.parse(m.content).amount);
+            } catch(e){}
+        }
+    });
+
+    if (hasFamilyCard) {
+        messages.push({
+            role: "system",
+            content: `[系统强制指令：用户刚刚向你赠送了额度为 ${lastFamilyCardAmount} 的亲属卡。请结合你的性格决定是否收下。你必须在返回的JSON根目录中添加 "familyCardAction": "accept" 或 "reject"，并在 replies 中作出相应的语言或动作回复。]`
+        });
+    }
     try {
         const response = await fetch(`${config.url}/chat/completions`, {
             method: 'POST',
@@ -4810,10 +6062,38 @@ async function getAiReply() {
                 updateInnerVoiceUI(freshContact.innerVoice);
             }
         }
-        
-        // --- 新增：处理 AI 自动生成的日记 ---
-        if (parsed.diary && parsed.diary.title && parsed.diary.content) {
+                if (parsed.diary && parsed.diary.title && parsed.diary.content) {
             const diaries = JSON.parse(localStorage.getItem('diaryData') || '[]');
+        if (parsed.familyCardAction) {
+            const freshContacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
+            const freshContact = freshContacts.find(c => c.id == currentChatId);
+            if (freshContact) {
+                if(!freshContact.messages) freshContact.messages = [];
+                let actionText = parsed.familyCardAction === 'accept' ? '领取' : '退还';
+                const sysMsg = {
+                    role: 'role',
+                    content: `${freshContact.role.name}已${actionText}了你的亲属卡`,
+                    msgType: 'system',
+                    timestamp: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false})
+                };
+                freshContact.messages.push(sysMsg);
+                localStorage.setItem('chatContacts', JSON.stringify(freshContacts));
+                
+                renderChatMessage(sysMsg, freshContact, freshContact.messages.length - 1);
+                
+                if (parsed.familyCardAction === 'reject') {
+                    let bal = parseFloat(localStorage.getItem('userBalance') || '0');
+                    bal += lastFamilyCardAmount;
+                    localStorage.setItem('userBalance', bal);
+                    
+                    let cards = JSON.parse(localStorage.getItem('familyCardsData') || '[]');
+                    if (cards.length > 0) {
+                        cards.shift();
+                        localStorage.setItem('familyCardsData', JSON.stringify(cards));
+                    }
+                }
+            }
+        }
             const now = new Date();
             now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
             const nowStr = now.toISOString().slice(0, 16).replace('T', ' ');
@@ -4828,6 +6108,38 @@ async function getAiReply() {
             
             // 在聊天中插入一条系统提示
             const freshContacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
+        if (hasFamilyCard) {
+            const action = parsed.familyCardAction || 'accept';
+            const freshContacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
+            const freshContact = freshContacts.find(c => c.id == currentChatId);
+            if (freshContact) {
+                if(!freshContact.messages) freshContact.messages = [];
+                let actionText = action === 'accept' ? '领取' : '退还';
+                const sysMsg = {
+                    role: 'role',
+                    content: `${freshContact.role.name}已${actionText}了你的亲属卡`,
+                    msgType: 'system',
+                    timestamp: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false})
+                };
+                freshContact.messages.push(sysMsg);
+                localStorage.setItem('chatContacts', JSON.stringify(freshContacts));
+                
+                renderChatMessage(sysMsg, freshContact, freshContact.messages.length - 1);
+                
+                if (action === 'reject') {
+                    let bal = parseFloat(localStorage.getItem('userBalance') || '0');
+                    bal += lastFamilyCardAmount;
+                    localStorage.setItem('userBalance', bal);
+                    
+                    let cards = JSON.parse(localStorage.getItem('familyCardsData') || '[]');
+                    if (cards.length > 0) {
+                        cards.shift();
+                        localStorage.setItem('familyCardsData', JSON.stringify(cards));
+                    }
+                    updateBalanceDisplay();
+                }
+            }
+        }
             const freshContact = freshContacts.find(c => c.id == currentChatId);
             if (freshContact) {
                 if(!freshContact.messages) freshContact.messages = [];
@@ -4840,7 +6152,38 @@ async function getAiReply() {
                 localStorage.setItem('chatContacts', JSON.stringify(freshContacts));
             }
         }
-
+        if (hasFamilyCard) {
+            const action = parsed.familyCardAction || 'accept';
+            const freshContacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
+            const freshContact = freshContacts.find(c => c.id == currentChatId);
+            if (freshContact) {
+                if(!freshContact.messages) freshContact.messages = [];
+                let actionText = action === 'accept' ? '领取' : '退还';
+                const sysMsg = {
+                    role: 'role',
+                    content: `${freshContact.role.name}已${actionText}了你的亲属卡`,
+                    msgType: 'system',
+                    timestamp: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false})
+                };
+                freshContact.messages.push(sysMsg);
+                localStorage.setItem('chatContacts', JSON.stringify(freshContacts));
+                
+                renderChatMessage(sysMsg, freshContact, freshContact.messages.length - 1);
+                
+                if (action === 'reject') {
+                    let bal = parseFloat(localStorage.getItem('userBalance') || '0');
+                    bal += lastFamilyCardAmount;
+                    localStorage.setItem('userBalance', bal);
+                    
+                    let cards = JSON.parse(localStorage.getItem('familyCardsData') || '[]');
+                    if (cards.length > 0) {
+                        cards.shift();
+                        localStorage.setItem('familyCardsData', JSON.stringify(cards));
+                    }
+                    updateBalanceDisplay();
+                }
+            }
+        }
         let rawReplies = parsed.replies || parsed.messages || [{type: 'text', content: content}];
         let finalReplies = [];
         
@@ -5184,7 +6527,7 @@ function renderContactList() {
     });
 }
 function loadSavedData() {
-    const imgTargets = ['top-widget', 'avatar-left', 'avatar-right', 'moments-avatar', 'me-avatar', 'moments-cover'];
+    const imgTargets = ['top-widget', 'avatar-left', 'avatar-right', 'moments-avatar', 'me-avatar', 'moments-cover', 'shop-me-avatar'];
     imgTargets.forEach(id => {
         const saved = localStorage.getItem(id);
         if (saved) document.getElementById(id + '-img').style.backgroundImage = `url(${saved})`;
@@ -5217,7 +6560,7 @@ function loadSavedData() {
         const saved = localStorage.getItem(id);
         if (saved) document.getElementById(id).innerText = saved;
     });
-    const textTargets = ['moments-name', 'me-name'];
+    const textTargets = ['moments-name', 'me-name', 'shop-me-name'];
     textTargets.forEach(id => {
         const saved = localStorage.getItem(id);
         if (saved) document.getElementById(id).innerText = saved;
@@ -5263,20 +6606,19 @@ function loadSavedData() {
     }
     renderPresets();
     renderContactList();
+    updateBalanceDisplay();
+    renderBills();
 }
 loadSavedData();
-// --- 气泡菜单与快捷功能逻辑 ---
+
 let activeToolbar = null;
 let currentQuoteData = null;
 let isMultiSelectMode = false;
 let selectedMsgIndices = new Set();
-
-// 1. 双击显示菜单
 function showBubbleMenu(event, index, isUser) {
     event.stopPropagation();
     event.preventDefault();
     
-    // 如果已有菜单则移除
     if (activeToolbar) activeToolbar.remove();
     
     const bubble = event.currentTarget;
@@ -5287,9 +6629,6 @@ function showBubbleMenu(event, index, isUser) {
     
     const toolbar = document.createElement('div');
     toolbar.className = 'msg-toolbar';
-    
-    // 计算位置：紧贴气泡上方居中
-    // top: 气泡top - 菜单高度(44) - 箭头(6)
     toolbar.style.top = (rect.top - 6) + 'px'; 
     toolbar.style.left = (rect.left + rect.width / 2) + 'px';
     
@@ -5320,11 +6659,8 @@ function showBubbleMenu(event, index, isUser) {
             document.removeEventListener('click', closeMenu);
         }
     };
-    // 延迟绑定避免立即触发
     setTimeout(() => document.addEventListener('click', closeMenu), 10);
 }
-
-// 功能：复制
 function menuCopy(text) {
     const input = document.createElement('textarea');
     input.value = text;
@@ -5335,8 +6671,6 @@ function menuCopy(text) {
     alert('已复制');
     if(activeToolbar) activeToolbar.remove();
 }
-
-// 功能：编辑
 function menuEdit(index) {
     const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
     const contact = contacts.find(c => c.id == currentChatId);
@@ -6752,7 +8086,7 @@ function closeFullPlayer() {
 function toggleFpFlip() {
     document.getElementById('fpFlipContainer').classList.toggle('flipped');
 }
-
+renderShopItems();
 </script>
 </body>
 </html>

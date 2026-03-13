@@ -2615,17 +2615,17 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
 .fp-flip-container.flipped .fp-flipper { transform: rotateY(180deg); }
 .fp-front, .fp-back { width: 100%; height: 100%; position: absolute; top: 0; left: 0; backface-visibility: hidden; border-radius: 24px; }
 .fp-front { background-size: cover; background-position: center; box-shadow: 0 20px 50px rgba(0,0,0,0.15); overflow: hidden;}
-.fp-back { transform: rotateY(180deg); background: transparent; display: flex; flex-direction: column; padding: 0; box-shadow: none; } /* 去掉黑底和阴影 */
+.fp-back { transform: rotateY(180deg); background: transparent; display: flex; flex-direction: column; padding: 0; box-shadow: none; }
 .fp-lyrics-container { flex: 1; overflow-y: auto; text-align: center; scroll-behavior: smooth; padding: 50% 0; mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent); -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent); }
 .fp-lyrics-container::-webkit-scrollbar { display: none; }
-.fp-lyric-line { font-size: 15px; color: rgba(0,0,0,0.3); margin-bottom: 24px; transition: all 0.3s; min-height: 20px; padding: 0 10px; line-height: 1.5; font-weight: 600; } /* 适应浅色背景的深色文字 */
+.fp-lyric-line { font-size: 15px; color: rgba(0,0,0,0.3); margin-bottom: 24px; transition: all 0.3s; min-height: 20px; padding: 0 10px; line-height: 1.5; font-weight: 600; }
 .fp-lyric-line.active { color: #1a1a1a; font-size: 18px; font-weight: 800; transform: scale(1.1); }
 .fp-info { text-align: center; margin-bottom: 30px; width: 100%; }
 .fp-name { font-size: 24px; font-weight: 800; color: #1a1a1a; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .fp-artist { font-size: 15px; color: #888; font-weight: 500; }
 .fp-progress-area { width: 100%; margin-bottom: 30px; }
 .fp-time-row { display: flex; justify-content: space-between; font-size: 12px; color: #888; margin-bottom: 8px; font-family: monospace;}
-.fp-progress-bg { width: 100%; height: 30px; background: transparent; cursor: pointer; position: relative; display: flex; align-items: center; touch-action: none; } /* 增加热区高度，禁止默认滑动 */
+.fp-progress-bg { width: 100%; height: 30px; background: transparent; cursor: pointer; position: relative; display: flex; align-items: center; touch-action: none; }
 .fp-progress-track { width: 100%; height: 4px; background: rgba(0,0,0,0.08); border-radius: 2px; position: relative; pointer-events: none;}
 .fp-progress-fill { height: 100%; width: 0%; background: #1a1a1a; border-radius: 2px; position: absolute; top:0; left:0; transition: width 0.1s linear; }
 .fp-progress-fill::after { content: ''; position: absolute; right: -8px; top: -6px; width: 16px; height: 16px; background: #fff; border: 4px solid #1a1a1a; border-radius: 50%; box-shadow: 0 2px 6px rgba(0,0,0,0.2); transition: transform 0.1s; }
@@ -2635,21 +2635,26 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
 .fp-btn:active { transform: scale(0.9); }
 .fp-btn.play-pause { width: 68px; height: 68px; background: #1a1a1a; color: #fff; border-radius: 50%; box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
 #shopAppPage {
-    background-color: #f7f7f7;
-    padding-top: 0;
+    background-color: #ffffff;
+    padding-top: 48px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
 }
 
+#shopAppPage .shop-content-container {
+    background-color: #f7f7f7;
+}
+
 .shop-header {
     background: #ffffff;
-    padding: 48px 16px 0;
+    padding: 10px 16px 0;
     position: sticky;
     top: 0;
     z-index: 100;
     box-shadow: 0 2px 10px rgba(0,0,0,0.02);
 }
+
 .shop-header-top {
     display: flex;
     align-items: center;
@@ -2848,7 +2853,7 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 140px 20px 40px;
+    padding: 80px 20px 40px;
     background: #fff;
     margin-bottom: 12px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.02);
@@ -3272,77 +3277,7 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     line-height: 1.4;
     word-break: break-word;
 }
-.chat-shop-card {
-    width: 240px;
-    background: #ffffff;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-    text-align: left;
-    border: 1px solid rgba(0,0,0,0.04);
-}
-.chat-shop-img {
-    width: 100%;
-    height: 140px;
-    background-size: cover;
-    background-position: center;
-    background-color: #f0f0f2;
-    position: relative;
-}
-.chat-shop-tag {
-    position: absolute;
-    bottom: 8px;
-    left: 8px;
-    background: rgba(0,0,0,0.6);
-    color: #fff;
-    font-size: 10px;
-    padding: 2px 6px;
-    border-radius: 4px;
-    backdrop-filter: blur(4px);
-}
-.chat-shop-info {
-    padding: 12px;
-}
-.chat-shop-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: #1a1a1a;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    line-height: 1.4;
-    margin-bottom: 8px;
-}
-.chat-shop-bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.chat-shop-price {
-    font-size: 16px;
-    font-weight: 700;
-    color: #ff3b30;
-}
-.chat-shop-price::before {
-    content: '¥';
-    font-size: 12px;
-    margin-right: 2px;
-}
-.chat-shop-btn {
-    font-size: 12px;
-    color: #fff;
-    background: #ff3b30;
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-weight: 600;
-}
-.chat-msg-bubble.is-shop-card {
-    padding: 0 !important;
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-}
+
 </style>
 </head>
 <body>
@@ -4226,11 +4161,11 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     </div>
 </div>
     <div class="app-page" id="shopAppPage">
-        <div class="shop-global-back" onclick="closeAppPage('shopAppPage')">&#10094;</div>
         <div class="shop-content-container" style="padding-top: 0;">
             <div class="shop-tab-content active" id="shop-tab-home" style="padding: 0 0 100px;">
                 <div class="shop-header" style="box-shadow: none;">
-                    <div class="shop-header-top" style="padding-left: 46px;">
+                    <div class="shop-header-top">
+                        <div class="shop-back-btn" onclick="closeAppPage('shopAppPage')">&#10094;</div>
                         <div class="shop-search-box">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                             <input type="text" id="shopSearchInput" placeholder="搜索商品、品牌...">
@@ -4266,7 +4201,7 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             </div>
 
             <div class="shop-tab-content" id="shop-tab-chat" style="padding: 0; background: #f7f7f7;">
-                <div style="padding: 48px 16px 12px; background: #fff; font-size: 18px; font-weight: 700; color: var(--text-main); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.05); text-align: center;">客服消息</div>
+                <div style="padding: 12px 16px; background: #fff; font-size: 18px; font-weight: 700; color: var(--text-main); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.05); text-align: center;">客服消息</div>
                 <div id="shopChatListContainer" style="padding-bottom: 100px;"></div>
             </div>
 
@@ -4327,7 +4262,7 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                     <span>客服</span>
                 </div>
-                <div class="shop-btn-cart" onclick="openShopForwardModal()">转发代付</div>
+                <div class="shop-btn-cart">加入购物车</div>
                 <div class="shop-btn-buy" onclick="handleShopBuy()">立即购买</div>
             </div>
         </div>
@@ -6272,27 +6207,6 @@ function renderChatMessage(msg, contact, index) {
         } catch(e) {
             bubbleContent = '[日记解析错误]';
         }
-    } else if (msg.msgType === 'shop_item_card') {
-        bubbleClass += ' is-shop-card';
-        try {
-            const sData = JSON.parse(msg.content);
-            bubbleContent = `
-                <div class="chat-shop-card">
-                    <div class="chat-shop-img" style="background-image:url('${sData.img}')">
-                        <div class="chat-shop-tag">购物分享</div>
-                    </div>
-                    <div class="chat-shop-info">
-                        <div class="chat-shop-title">${sData.title}</div>
-                        <div class="chat-shop-bottom">
-                            <div class="chat-shop-price">${sData.price}</div>
-                            <div class="chat-shop-btn">去看看</div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        } catch(e) {
-            bubbleContent = '[商品卡片解析错误]';
-        }
     } else if (msg.msgType === 'voice') {
 
 
@@ -6493,13 +6407,10 @@ async function getAiReply() {
                     contentDataStr = `[系统最高警告：用户不知从哪里弄到了你（${contact.role.name}）自己偷偷写的私密日记，并把这篇日记直接发给了你！]\n日记标题：${dData.title}\n日记内容：\n${dData.content}\n\n[强制指令：这绝对是你自己写的日记，绝不是用户写的！你现在的反应必须是被抓包、震惊、害羞、掩饰或者恼羞成怒。完全贴合人设做出反应！]`;
                 } else if (authorStr === contact.user.name) {
                     contentDataStr = `[系统提示：用户(${contact.user.name})向你分享了Ta自己写的私人日记]\n日记标题：${dData.title}\n日记内容：\n${dData.content}\n\n[指令：请结合你与Ta的关系对这篇日记作出回应。]`;
+                } else {
+                    contentDataStr = `[系统提示：用户向你分享了一篇由 ${authorStr} 写的私人日记]\n日记标题：${dData.title}\n日记内容：\n${dData.content}\n\n[指令：请根据你的性格对该角色及日记内容作出评价和讨论。]`;
                 }
                 contentData = contentDataStr;
-            } catch(e) {}
-        } else if (msg.msgType === 'shop_item_card') {
-            try {
-                const sData = JSON.parse(msg.content);
-                contentData = `[系统提示：用户向你分享了一件商品，似乎是想让你代付或送给你]\n商品名称：${sData.title}\n价格：${sData.price}\n\n[指令：请结合你的性格对这件商品、价格以及用户的意图作出反应，可以吐槽、拒绝、欣然接受或调情。]`;
             } catch(e) {}
         } else if (msg.quote) {
                 let qText = msg.quote.content;
@@ -7894,66 +7805,8 @@ function forwardDiaryToContact(contactId) {
     
     openChat(contactId);
 }
-function openShopForwardModal() {
-    if (!currentShopItem) return;
-    const list = document.getElementById('forwardContactList');
-    const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
-    list.innerHTML = '';
-    if (contacts.length === 0) {
-        list.innerHTML = '<div style="text-align:center; color:#999; padding:20px; font-size:13px;">暂无联系人</div>';
-    } else {
-        contacts.forEach(c => {
-            const item = document.createElement('div');
-            item.className = 'contact-select-item';
-            const avatarStyle = c.role.avatar ? `background-image:url(${c.role.avatar})` : '';
-            item.innerHTML = `
-                <div class="contact-select-avatar" style="${avatarStyle}"></div>
-                <div class="contact-select-name">${c.remark || c.role.name}</div>
-            `;
-            item.onclick = () => forwardShopItemToContact(c.id);
-            list.appendChild(item);
-        });
-    }
-    document.getElementById('forwardContactModal').classList.add('active');
-}
 
-function forwardShopItemToContact(contactId) {
-    if (!currentShopItem) return;
-    
-    const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
-    const contactIdx = contacts.findIndex(c => c.id == contactId);
-    if (contactIdx === -1) return;
 
-    const contact = contacts[contactIdx];
-    if (!contact.messages) contact.messages = [];
-
-    const nowTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
-    
-    const shopDataStr = JSON.stringify({ 
-        title: currentShopItem.title, 
-        price: currentShopItem.price, 
-        img: currentShopItem.img 
-    });
-
-    const newMsg = {
-        role: 'user',
-        content: shopDataStr,
-        msgType: 'shop_item_card',
-        timestamp: nowTime
-    };
-
-    contact.messages.push(newMsg);
-    contact.lastMsg = `[商品分享] ${currentShopItem.title}`;
-    contact.time = nowTime;
-
-    localStorage.setItem('chatContacts', JSON.stringify(contacts));
-    
-    closeForwardModal();
-    closeShopDetail();
-    closeAppPage('shopAppPage');
-    
-    openChat(contactId);
-}
 function formatDiaryTimeDisplay(val) {
     if (!val) return;
     const d = new Date(val);

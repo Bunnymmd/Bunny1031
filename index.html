@@ -4485,14 +4485,16 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                 <div class="shop-grid" id="shopGridContainer" style="padding: 0 16px;">
                 </div>
             </div>
-            <div class="shop-tab-content" id="shop-tab-cart">
-                <div id="shopCartListContainer">
+            <div class="shop-tab-content" id="shop-tab-cart" style="padding: 0; background: #f7f7f7;">
+                <div style="padding: 48px 16px 12px; background: #fff; font-size: 18px; font-weight: 700; color: var(--text-main); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.05); text-align: center;">购物车</div>
+                <div id="shopCartListContainer" style="padding-bottom: 100px;">
                     <div class="shop-empty-state">
                         <svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:48px;height:48px;margin-bottom:16px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
                         <div>购物车空空如也</div>
                     </div>
                 </div>
             </div>
+
             <div class="shop-tab-content" id="shop-tab-chat" style="padding: 0; background: #f7f7f7;">
                 <div style="padding: 48px 16px 12px; background: #fff; font-size: 18px; font-weight: 700; color: var(--text-main); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.05); text-align: center;">客服消息</div>
                 <div id="shopChatListContainer" style="padding-bottom: 100px;"></div>

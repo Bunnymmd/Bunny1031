@@ -1433,7 +1433,51 @@ select.setting-input {
     font-size: 11px;
     color: var(--text-sub);
 }
-/* Icons for Function Panel */
+
+.emoticon-panel {
+    position: absolute;
+    bottom: 85px;
+    left: 16px;
+    right: 16px;
+    height: 0;
+    background: rgba(255, 255, 255, 0.95); 
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    border-radius: 20px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    z-index: 90;
+    overflow-y: auto;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+.emoticon-panel.active {
+    height: 220px;
+    padding: 16px;
+    opacity: 1;
+    pointer-events: auto;
+    bottom: 90px;
+}
+.chat-emoticon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+.chat-emoticon-item {
+    width: 100%;
+    aspect-ratio: 1;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: transform 0.1s;
+}
+.chat-emoticon-item:active {
+    transform: scale(0.9);
+    background-color: rgba(0,0,0,0.05);
+}
+
 .icon-f-camera { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23555'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E"); }
 .icon-f-pic { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23555'%3E%3Cpath d='M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z'/%3E%3C/svg%3E"); }
 .icon-f-call { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23555'%3E%3Cpath d='M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.43-5.15-3.75-6.59-6.59l1.97-1.57c.26-.26.35-.65.24-1.01-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-0.99-.99-0.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z'/%3E%3C/svg%3E"); }
@@ -3646,8 +3690,9 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                 <div class="f-item" onclick="sendFamilyCardFromChat()"><div class="f-icon icon-f-card"></div><span class="f-text">Family Card</span></div>
             </div>
         </div>
-        
-        <!-- 引用显示栏 (新样式) -->
+        <div class="emoticon-panel" id="emoticonPanel">
+            <div class="chat-emoticon-grid" id="chatEmoticonGrid"></div>
+        </div>
         <div class="quote-panel" id="quotePanel">
             <span class="quote-label">引用</span>
             <span class="quote-divider">|</span>
@@ -3670,7 +3715,7 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
 
         <form class="chat-footer" action="javascript:void(0)" onsubmit="handleFormSubmit(event)">
             <div class="chat-icon icon-plus" onclick="toggleFunctionPanel()"></div>
-            <div class="chat-icon icon-face"></div>
+                        <div class="chat-icon icon-face" onclick="toggleEmoticonPanel()"></div>
             <input type="text" class="chat-input" id="chatInput" placeholder="小猫邮递员派送中……" autocomplete="off">
             <div class="chat-icon icon-mic" onclick="openVoiceModal()"></div>
             <div class="chat-icon icon-send" onclick="handleSendClick()"></div>
@@ -4699,6 +4744,7 @@ function sendFamilyCardFromChat() {
     const contact = contacts.find(c => c.id == currentChatId);
     if (!contact) return;
     document.getElementById('functionPanel').classList.remove('active');
+    document.getElementById('emoticonPanel').classList.remove('active');
     handleSendFamilyCard(currentChatId, contact.remark || contact.role.name);
 }
 
@@ -5637,6 +5683,7 @@ function openChat(id) {
 }
 function toggleFunctionPanel() {
     const panel = document.getElementById('functionPanel');
+    document.getElementById('emoticonPanel').classList.remove('active');
     panel.classList.toggle('active');
 }
 function handleFormSubmit(e) {
@@ -5755,11 +5802,6 @@ function renderChatMessage(msg, contact, index) {
             bubbleContent = '[亲属卡解析错误]';
         }
     } else if (msg.msgType === 'diary_card') {
-        } else if (msg.msgType === 'family_card') {
-            try {
-                const fcData = JSON.parse(msg.content);
-                contentData = `[系统提示：用户向你赠送了一张额度为 ¥${fcData.amount} 的亲属卡]`;
-            } catch(e) {}
         try {
             const dData = JSON.parse(msg.content);
             let authorDisp = dData.author;
@@ -5789,6 +5831,7 @@ function renderChatMessage(msg, contact, index) {
             bubbleContent = '[日记解析错误]';
         }
     } else if (msg.msgType === 'voice') {
+
 
         let sec = Math.ceil(msg.content.length / 3);
         if (sec < 1) sec = 1;
@@ -6899,7 +6942,40 @@ function toggleVoiceText(e, index) {
 }
 function hideFunctionPanelOnScroll() {
     document.getElementById('functionPanel').classList.remove('active');
+    document.getElementById('emoticonPanel').classList.remove('active');
     document.getElementById('innerVoicePanel').classList.remove('active');
+}
+
+function toggleEmoticonPanel() {
+    const panel = document.getElementById('emoticonPanel');
+    document.getElementById('functionPanel').classList.remove('active'); // 互斥关闭功能面板
+    
+    if (!panel.classList.contains('active')) {
+        renderChatEmoticons();
+    }
+    panel.classList.toggle('active');
+}
+
+function renderChatEmoticons() {
+    const grid = document.getElementById('chatEmoticonGrid');
+    const emoticons = JSON.parse(localStorage.getItem('emoticonData') || '[]');
+    grid.innerHTML = '';
+    
+    if (emoticons.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1 / -1; text-align: center; color: #999; font-size: 12px; padding-top: 40px;">暂无表情包，请在"我-表情"中添加</div>';
+        return;
+    }
+    
+    emoticons.forEach(emo => {
+        const item = document.createElement('div');
+        item.className = 'chat-emoticon-item';
+        item.style.backgroundImage = `url('${emo.url}')`;
+        item.onclick = () => {
+            sendUserMessage(emo.url, 'image');
+            document.getElementById('emoticonPanel').classList.remove('active');
+        };
+        grid.appendChild(item);
+    });
 }
 function toggleInnerVoice(e) {
     if(e) e.stopPropagation();

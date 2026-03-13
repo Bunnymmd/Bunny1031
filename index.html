@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="apple-touch-icon" href="https://image.uglycat.cc/tm7moi.png">
 <link rel="icon" type="image/jpeg" href="https://image.uglycat.cc/tm7moi.png">
-<title>Mobile Interface</title>
+<title>Bunny</title>
 <style>
 :root {
     --bg-base: #fcfcf9;
@@ -3042,6 +3042,341 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
     font-size: 14px;
     cursor: pointer;
 }
+.shop-btn-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-sub);
+    cursor: pointer;
+    font-size: 10px;
+    margin-right: 12px;
+}
+.shop-btn-icon svg {
+    width: 22px;
+    height: 22px;
+    margin-bottom: 2px;
+}
+.shop-chat-goods-bar {
+    display: flex;
+    padding: 10px 16px;
+    background: #fff;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+.sc-goods-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    background-size: cover;
+    background-position: center;
+    background-color: #eee;
+    flex-shrink: 0;
+}
+.sc-goods-info {
+    flex: 1;
+    overflow: hidden;
+}
+.sc-goods-price {
+    color: var(--danger);
+    font-size: 14px;
+    font-weight: 700;
+}
+.sc-goods-price::before {
+    content: '¥';
+    font-size: 10px;
+}
+.sc-goods-title {
+    font-size: 12px;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.sc-goods-buy {
+    padding: 6px 14px;
+    background: var(--danger);
+    color: #fff;
+    border-radius: 14px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.shop-chat-item {
+    display: flex;
+    padding: 16px;
+    background: #fff;
+    border-bottom: 1px solid #f0f0f2;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+.shop-chat-item:active {
+    background: #f9f9f9;
+}
+.shop-chat-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #007aff;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+.shop-chat-info {
+    flex: 1;
+    overflow: hidden;
+}
+.shop-chat-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+.shop-chat-last {
+    font-size: 13px;
+    color: var(--text-sub);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.shop-chat-time {
+    font-size: 11px;
+    color: var(--text-sub);
+}
+.shop-order-list { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.shop-order-item { background: #fff; border-radius: 12px; padding: 16px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); display: flex; gap: 12px; }
+.shop-order-img { width: 60px; height: 60px; border-radius: 8px; background-size: cover; background-position: center; flex-shrink: 0; }
+.shop-order-info { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.shop-order-title { font-size: 13px; color: var(--text-main); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.shop-order-bottom { display: flex; justify-content: space-between; align-items: center; }
+.shop-order-price { font-size: 14px; font-weight: 700; color: var(--danger); }
+.shop-order-status { font-size: 12px; font-weight: 600; color: #007aff; }
+.shop-order-page { position: absolute; top: 0; left: 100%; width: 100%; height: 100%; background: #f7f7f7; z-index: 600; transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1); display: flex; flex-direction: column; }
+.shop-order-page.active { transform: translateX(-100%); }
+.shop-order-header { position: sticky; top: 0; background: #fff; display: flex; align-items: center; padding: 48px 16px 12px; border-bottom: 1px solid rgba(0,0,0,0.05); z-index: 100; }
+.shop-order-back { font-size: 24px; cursor: pointer; color: var(--text-main); width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; margin-right: 12px; }
+.shop-order-title-text { font-size: 18px; font-weight: 700; color: var(--text-main); }
+.shop-order-content { flex: 1; overflow-y: auto; padding-bottom: 40px; }
+.shop-btn-receive {
+    padding: 6px 14px;
+    background: #007aff;
+    color: #fff;
+    border-radius: 14px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.shop-btn-review {
+    padding: 6px 14px;
+    background: #ff9500;
+    color: #fff;
+    border-radius: 14px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.review-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 3000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(2px);
+}
+.review-modal-overlay.active { display: flex; }
+.review-box {
+    background: #fff;
+    width: 80%;
+    max-width: 300px;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+.review-title { font-size: 16px; font-weight: 700; margin-bottom: 10px; text-align: center; }
+.review-textarea {
+    width: 100%;
+    height: 100px;
+    background: #f5f5f5;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+    resize: none;
+    margin-bottom: 15px;
+}
+.review-stars {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.review-star {
+    font-size: 32px;
+    color: #e5e5ea;
+    cursor: pointer;
+    transition: color 0.2s, transform 0.1s;
+    line-height: 1;
+}
+.review-star:active {
+    transform: scale(0.8);
+}
+.review-star.active {
+    color: #ffcc00;
+}
+.chat-review-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 12px;
+    width: 200px;
+    text-align: left;
+    color: var(--text-main);
+}
+.crc-title {
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #f0f0f2;
+}
+.crc-stars {
+    color: #ffcc00;
+    font-size: 14px;
+    margin-bottom: 6px;
+    letter-spacing: 2px;
+}
+.crc-content {
+    font-size: 12px;
+    color: var(--text-sub);
+    line-height: 1.4;
+    word-break: break-word;
+}
+.cart-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    display: flex;
+    gap: 12px;
+    position: relative;
+}
+.cart-del-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 24px;
+    height: 24px;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+}
+.cart-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+}
+.cart-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.cart-title {
+    font-size: 13px;
+    color: var(--text-main);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    padding-right: 16px;
+}
+.cart-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 8px;
+}
+.cart-count-price {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.cart-price {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--danger);
+}
+.cart-price::before {
+    content: '¥';
+    font-size: 11px;
+}
+.cart-count {
+    font-size: 11px;
+    color: var(--text-sub);
+}
+.cart-actions {
+    display: flex;
+    gap: 8px;
+}
+.cart-btn {
+    padding: 6px 12px;
+    border-radius: 14px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.cart-btn.forward {
+    background: #f0f0f2;
+    color: var(--text-main);
+}
+.cart-btn.buy {
+    background: var(--danger);
+    color: #fff;
+}
+.count-selector {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 20px 0;
+    justify-content: center;
+}
+.count-btn {
+    width: 32px;
+    height: 32px;
+    background: #f0f0f2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--text-main);
+}
+.count-val {
+    font-size: 18px;
+    font-weight: 700;
+    width: 30px;
+    text-align: center;
+}
+
 </style>
 </head>
 <body>
@@ -3958,42 +4293,51 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             </div>
 
             <div class="shop-tab-content" id="shop-tab-cart">
-                <div class="shop-empty-state">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:48px;height:48px;margin-bottom:16px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                    <div>购物车空空如也</div>
+                <div id="shopCartListContainer">
+                    <div class="shop-empty-state">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:48px;height:48px;margin-bottom:16px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                        <div>购物车空空如也</div>
+                    </div>
                 </div>
+            </div>
+            <div class="shop-tab-content" id="shop-tab-chat" style="padding: 0; background: #f7f7f7;">
+                <div style="padding: 48px 16px 12px; background: #fff; font-size: 18px; font-weight: 700; color: var(--text-main); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(0,0,0,0.05); text-align: center;">客服消息</div>
+                <div id="shopChatListContainer" style="padding-bottom: 100px;"></div>
             </div>
 
-            <div class="shop-tab-content" id="shop-tab-chat">
-                <div class="shop-empty-state">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:48px;height:48px;margin-bottom:16px;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-                    <div>暂无客服消息</div>
-                </div>
-            </div>
 
             <div class="shop-tab-content" id="shop-tab-me" style="padding: 0 0 100px; background: #f7f7f7;">
                 <div class="shop-me-header">
                     <div class="shop-me-avatar" id="shop-me-avatar-img" onclick="openMenu('shop-me-avatar', event)"></div>
                     <div class="shop-me-name" id="shop-me-name" onclick="editCommonText('shop-me-name')">购物达人</div>
                     <div class="shop-me-stats">
-                        <div class="shop-me-stat-item">
+                        <div class="shop-me-stat-item" onclick="openOrderPage('all')">
                             <svg class="shop-me-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                             <span class="shop-me-stat-text">订单</span>
                         </div>
-                        <div class="shop-me-stat-item">
+                        <div class="shop-me-stat-item" onclick="openOrderPage('pending')">
                             <svg class="shop-me-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-                            <span class="shop-me-stat-text">已发货</span>
+                            <span class="shop-me-stat-text">待发货</span>
                         </div>
-                        <div class="shop-me-stat-item">
+                        <div class="shop-me-stat-item" onclick="openOrderPage('shipped')">
                             <svg class="shop-me-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
                             <span class="shop-me-stat-text">待收货</span>
                         </div>
-                        <div class="shop-me-stat-item">
+                        <div class="shop-me-stat-item" onclick="openOrderPage('review')">
                             <svg class="shop-me-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="9" y1="10" x2="15" y2="10"></line></svg>
                             <span class="shop-me-stat-text">评价</span>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="shop-order-page" id="shopOrderPage">
+            <div class="shop-order-header">
+                <div class="shop-order-back" onclick="closeOrderPage()">&#10094;</div>
+                <div class="shop-order-title-text" id="shopOrderPageTitle">我的订单</div>
+            </div>
+            <div class="shop-order-content">
+                <div class="shop-order-list" id="shopOrderListContainer"></div>
             </div>
         </div>
         <div class="shop-detail-page" id="shopDetailPage">
@@ -4014,9 +4358,72 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
                 </div>
             </div>
             <div class="shop-detail-bottom">
-                <div class="shop-btn-cart">加入购物车</div>
-                <div class="shop-btn-buy" onclick="handleShopBuy()">立即购买</div>
+                <div class="shop-btn-icon" onclick="openShopChat()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                    <span>客服</span>
+                </div>
+                <div class="shop-btn-cart" onclick="openCartAddModal()">加入购物车</div>
+            <div class="shop-btn-buy" onclick="handleShopBuy()">立即购买</div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="cartAddModal">
+        <div class="modal-container">
+            <div class="modal-header">选择数量</div>
+            <div class="count-selector">
+                <div class="count-btn" onclick="changeCartCount(-1)">-</div>
+                <div class="count-val" id="cartAddCount">1</div>
+                <div class="count-btn" onclick="changeCartCount(1)">+</div>
             </div>
+            <div class="btn-row">
+                <button class="btn-secondary" onclick="closeCartAddModal()">取消</button>
+                <button class="btn-primary" onclick="confirmAddCart()">确认加入</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="cartContactModal">
+        <div class="modal-container">
+            <div class="modal-header">选择联系人</div>
+            <div class="contact-list-modal" id="cartContactList"></div>
+            <div class="btn-row" style="margin-top: 16px;">
+                <button class="btn-secondary" style="width: 100%" onclick="closeCartContactModal()">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="cartActionTypeModal">
+        <div class="modal-container">
+            <div class="modal-header">选择操作</div>
+            <div style="display:flex; flex-direction:column; gap:16px; padding: 10px 0 20px;">
+                <button class="btn-primary" style="padding:16px; font-size:16px;" onclick="handleCartAction('pay_for_me')">请Ta代付</button>
+                <button class="btn-primary" style="padding:16px; font-size:16px; background:#ff9500;" onclick="handleCartAction('gift')">给Ta个惊喜</button>
+            </div>
+            <button class="btn-secondary" style="width:100%" onclick="closeCartActionTypeModal()">取消</button>
+        </div>
+    </div>
+
+    <div class="app-page" id="shopChatPage" style="z-index: 700; background: #f2f2f2; display: flex; flex-direction: column; padding-top: 0;">
+            <div class="chat-header" style="flex-shrink: 0; padding-top: 48px; height: auto; padding-bottom: 10px;">
+                <div class="chat-header-left">
+                    <div class="back-btn" onclick="closeShopChat()">&#10094;</div>
+                    <div class="chat-name" id="shopChatSellerName" style="font-size: 18px;">卖家</div>
+                </div>
+            </div>
+            <div class="shop-chat-goods-bar" id="shopChatGoodsBar">
+                <div class="sc-goods-img" id="sc-goods-img"></div>
+                <div class="sc-goods-info">
+                    <div class="sc-goods-price" id="sc-goods-price"></div>
+                    <div class="sc-goods-title" id="sc-goods-title"></div>
+                </div>
+                <div class="sc-goods-buy" onclick="handleShopBuy()">购买</div>
+            </div>
+            <div class="chat-content" id="shopChatMsgContainer" style="flex: 1; overflow-y: auto; padding: 16px; padding-bottom: 20px;">
+            </div>
+            <form class="chat-footer" action="javascript:void(0)" onsubmit="handleShopChatSubmit(event)" style="position: relative; bottom: 0; left: 0; right: 0; border-radius: 0; padding: 12px 16px 34px; box-shadow: 0 -2px 10px rgba(0,0,0,0.05);">
+                <input type="text" class="chat-input" id="shopChatInput" placeholder="发消息给卖家..." autocomplete="off">
+                <div class="chat-icon icon-send" id="shopChatSendBtn" onclick="handleShopChatSubmit(event)"></div>
+            </form>
         </div>
         <div class="shop-dock">
             <div class="shop-dock-item active" onclick="switchShopTab('home', this)">
@@ -4116,7 +4523,6 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
         </div>
     </div>
     
-    <!-- 全屏播放器页面 -->
     <div class="full-player-page" id="fullPlayerPage">
         <div class="fp-header">
             <div class="fp-close" onclick="closeFullPlayer()">
@@ -4166,9 +4572,27 @@ input:checked + .toggle-slider:before { transform: translateX(20px); }
             </div>
         </div>
     </div>
-
-    <!-- 隐藏的音频播放器 -->
     <audio id="globalAudioPlayer"></audio>
+<div class="review-modal-overlay" id="reviewModal">
+    <div class="review-box">
+        <div class="review-title">商品评价</div>
+        <div class="review-stars" id="reviewStars">
+            <div class="review-star active" onclick="setReviewStar(1)">★</div>
+            <div class="review-star active" onclick="setReviewStar(2)">★</div>
+            <div class="review-star active" onclick="setReviewStar(3)">★</div>
+            <div class="review-star active" onclick="setReviewStar(4)">★</div>
+            <div class="review-star active" onclick="setReviewStar(5)">★</div>
+        </div>
+        <textarea class="review-textarea" id="reviewContent" placeholder="请输入您的评价..."></textarea>
+        <div class="btn-row">
+            <button class="btn-secondary" onclick="closeReviewModal()">取消</button>
+            <button class="btn-primary" onclick="submitReview()">提交评价</button>
+        </div>
+        <input type="hidden" id="reviewOrderId">
+        <input type="hidden" id="reviewStarValue" value="5">
+    </div>
+</div>
+
 <div class="sim-phone-overlay" id="simPhoneOverlay">
     <div class="sim-phone-case">
         <div class="sim-close-btn" onclick="closeSimulatedPhone()">×</div>
@@ -4826,10 +5250,94 @@ function handleShopBuy() {
     initiatePayment(() => {
         bal -= price;
         localStorage.setItem('userBalance', bal);
+        let orders = JSON.parse(localStorage.getItem('shopOrders') || '[]');
+        const now = Date.now();
+        const shipTime = now + Math.floor(Math.random() * 4 * 60 * 60 * 1000);
+        const deliverTime = shipTime + Math.floor(Math.random() * 2 * 60 * 60 * 1000);
+        orders.unshift({
+            id: 'order_' + now,
+            item: currentShopItem,
+            buyTime: now,
+            shipTime: shipTime,
+            deliverTime: deliverTime,
+            isReceived: false,
+            isReviewed: false
+        });
+        localStorage.setItem('shopOrders', JSON.stringify(orders));
         alert("购买成功");
         closeShopDetail();
     }, "购买商品 - " + title, -price);
 }
+function openOrderPage(filter) {
+    const titleMap = {
+        'all': '全部订单',
+        'pending': '待发货',
+        'shipped': '待收货',
+        'review': '待评价'
+    };
+    document.getElementById('shopOrderPageTitle').innerText = titleMap[filter];
+    renderShopOrders(filter);
+    document.getElementById('shopOrderPage').classList.add('active');
+}
+function closeOrderPage() {
+    document.getElementById('shopOrderPage').classList.remove('active');
+}
+function renderShopOrders(filter = 'all') {
+    const container = document.querySelector('#shopOrderPage #shopOrderListContainer');
+    if (!container) return;
+    const orders = JSON.parse(localStorage.getItem('shopOrders') || '[]');
+    container.innerHTML = '';
+    const now = Date.now();
+    let filteredOrders = orders.filter(order => {
+        let isShipped = now >= order.shipTime;
+        let isDelivered = now >= (order.deliverTime || order.shipTime);
+        if (filter === 'pending') return !isShipped;
+        if (filter === 'shipped') return isShipped && !order.isReceived;
+        if (filter === 'review') return order.isReceived && !order.isReviewed; 
+        return true;
+    });
+    if (filteredOrders.length === 0) {
+        container.innerHTML = '<div style="text-align:center;color:#999;font-size:13px;padding:80px 20px;">暂无相关订单</div>';
+        return;
+    }
+    let html = '';
+    filteredOrders.forEach(order => {
+        let isShipped = now >= order.shipTime;
+        let isDelivered = now >= (order.deliverTime || order.shipTime);
+        let status = '';
+        let actionBtn = '';
+        if (order.isReviewed) {
+            status = '已评价';
+        } else if (order.isReceived) {
+            status = '待评价';
+            actionBtn = `<div class="shop-btn-review" onclick="openReviewModal('${order.id}')">评价</div>`;
+        } else if (isDelivered) {
+            status = '已送达';
+            actionBtn = `<div class="shop-btn-receive" onclick="confirmReceive('${order.id}')">确认收货</div>`;
+        } else if (isShipped) {
+            status = '待收货';
+        } else {
+            status = '待发货';
+        }
+        html += `
+            <div class="shop-order-item">
+                <div class="shop-order-img" style="background-image:url('${order.item.img}')"></div>
+                <div class="shop-order-info">
+                    <div class="shop-order-title">${order.item.title}</div>
+                    <div class="shop-order-bottom">
+                        <div class="shop-order-price">¥${order.item.price}</div>
+                        <div style="display:flex; align-items:center;">
+                            <div class="shop-order-status">${status}</div>
+                            ${actionBtn}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    container.innerHTML = html;
+}
+
 function closeAppPage(pageId) {
     document.getElementById(pageId).classList.remove('active');
 }
@@ -4853,7 +5361,14 @@ function switchShopTab(tabName, el) {
     document.getElementById('shop-tab-' + tabName).classList.add('active');
     document.querySelectorAll('#shopAppPage .shop-dock-item').forEach(i => i.classList.remove('active'));
     el.classList.add('active');
+    if (tabName === 'chat') {
+        renderShopChatList();
+    }
+    if (tabName === 'cart') {
+        renderShopCart();
+    }
 }
+
 
 let currentShopCategory = '推荐';
 
@@ -5008,10 +5523,12 @@ function renderShopItems() {
     });
 }
 
+let currentShopItem = null;
 function openShopDetail(index) {
     let shopData = JSON.parse(localStorage.getItem('shopData_' + currentShopCategory) || '[]');
     const item = shopData[index];
     if (!item) return;
+    currentShopItem = item;
 
     document.getElementById('sd-img').style.backgroundImage = `url('${item.img}')`;
     document.getElementById('sd-price').innerText = item.price;
@@ -5711,7 +6228,7 @@ function handleSendClick() {
 
 function renderChatMessage(msg, contact, index) {
     if (msg.msgType === 'text' && typeof msg.content === 'string') {
-        const voiceMatch = msg.content.match(/([\s\S]*?)\[语音.*?\]([\s\S]*)/);
+        const voiceMatch = msg.content.match(/([\s\S]*?)$$语音.*?$$([\s\S]*)/);
         if (voiceMatch) {
             msg.msgType = 'voice';
             msg.content = (voiceMatch[1] + voiceMatch[2]).trim() || '语音消息';
@@ -6240,7 +6757,7 @@ async function getAiReply() {
                 if (rawMsg.type === 'image') msgType = 'image';
             }
             
-            const voiceMatch = msgContent.match(/([\s\S]*?)\[语音.*?\]([\s\S]*)/);
+            const voiceMatch = msgContent.match(/([\s\S]*?)$$语音.*?$$([\s\S]*)/);
 
             if (voiceMatch) {
                 msgType = 'voice';
@@ -7979,7 +8496,7 @@ function parseLyrics(lrcText) {
     if (!lrcText) return [];
     const lines = lrcText.split('\n');
     const result = [];
-    const timeReg = /\[(\d{2}):(\d{2})\.(\d{2,3})\]/;
+    const timeReg = /$$(\d{2}):(\d{2})\.(\d{2,3})$$/;
     lines.forEach(line => {
         const match = timeReg.exec(line);
         if (match) {
@@ -8163,6 +8680,695 @@ function toggleFpFlip() {
     document.getElementById('fpFlipContainer').classList.toggle('flipped');
 }
 renderShopItems();
+let currentShopChatId = null;
+let isShopAiProcessing = false;
+
+function openShopChat(chatId = null) {
+    let chats = JSON.parse(localStorage.getItem('shopChats') || '[]');
+    let chat = null;
+
+    if (chatId) {
+        chat = chats.find(c => c.id === chatId);
+    } else {
+        if (!currentShopItem) return;
+        const itemId = currentShopItem.title; 
+        chat = chats.find(c => c.itemId === itemId);
+        if (!chat) {
+            const personas = ['热情话痨型', '佛系随缘型', '高冷专业型', '精明砍价型', '温柔贴心型', '暴躁直球型'];
+            const storeNames = ['喵星人严选', '深夜便利店', '暴躁老哥的店', '佛系青年杂货', '品牌直营店', '海外代购C店', '潮流前线专营', '杂货小铺'];
+            const randomPersona = personas[Math.floor(Math.random() * personas.length)];
+            const randomStore = storeNames[Math.floor(Math.random() * storeNames.length)];
+            chat = {
+                id: 'sc_' + Date.now(),
+                itemId: itemId,
+                sellerName: randomStore,
+                persona: randomPersona,
+                item: currentShopItem,
+                messages: [],
+                lastTime: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false}),
+                lastMsg: ''
+            };
+            chats.unshift(chat);
+            localStorage.setItem('shopChats', JSON.stringify(chats));
+        }
+    }
+
+    if (!chat) return;
+    currentShopChatId = chat.id;
+    currentShopItem = chat.item; 
+
+    document.getElementById('shopChatSellerName').innerText = chat.sellerName;
+    document.getElementById('sc-goods-img').style.backgroundImage = `url('${chat.item.img}')`;
+    document.getElementById('sc-goods-price').innerText = chat.item.price;
+    document.getElementById('sc-goods-title').innerText = chat.item.title;
+
+    renderShopChatMessages();
+    document.getElementById('shopChatPage').classList.add('active');
+}
+
+function closeShopChat() {
+    document.getElementById('shopChatPage').classList.remove('active');
+    renderShopChatList();
+}
+
+function renderShopChatMessages() {
+    const container = document.getElementById('shopChatMsgContainer');
+    container.innerHTML = '';
+    const chats = JSON.parse(localStorage.getItem('shopChats') || '[]');
+    const chat = chats.find(c => c.id === currentShopChatId);
+    if (!chat) return;
+
+    chat.messages.forEach(msg => {
+        const row = document.createElement('div');
+        const isUser = msg.role === 'user';
+        row.className = `chat-msg-row ${isUser ? 'right' : 'left'}`;
+        
+        const myAvatar = localStorage.getItem('shop-me-avatar') || 'https://image.uglycat.cc/tm7moi.png';
+        const avatarStyle = isUser ? `background-image:url(${myAvatar})` : 'background-color:#007aff;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:18px;';
+
+        const avatarInner = isUser ? '' : '店';
+        let bubbleStyle = msg.content.includes('chat-review-card') ? 'padding:0; background:transparent; border:none; box-shadow:0 4px 16px rgba(0,0,0,0.06);' : 'max-width:100%;';
+
+        row.innerHTML = `
+            <div class="chat-msg-col">
+                <div class="chat-msg-avatar" style="${avatarStyle}; background-size:cover; background-position:center;">${avatarInner}</div>
+                <div class="chat-msg-time">${msg.time}</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:${isUser ? 'flex-end' : 'flex-start'};max-width:70%;">
+                <div class="chat-msg-bubble" style="${bubbleStyle}">${msg.content}</div>
+            </div>
+        `;
+        container.appendChild(row);
+    });
+    container.scrollTop = container.scrollHeight;
+}
+
+async function handleShopChatSubmit(e) {
+    if (e) e.preventDefault();
+    if (isShopAiProcessing || !currentShopChatId) return;
+    const input = document.getElementById('shopChatInput');
+    const text = input.value.trim();
+    
+    let chats = JSON.parse(localStorage.getItem('shopChats') || '[]');
+    let chatIndex = chats.findIndex(c => c.id === currentShopChatId);
+    if (chatIndex === -1) return;
+
+    const nowTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
+    
+    if (text !== '') {
+        input.value = '';
+        chats[chatIndex].messages.push({ role: 'user', content: text, time: nowTime });
+        chats[chatIndex].lastMsg = text;
+        chats[chatIndex].lastTime = nowTime;
+        localStorage.setItem('shopChats', JSON.stringify(chats));
+        renderShopChatMessages();
+    }
+
+    isShopAiProcessing = true;
+    document.getElementById('shopChatSendBtn').classList.add('locked');
+
+    const config = JSON.parse(localStorage.getItem('apiConfig') || '{}');
+    if (!config.url || !config.key) {
+        alert("请先在设置中配置API");
+        isShopAiProcessing = false;
+        document.getElementById('shopChatSendBtn').classList.remove('locked');
+        return;
+    }
+
+    const prompt = `你现在是一个电商卖家，你的性格设定是：${chats[chatIndex].persona}。
+用户正在咨询你的商品：${chats[chatIndex].item.title}，当前价格：${chats[chatIndex].item.price}。
+请完全按照你的性格设定来回答用户的问题，绝不能暴露自己是AI。
+必须返回如下JSON格式：{"replies": [{"type": "text", "content": "回复内容"}]}`;
+
+    const apiMsgs = [{ role: "system", content: prompt }];
+    const history = chats[chatIndex].messages.slice(-10);
+    history.forEach(m => {
+        apiMsgs.push({ role: m.role === 'user' ? 'user' : 'assistant', content: m.content });
+    });
+
+    try {
+        const response = await fetch(`${config.url}/chat/completions`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${config.key}`
+            },
+            body: JSON.stringify({
+                model: config.model || 'gpt-3.5-turbo',
+                messages: apiMsgs,
+                temperature: 0.8,
+                response_format: { type: "json_object" }
+            })
+        });
+
+        if (!response.ok) throw new Error('API Error');
+        const data = await response.json();
+        const parsed = JSON.parse(data.choices[0].message.content);
+        
+        chats = JSON.parse(localStorage.getItem('shopChats') || '[]');
+        chatIndex = chats.findIndex(c => c.id === currentShopChatId);
+        
+        if (parsed.replies && parsed.replies.length > 0) {
+            let finalReplies = [];
+            parsed.replies.forEach(r => {
+                let msgContent = r.content || '';
+                if (msgContent.length > 15) {
+                    let chunks = msgContent.match(/[^。！？!?~\n]+[。！？!?~\n]*/g);
+                    if (chunks) {
+                        let tempChunk = '';
+                        chunks.forEach(c => {
+                            tempChunk += c;
+                            if (tempChunk.length >= 15 || c.includes('\n')) {
+                                finalReplies.push(tempChunk.trim());
+                                tempChunk = '';
+                            }
+                        });
+                        if (tempChunk.trim()) finalReplies.push(tempChunk.trim());
+                    } else {
+                        finalReplies.push(msgContent);
+                    }
+                } else {
+                    if (msgContent.trim()) finalReplies.push(msgContent);
+                }
+            });
+
+            for (let i = 0; i < finalReplies.length; i++) {
+                await new Promise(resolve => setTimeout(resolve, 800));
+                chats = JSON.parse(localStorage.getItem('shopChats') || '[]');
+                chatIndex = chats.findIndex(c => c.id === currentShopChatId);
+                const rTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
+                chats[chatIndex].messages.push({ role: 'seller', content: finalReplies[i], time: rTime });
+                chats[chatIndex].lastMsg = finalReplies[i];
+                chats[chatIndex].lastTime = rTime;
+                localStorage.setItem('shopChats', JSON.stringify(chats));
+                renderShopChatMessages();
+            }
+        }
+    } catch (err) {
+        alert("网络错误：" + err.message);
+    } finally {
+        isShopAiProcessing = false;
+        document.getElementById('shopChatSendBtn').classList.remove('locked');
+    }
+}
+
+function renderShopChatList() {
+    const container = document.getElementById('shopChatListContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    const chats = JSON.parse(localStorage.getItem('shopChats') || '[]');
+    if (chats.length === 0) {
+        container.innerHTML = `
+            <div class="shop-empty-state" style="padding-top:120px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:48px;height:48px;margin-bottom:16px;"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                <div>暂无客服消息</div>
+            </div>`;
+        return;
+    }
+
+    chats.forEach(chat => {
+        const item = document.createElement('div');
+        item.className = 'shop-chat-item';
+        item.onclick = () => openShopChat(chat.id);
+        item.innerHTML = `
+            <div class="shop-chat-avatar">店</div>
+            <div class="shop-chat-info">
+                <div class="shop-chat-name">${chat.sellerName}</div>
+                <div class="shop-chat-last">${chat.lastMsg || '点击开始聊天'}</div>
+            </div>
+            <div class="shop-chat-time">${chat.lastTime}</div>
+        `;
+        container.appendChild(item);
+    });
+}
+function confirmReceive(orderId) {
+    let orders = JSON.parse(localStorage.getItem('shopOrders') || '[]');
+    let index = orders.findIndex(o => o.id === orderId);
+    if (index !== -1) {
+        orders[index].isReceived = true;
+        localStorage.setItem('shopOrders', JSON.stringify(orders));
+        renderShopOrders(document.getElementById('shopOrderPageTitle').innerText === '待收货' ? 'shipped' : 'all');
+        openReviewModal(orderId);
+    }
+}
+
+function openReviewModal(orderId) {
+    document.getElementById('reviewOrderId').value = orderId;
+    document.getElementById('reviewContent').value = '';
+    setReviewStar(5);
+    document.getElementById('reviewModal').classList.add('active');
+}
+
+function closeReviewModal() {
+    document.getElementById('reviewModal').classList.remove('active');
+}
+
+function submitReview() {
+    let orderId = document.getElementById('reviewOrderId').value;
+    let content = document.getElementById('reviewContent').value.trim();
+    let star = parseInt(document.getElementById('reviewStarValue').value);
+    if (!content) {
+        alert("请输入评价内容");
+        return;
+    }
+    let orders = JSON.parse(localStorage.getItem('shopOrders') || '[]');
+    let index = orders.findIndex(o => o.id === orderId);
+    if (index !== -1) {
+        orders[index].isReviewed = true;
+        orders[index].reviewContent = content;
+        orders[index].reviewStar = star;
+        localStorage.setItem('shopOrders', JSON.stringify(orders));
+        closeReviewModal();
+        let currentTitle = document.getElementById('shopOrderPageTitle').innerText;
+        let filter = 'all';
+        if (currentTitle === '待评价') filter = 'review';
+        else if (currentTitle === '待收货') filter = 'shipped';
+        else if (currentTitle === '待发货') filter = 'pending';
+        renderShopOrders(filter);
+        triggerSellerReaction(orders[index], star, content);
+    }
+}
+function setReviewStar(star) {
+    document.getElementById('reviewStarValue').value = star;
+    const stars = document.querySelectorAll('#reviewStars .review-star');
+    stars.forEach((el, index) => {
+        if (index < star) el.classList.add('active');
+        else el.classList.remove('active');
+    });
+}
+
+async function triggerSellerReaction(order, star, content) {
+    let chats = JSON.parse(localStorage.getItem('shopChats') || '[]');
+    let chatIndex = chats.findIndex(c => c.itemId === order.item.title);
+    let chat;
+
+    if (chatIndex === -1) {
+        const personas = ['热情话痨型', '佛系随缘型', '高冷专业型', '精明砍价型', '温柔贴心型', '暴躁直球型'];
+        const storeNames = ['喵星人严选', '深夜便利店', '暴躁老哥的店', '佛系青年杂货', '品牌直营店', '海外代购C店', '潮流前线专营', '杂货小铺'];
+        const randomPersona = personas[Math.floor(Math.random() * personas.length)];
+        const randomStore = storeNames[Math.floor(Math.random() * storeNames.length)];
+        chat = {
+            id: 'sc_' + Date.now(),
+            itemId: order.item.title,
+            sellerName: randomStore,
+            persona: randomPersona,
+            item: order.item,
+            messages: [],
+            lastTime: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false}),
+            lastMsg: ''
+        };
+        chats.unshift(chat);
+        chatIndex = 0;
+    } else {
+        chat = chats[chatIndex];
+    }
+
+    let starStr = '★'.repeat(star) + '☆'.repeat(5 - star);
+    let reviewHtml = `<div class="chat-review-card"><div class="crc-title">商品评价</div><div class="crc-stars">${starStr}</div><div class="crc-content">${content}</div></div>`;
+    
+    const nowTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
+    chat.messages.push({ role: 'user', content: reviewHtml, time: nowTime });
+    chat.lastMsg = '[商品评价]';
+    chat.lastTime = nowTime;
+    localStorage.setItem('shopChats', JSON.stringify(chats));
+
+    if (document.getElementById('shopChatPage').classList.contains('active') && currentShopChatId === chat.id) {
+        renderShopChatMessages();
+    }
+    if (document.getElementById('shop-tab-chat').classList.contains('active')) {
+        renderShopChatList();
+    }
+
+    const config = JSON.parse(localStorage.getItem('apiConfig') || '{}');
+    if (!config.url || !config.key) return;
+
+    const prompt = `你是一个电商卖家，店铺名是“${chat.sellerName}”，你的性格设定是：${chat.persona}。
+买家刚刚对你的商品“${order.item.title}”给出了 ${star} 星评价（满分5星）。
+买家的评价内容是：“${content}”。
+请根据你的性格设定，马上给买家发一条消息。如果是差评（1-2星）且你是暴躁直球型，请直接极其激烈地对线、骂街理论；如果是好评，可以感谢或推销。
+必须返回如下JSON格式：{"replies": [{"type": "text", "content": "回复内容"}]}
+注意：回复内容不要超过100字，保持聊天的口语化。`;
+
+    try {
+        const response = await fetch(`${config.url}/chat/completions`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${config.key}`
+            },
+            body: JSON.stringify({
+                model: config.model || 'gpt-3.5-turbo',
+                messages: [{ role: "system", content: prompt }],
+                temperature: 0.9,
+                response_format: { type: "json_object" }
+            })
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            const parsed = JSON.parse(data.choices[0].message.content);
+            if (parsed.replies && parsed.replies.length > 0) {
+                chats = JSON.parse(localStorage.getItem('shopChats') || '[]');
+                chatIndex = chats.findIndex(c => c.id === chat.id);
+                
+                const rTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
+                const replyText = parsed.replies[0].content;
+                chats[chatIndex].messages.push({ role: 'seller', content: replyText, time: rTime });
+                chats[chatIndex].lastMsg = replyText;
+                chats[chatIndex].lastTime = rTime;
+                localStorage.setItem('shopChats', JSON.stringify(chats));
+
+                if (document.getElementById('shopChatPage').classList.contains('active') && currentShopChatId === chat.id) {
+                    renderShopChatMessages();
+                }
+                if (document.getElementById('shop-tab-chat').classList.contains('active')) {
+                    renderShopChatList();
+                }
+            }
+        }
+    } catch (e) {}
+}
+let tempCartCount = 1;
+let currentForwardCartId = null;
+let currentForwardContactId = null;
+
+function openCartAddModal() {
+    tempCartCount = 1;
+    document.getElementById('cartAddCount').innerText = tempCartCount;
+    document.getElementById('cartAddModal').classList.add('active');
+}
+
+function closeCartAddModal() {
+    document.getElementById('cartAddModal').classList.remove('active');
+}
+
+function changeCartCount(delta) {
+    tempCartCount += delta;
+    if (tempCartCount < 1) tempCartCount = 1;
+    if (tempCartCount > 99) tempCartCount = 99;
+    document.getElementById('cartAddCount').innerText = tempCartCount;
+}
+
+function confirmAddCart() {
+    if (!currentShopItem) return;
+    let cart = JSON.parse(localStorage.getItem('shopCart') || '[]');
+    cart.unshift({
+        id: 'cart_' + Date.now(),
+        item: currentShopItem,
+        count: tempCartCount,
+        addTime: Date.now()
+    });
+    localStorage.setItem('shopCart', JSON.stringify(cart));
+    alert('已加入购物车');
+    closeCartAddModal();
+}
+
+function renderShopCart() {
+    const container = document.getElementById('shopCartListContainer');
+    let cart = JSON.parse(localStorage.getItem('shopCart') || '[]');
+    if (cart.length === 0) {
+        container.innerHTML = `
+            <div class="shop-empty-state">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:48px;height:48px;margin-bottom:16px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                <div>购物车空空如也</div>
+            </div>`;
+        return;
+    }
+    let html = '<div style="padding: 16px;">';
+    cart.forEach(c => {
+        let total = (parseFloat(c.item.price) * c.count).toFixed(2);
+        html += `
+            <div class="cart-item">
+                <div class="cart-del-btn" onclick="deleteCartItem('${c.id}')">×</div>
+                <div class="cart-img" style="background-image:url('${c.item.img}')"></div>
+                <div class="cart-info">
+                    <div class="cart-title">${c.item.title}</div>
+                    <div class="cart-bottom">
+                        <div class="cart-count-price">
+                            <div class="cart-price">${total}</div>
+                            <div class="cart-count">数量：${c.count}</div>
+                        </div>
+                        <div class="cart-actions">
+                            <div class="cart-btn forward" onclick="forwardFromCart('${c.id}')">转发给联系人</div>
+                            <div class="cart-btn buy" onclick="buyFromCart('${c.id}')">立即购买</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+function deleteCartItem(id) {
+    if (!confirm('确定从购物车移除该商品吗？')) return;
+    let cart = JSON.parse(localStorage.getItem('shopCart') || '[]');
+    cart = cart.filter(c => c.id !== id);
+    localStorage.setItem('shopCart', JSON.stringify(cart));
+    renderShopCart();
+}
+
+function buyFromCart(id) {
+    let cart = JSON.parse(localStorage.getItem('shopCart') || '[]');
+    let c = cart.find(item => item.id === id);
+    if (!c) return;
+    let total = parseFloat(c.item.price) * c.count;
+    let bal = parseFloat(localStorage.getItem('userBalance') || '0');
+    if (total > bal) { alert("余额不足，请先充值"); return; }
+    
+    initiatePayment(() => {
+        bal -= total;
+        localStorage.setItem('userBalance', bal);
+        let orders = JSON.parse(localStorage.getItem('shopOrders') || '[]');
+        const now = Date.now();
+        const shipTime = now + Math.floor(Math.random() * 4 * 60 * 60 * 1000);
+        const deliverTime = shipTime + Math.floor(Math.random() * 2 * 60 * 60 * 1000);
+        
+        let orderItem = JSON.parse(JSON.stringify(c.item));
+        orderItem.title = `[x${c.count}] ` + orderItem.title;
+        orderItem.price = total.toFixed(2);
+
+        orders.unshift({
+            id: 'order_' + now,
+            item: orderItem,
+            buyTime: now,
+            shipTime: shipTime,
+            deliverTime: deliverTime,
+            isReceived: false,
+            isReviewed: false
+        });
+        localStorage.setItem('shopOrders', JSON.stringify(orders));
+        
+        cart = cart.filter(item => item.id !== id);
+        localStorage.setItem('shopCart', JSON.stringify(cart));
+        
+        alert("购买成功");
+        renderShopCart();
+    }, "购买商品 - " + c.item.title, -total);
+}
+
+function forwardFromCart(id) {
+    currentForwardCartId = id;
+    const list = document.getElementById('cartContactList');
+    const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
+    list.innerHTML = '';
+    if (contacts.length === 0) {
+        list.innerHTML = '<div style="text-align:center; color:#999; padding:20px; font-size:13px;">暂无联系人</div>';
+    } else {
+        contacts.forEach(c => {
+            const item = document.createElement('div');
+            item.className = 'contact-select-item';
+            const avatarStyle = c.role.avatar ? `background-image:url(${c.role.avatar})` : '';
+            item.innerHTML = `
+                <div class="contact-select-avatar" style="${avatarStyle}"></div>
+                <div class="contact-select-name">${c.remark || c.role.name}</div>
+            `;
+            item.onclick = () => selectCartContact(c.id);
+            list.appendChild(item);
+        });
+    }
+    document.getElementById('cartContactModal').classList.add('active');
+}
+
+function closeCartContactModal() {
+    document.getElementById('cartContactModal').classList.remove('active');
+}
+
+function selectCartContact(contactId) {
+    currentForwardContactId = contactId;
+    closeCartContactModal();
+    document.getElementById('cartActionTypeModal').classList.add('active');
+}
+
+function closeCartActionTypeModal() {
+    document.getElementById('cartActionTypeModal').classList.remove('active');
+}
+
+function handleCartAction(type) {
+    closeCartActionTypeModal();
+    let cart = JSON.parse(localStorage.getItem('shopCart') || '[]');
+    let c = cart.find(item => item.id === currentForwardCartId);
+    if (!c) return;
+    
+    let total = parseFloat(c.item.price) * c.count;
+    const contacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
+    const contactIdx = contacts.findIndex(ct => ct.id == currentForwardContactId);
+    if (contactIdx === -1) return;
+    const contact = contacts[contactIdx];
+
+    if (type === 'pay_for_me') {
+        let msgText = `[代付请求] 我想买这个：${c.item.title}，数量：${c.count}，总价：¥${total.toFixed(2)}。能帮我付一下吗？`;
+        sendSysUserMessage(contact, msgText);
+        triggerCartAiReaction(type, c, contact, total);
+        
+    } else if (type === 'gift') {
+        let bal = parseFloat(localStorage.getItem('userBalance') || '0');
+        if (total > bal) { alert("余额不足以购买赠礼，请先充值"); return; }
+        
+        initiatePayment(() => {
+            bal -= total;
+            localStorage.setItem('userBalance', bal);
+            
+            let orders = JSON.parse(localStorage.getItem('shopOrders') || '[]');
+            const now = Date.now();
+            let orderItem = JSON.parse(JSON.stringify(c.item));
+            orderItem.title = `[赠礼 x${c.count}] ` + orderItem.title;
+            orderItem.price = total.toFixed(2);
+            orders.unshift({
+                id: 'order_' + now,
+                item: orderItem,
+                buyTime: now,
+                shipTime: now, 
+                deliverTime: now,
+                isReceived: true,
+                isReviewed: true 
+            });
+            localStorage.setItem('shopOrders', JSON.stringify(orders));
+
+            cart = cart.filter(item => item.id !== currentForwardCartId);
+            localStorage.setItem('shopCart', JSON.stringify(cart));
+            renderShopCart();
+
+            let msgText = `[赠礼] 我给你买了这个：${c.item.title}，数量：${c.count}。希望你喜欢！`;
+            sendSysUserMessage(contact, msgText);
+            triggerCartAiReaction(type, c, contact, total);
+
+            alert("赠礼购买成功！");
+        }, "赠礼 - " + c.item.title, -total);
+    }
+}
+
+function sendSysUserMessage(contact, text) {
+    if (!contact.messages) contact.messages = [];
+    const nowTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
+    const newMsg = { 
+        role: 'user', 
+        content: text, 
+        msgType: 'text',
+        timestamp: nowTime
+    };
+    contact.messages.push(newMsg);
+    contact.lastMsg = text;
+    contact.time = nowTime;
+    
+    let allContacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
+    let idx = allContacts.findIndex(ct => ct.id == contact.id);
+    if(idx !== -1) {
+        allContacts[idx] = contact;
+        localStorage.setItem('chatContacts', JSON.stringify(allContacts));
+    }
+}
+
+async function triggerCartAiReaction(type, cartItem, contact, total) {
+    const config = JSON.parse(localStorage.getItem('apiConfig') || '{}');
+    if (!config.url || !config.key) return;
+
+    let prompt = '';
+    if (type === 'pay_for_me') {
+        prompt = `[系统强制指令：用户请求你代付购买商品 "${cartItem.item.title}"，数量 ${cartItem.count}，总价 ¥${total.toFixed(2)}。请结合你的性格和与用户的关系决定是否帮忙付款。你必须在返回的JSON根目录中添加 "payAction": "accept" 或 "reject"，并在 replies 中作出相应的语言回复。]`;
+    } else {
+        prompt = `[系统提示：用户刚刚花钱为你购买了礼物 "${cartItem.item.title}"，数量 ${cartItem.count}。请结合你的性格对这份礼物作出反应，在 replies 中回复。]`;
+    }
+
+    let systemContent = `你是${contact.role.name}。${contact.role.details}\n用户是${contact.user.name}。${contact.user.details}\n请严格按照你的性格说话。\n必须返回JSON格式：{"replies": [{"type": "text", "content": "回复内容"}]}`;
+    const messages = [
+        { role: "system", content: systemContent },
+        { role: "user", content: prompt }
+    ];
+
+    try {
+        const response = await fetch(`${config.url}/chat/completions`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${config.key}`
+            },
+            body: JSON.stringify({
+                model: config.model || 'gpt-3.5-turbo',
+                messages: messages,
+                temperature: 0.8,
+                response_format: { type: "json_object" }
+            })
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            const parsed = JSON.parse(data.choices[0].message.content);
+            
+            let allContacts = JSON.parse(localStorage.getItem('chatContacts') || '[]');
+            let idx = allContacts.findIndex(ct => ct.id == contact.id);
+            if(idx === -1) return;
+            let freshContact = allContacts[idx];
+
+            const nowTime = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
+
+            if (type === 'pay_for_me' && parsed.payAction) {
+                let sysText = parsed.payAction === 'accept' ? `${freshContact.role.name}已为你代付成功` : `${freshContact.role.name}拒绝了你的代付请求`;
+                freshContact.messages.push({ role: 'role', content: sysText, msgType: 'system', timestamp: nowTime });
+                
+                if (parsed.payAction === 'accept') {
+                    let orders = JSON.parse(localStorage.getItem('shopOrders') || '[]');
+                    const now = Date.now();
+                    let orderItem = JSON.parse(JSON.stringify(cartItem.item));
+                    orderItem.title = `[代付 x${cartItem.count}] ` + orderItem.title;
+                    orderItem.price = total.toFixed(2);
+                    orders.unshift({
+                        id: 'order_' + now,
+                        item: orderItem,
+                        buyTime: now,
+                        shipTime: now + Math.floor(Math.random() * 4 * 60 * 60 * 1000),
+                        deliverTime: now + Math.floor(Math.random() * 6 * 60 * 60 * 1000),
+                        isReceived: false,
+                        isReviewed: false
+                    });
+                    localStorage.setItem('shopOrders', JSON.stringify(orders));
+                    
+                    let cart = JSON.parse(localStorage.getItem('shopCart') || '[]');
+                    cart = cart.filter(item => item.id !== currentForwardCartId);
+                    localStorage.setItem('shopCart', JSON.stringify(cart));
+                    if (document.getElementById('shop-tab-cart').classList.contains('active')) {
+                        renderShopCart();
+                    }
+                }
+            }
+
+            if (parsed.replies && parsed.replies.length > 0) {
+                const replyText = parsed.replies[0].content;
+                freshContact.messages.push({ role: 'role', content: replyText, msgType: 'text', timestamp: nowTime });
+                freshContact.lastMsg = replyText;
+                freshContact.time = nowTime;
+            }
+
+            allContacts[idx] = freshContact;
+            localStorage.setItem('chatContacts', JSON.stringify(allContacts));
+
+            if (currentChatId == contact.id && document.getElementById('chatPage').classList.contains('active')) {
+                openChat(contact.id); 
+            }
+        }
+    } catch (e) {}
+}
 </script>
 </body>
 </html>
